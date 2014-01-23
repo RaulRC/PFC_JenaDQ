@@ -1,0 +1,5 @@
+PREFIX cal: <http://www.w3.org/202/12/cal#>
+
+SELECT ?streetAddress
+WHERE
+{ cal:street-address ?streetAddress .}

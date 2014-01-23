@@ -1,0 +1,50 @@
+@prefix dc:      <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcat:    <http://vocab.deri.ie/dcat#> .
+@prefix geo:     <http://www.geonames.org/ontology#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix cal:     <http://www.w3.org/2002/12/cal#> .
+@prefix vcard:   <http://www.w3.org/2006/vcard/ns#> .
+
+<http://www.gijon.es/directorios/show/3230-apartamentos-cean-bermudez>
+      a       geo:Feature ;
+      dc:description "&lt;div style=&quot;text-align: justify;&quot;&gt;Edificio de nueva construcci&#243;n con acabados y amueblamiento funcional que forman un conjunto armonioso. Es la opci&#243;n ideal para quienes prefieren disfrutar de una estancia m&#225;s &#237;ntima e independiente al alojamiento en un hotel, tanto para estancias de negocios como para pasar unos d&#237;as con la familia o amigos.&lt;p&gt;&lt;/p&gt;&lt;p&gt;Situados en el centro de Gij&#243;n, cerca del Paseo de Bego&#241;a y Plaza Europa. A 5 minutos de la estaci&#243;n de autobuses y del tren.&lt;br/&gt;&lt;/p&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: bold;&quot;&gt;&lt;/span&gt;" ;
+      dc:relation "http://www.gijon.es/data/images/f0/f2/28668/169x133_v1_9372_11101110200695056.jpg" ;
+      geo:name "Apartamentos Ce&#225;n Berm&#250;dez" ;
+      cal:street-address "C/ Ce&#225;n Berm&#250;dez, 6 - 33208 Gij&#243;n" ;
+      cal:tel "+ 34 648 056 184" .
+
+<http://www.gijon.es/directorios/show/3272-apartamentos-urbanos-moros-41>
+      a       geo:Feature ;
+      dc:description "&lt;div style=&quot;text-align: justify;&quot;&gt;Un nuevo concepto de alquiler de apartamentos urbanos. Los exclusivos apartamentos Moros 41 combinan la tendencia arquitect&#243;nica actual con la renovaci&#243;n y rehabilitaci&#243;n de un edificio que data de principios de siglo. Un ambiente diferente. Con una superficie de 40 m2. El espacio se organiza en 2 ambientes: Uno en el que la cocina tipo americana completamente equipada y una acogedora &#225;rea de dispersi&#243;n que incluye sof&#225; cama. El segundo ambiente esta situado el dormitorio y el cuarto de ba&#241;o en el que se ha cuidado hasta el m&#225;s m&#237;nimo detalle. Por su disposici&#243;n y el generoso dise&#241;o, los apartamentos Moros 41 brindan absoluta independencia en una atm&#243;sfera &#250;nica. Dise&#241;o, funcionalidad y cuidado del detalle en el centro de Gij&#243;n&lt;br/&gt;&lt;/div&gt;&lt;br/&gt;&lt;h3&gt;N&#250;mero de apartamentos:&lt;/h3&gt;8 apartamentos de 2-4 pax (habitaci&#243;n doble y sof&#225; cama en sal&#243;n)&lt;br/&gt;&lt;br/&gt;&lt;h3&gt;Servicios en apartamentos:&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;Acceso a los apartamentos mediante teclado num&#233;rico de seguridad,&lt;/li&gt;&lt;li&gt;Calefacci&#243;n individual&lt;/li&gt;&lt;li&gt;Conexi&#243;n a Internet Wi-Fi&lt;/li&gt;&lt;li style=&quot;text-align: justify;&quot;&gt;Microondas, lavadora / secadora, frigor&#237;fico, TV, ropa de cama, mantas y toallas, plancha, tabla de planchar, set de higiene personal en el ba&#241;o, bater&#237;a de cocina y menaje &lt;/li&gt;&lt;/ul&gt;" ;
+      dc:relation "http://www.gijon.es/data/images/f0/f2/28705/169x89_v1_31927_81812008135557.jpg" ;
+      geo:name "Apartamentos Urbanos Moros 41" ;
+      cal:street-address "C/ Moros, 41 33206 Gij&#243;n" ;
+      cal:tel "+34 660 515 859" .
+
+<http://www.gijon.es/directorios/show/3265-apartamentos-blue-san-esteban>
+      a       geo:Feature ;
+      dc:description "&lt;div style=&quot;text-align: justify;&quot;&gt;Edificio de nueva construcci&#243;n, en pleno centro de Gij&#243;n, a un paso de la Playa San Lorenzo y totalmente equipados. Todos ellos exteriores, y cuentan con cocina completa, lavadora, vitrocer&#225;mica, microondas, plancha, un completo menaje de cocina, ropa de camas y toallas, televisi&#243;n, acceso a internet WIFI gratuito, caja fuerte, calefacci&#243;n individual, ascensor.... y todo un conjunto de cuidados detalles con un dise&#241;o moderno y c&#225;lido, en el que el confort y la funcionalidad se unen para crear un espacio c&#243;modo y acogedor.&lt;br/&gt;&lt;/div&gt;&lt;br/&gt;&lt;h3&gt;N&#186; apartamentos:&lt;/h3&gt;4 estudios de 2 pax&lt;br/&gt;8 apartamentos de 2-4 pax (habitaci&#243;n doble y sof&#225; cama en sal&#243;n)&lt;br/&gt;8 apartamentos de 4-6 pax (2 habitaciones dobles y sof&#225; cama en sal&#243;n)" ;
+      dc:relation "http://www.gijon.es/data/images/f0/f2/28701/169x112_v1_21712_49492007132959.jpg" ;
+      geo:name "Apartamentos Blue San Esteban" ;
+      cal:street-address "Apartamentos San Esteban Dos Llaves - C/ Cabrales, 17 33201 Gij&#243;n" ;
+      cal:tel "+ 34 985 090 929" .
+
+<http://www.gijon.es/directorios/show/3232-apartamentos-hotel-gijon>
+      a       geo:Feature ;
+      dc:description "Inaugurados en el a&#241;o 2005, situado a tan s&#243;lo 50 m. de la Playa de Poniente y del Puerto Deportivo.&lt;br/&gt;&lt;br/&gt;&lt;h3&gt;Per&#237;odo de apertura:&lt;/h3&gt;Todo el a&#241;o.&lt;br/&gt;&lt;br/&gt;&lt;h3&gt;N&#250;mero de apartamentos:&lt;/h3&gt;Los 4 apartamentos de los que dispone se dividen en 1 para 4-5 pax. y 3 estudios para 2-3 pax.&lt;br/&gt;&lt;br/&gt;&lt;h3&gt;Servicios en habitaciones:&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;Nevera.&lt;/li&gt;&lt;li&gt;Microondas.&lt;/li&gt;&lt;li&gt;Vitrocer&#225;mica.&lt;/li&gt;&lt;li&gt;TV digital de 21&apos; y radio.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Tarjeta tur&#237;stica:&lt;/h3&gt;10% descuento sobre tarifa oficial, no acumulable a otros descuentos o precios ofertas." ;
+      dc:relation "http://www.gijon.es/data/images/f0/f2/28670/169x133_v1_38903_11101110200695257.jpg" ;
+      geo:name "Apartamentos Hotel Gij&#243;n" ;
+      cal:street-address "Apartamentos Hotel Gij&#243;n Dos llaves - C/ Joaqu&#237;n Alonso Bonet, 9 - 33206 Gij&#243;n" ;
+      cal:tel "+ 34 985 356 036" .
+
+<http://www.gijon.es/directorios/show/3279-apartamentos-rurales-laboz>
+      a       geo:Feature ;
+      dc:description "LABOZ es un complejo rural inaugurado en Diciembre de 2008 que consta de 8 casas de lujo. Cada una dispone de tres amplias habitaciones, dos dobles y una sencilla, dos ba&#241;os un aseo, un gran sal&#243;n y una cocina completamente equipada, todas con garaje propio acceso a Internet, tel&#233;fono y TV.&lt;br/&gt;Piscina, cancha de padel, ping-pong completan las instalaciones en un entorno de 14.000m de jard&#237;n. Con unas impresionantes vistas sobre m&#225;s de 30Km de costa LABOZ conjuga a la perfecci&#243;n paisaje, modernidad, comodidad y tranquilidad, con todos los servicios que proporciona su proximidad a una ciudad como Gij&#243;n (15m del centro).&lt;br/&gt;&lt;br/&gt;&lt;h3&gt;N&#186; apartamentos y plazas:&lt;/h3&gt;8 apartamentos rurales. Capacidad 36 plazas" ;
+      dc:relation "http://www.gijon.es/data/images/f0/f2/28711/169x113_v1_30336_1531532010134614.jpg" ;
+      geo:name "Apartamentos Rurales Laboz" ;
+      cal:location "43.504959 -5.568129" ;
+      cal:street-address "C&#186; de Pe&#241;as Blancas s/n 33314 Villaviciosa (ASTURIAS)" ;
+      cal:tel "+34 647 928 024" .
