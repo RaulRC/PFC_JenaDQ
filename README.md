@@ -2,7 +2,7 @@ JenaProjects
 ============
 
 SemanticAnalytics project
-=========================
+-------------------------
 
 Integrating: 
 
