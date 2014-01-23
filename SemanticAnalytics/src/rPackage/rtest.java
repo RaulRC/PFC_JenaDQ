@@ -226,11 +226,6 @@ public class rtest {
         }
 
         re.eval("print(1:10/3)");
-        int a = 7; 
-        String s = a + "+ 1";
-        
-        REXP res =re.eval(s);
-        System.out.println(">>>>>>>>>>>>" + res.toString());
         
 	if (true) {
 	    // so far we used R as a computational slave without REPL
