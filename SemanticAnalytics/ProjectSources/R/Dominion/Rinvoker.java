@@ -1,4 +1,4 @@
-package rPackage;
+package R.Dominion;
 
 import java.io.*;
 import java.awt.Frame;
@@ -57,7 +57,24 @@ class TextConsole implements RMainLoopCallbacks
     }			
 }
 
-public class rtest {
+public class Rinvoker {
+	private Rengine re;
+	
+	public Rinvoker(){
+		if (!Rengine.versionCheck()) {
+		    System.err.println("** Version mismatch - Java files don't match library version.");
+		    System.exit(1);
+		}
+	        System.out.println("Creating Rengine (with arguments)");
+			
+			re=new Rengine(null, false, new TextConsole());
+	        System.out.println("Rengine created, waiting for R");
+	
+	        if (!re.waitForR()) {
+	            System.out.println("Cannot load R");
+	            return;
+	        }
+	}
     public static void main(String[] args) {
 	// just making sure we have the right version of everything
 	if (!Rengine.versionCheck()) {
@@ -226,19 +243,12 @@ public class rtest {
         }
 
         re.eval("print(1:10/3)");
-        int a = 7; 
-        String s = a + "+ 1";
-        
-        REXP res =re.eval(s);
-        System.out.println(">>>>>>>>>>>>" + res.toString());
         
 	if (true) {
 	    // so far we used R as a computational slave without REPL
 	    // now we start the loop, so the user can use the console
-	    //System.out.println("Now the console is yours ... have fun");
-	    //re.startMainLoop();
-		re.end(); 
-		System.out.println("end");
+	    System.out.println("Now the console is yours ... have fun");
+	    re.startMainLoop();
 	} else {
 	    re.end();
 	    System.out.println("end");

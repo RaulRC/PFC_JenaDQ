@@ -26,5 +26,10 @@
     <s:file name="upload" label="File to upload"/>
     <s:submit/>
 </s:form>
+<s:form action="calculations" >
+    <s:textfield name="somedata" label="Give me some data!"/>
+    <s:submit/>
+</s:form>
+
 </body>
 </html>

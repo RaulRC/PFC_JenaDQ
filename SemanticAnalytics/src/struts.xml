@@ -17,6 +17,10 @@
 			<result name="success">uriData.jsp</result>
 			<result name="error">Error.jsp</result>
 		</action>	
+		<action name="calculations" class="R.actions.Calculations">
+			<result name="success">dataResults.jsp</result>
+			<result name="error">Error.jsp</result>
+		</action>
 	</package>
 </struts>
 
