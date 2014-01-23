@@ -1,6 +1,9 @@
 JenaProjects
 ============
 
+SemanticAnalytics project
+=========================
+
 Integrating: 
 
  - Apache Struts 2
