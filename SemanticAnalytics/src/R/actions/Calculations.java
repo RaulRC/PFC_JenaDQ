@@ -1,37 +1,42 @@
 package R.actions;
-import java.util.Map;
+import org.rosuda.REngine.REXP;
+import org.rosuda.REngine.Rserve.RConnection;
+import org.rosuda.REngine.REXP;
+import org.rosuda.REngine.REXPMismatchException;
+import org.rosuda.REngine.Rserve.RConnection;
+import org.rosuda.REngine.Rserve.RserveException;
+import R.Dominion.Rinvoker;
 
-import Dominion.*;
-import R.Dominion.*;
-
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.util.FileManager;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
 
 public class Calculations extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-	private int data;
+	private String data;
+	private double result; 
 	private Rinvoker r; 
-	public int getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(int data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String execute() {
 		String ret=SUCCESS;
 		try{
-			System.out.println("THE DATA HERE: " + data);
-			
-			//Rinvoker r = new Rinvoker(); 
-			//System.out.println(r.simpleOperation(data));
+			r = new Rinvoker(); 
+			setResult(r.simpleOperation(data));
+			r.RinvokerClose();
 		}
-		catch(Exception e){
+		catch(Exception e ){
 			ret=ERROR;
 		}
 		return ret; 
+	}
+	public double getResult() {
+		return result;
+	}
+	public void setResult(double result) {
+		this.result = result;
 	}
 }

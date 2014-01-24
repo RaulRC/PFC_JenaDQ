@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="ProjectSources"/>
+	<classpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="E:/R-3.0.2/bin/x64"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="ProjectSources">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="E:/R-3.0.2/bin/x64"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7n">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Rlibs">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="E:/R-3.0.2/bin/x64"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
@@ -15,15 +28,11 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JenaLibs"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Rlibs">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/rJava/jri/x64"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Strut2Libs"/>
 	<classpathentry kind="var" path="R_DOC_DIR"/>
 	<classpathentry kind="var" path="R_HOME"/>
 	<classpathentry kind="var" path="R_INCLUDE_DIR"/>
 	<classpathentry kind="var" path="R_SHARE_DIR"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RServeLib"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
