@@ -26,8 +26,11 @@
     <s:file name="upload" label="File to upload"/>
     <s:submit/>
 </s:form>
+<br>
+<br>
+<p><b>Type a R expression</b>: </p>
 <s:form action="calculations" >
-    <s:textfield name="data" label="Give me some data!"/>
+    <s:textfield name="data" label="R expression:"/>
     <s:submit/>
 </s:form>
 

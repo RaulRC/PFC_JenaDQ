@@ -12,6 +12,11 @@
 <h3>DataQuery results</h3>
 <br>
 <hr>
-	<p>R output: <s:property value="result" /></p>
+	<s:form>
+		<p>
+			<b>R output:</b>
+			<s:property value="result" />
+		</p>
+	</s:form>
 </body>
 </html>
