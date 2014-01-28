@@ -39,4 +39,7 @@ public class Calculations extends ActionSupport {
 	public void setResult(double result) {
 		this.result = result;
 	}
+//	public void graph(){
+//		
+//	}
 }

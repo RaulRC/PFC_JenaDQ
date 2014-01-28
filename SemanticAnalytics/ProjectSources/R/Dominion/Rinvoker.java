@@ -49,12 +49,14 @@ public class Rinvoker {
 	//TODO give more options of return type (png, bmp, jpg) etc
 	/*
 	 * Options: 
-	 *  - Format
+	 *  - Format <- not viable
 	 *  - barplot, point plot, etc.
+	 *  - add some options in the chart (date, X/Y axis, etc)
 	 */
-	public Image getPlot(String data){
+	public File getPlot(String data){
 		Image img = null;
-		BufferedImage bi = null; 
+		BufferedImage bi = null;
+		File outputfile = null;
 		REXP x; 
 		try {
 			x= c.parseAndEval("try(jpeg('test.jpg',quality=90))");
@@ -63,13 +65,13 @@ public class Rinvoker {
 			img = Toolkit.getDefaultToolkit().createImage(x.asBytes());
 			
 			bi = toBufferedImage(img); 
-			File outputfile = new File("./tempFiles/temp.jpg");
+			outputfile = new File("./tempFiles/temp.jpg");
 			ImageIO.write(bi, "jpg", outputfile);
 
 		} catch (REngineException | REXPMismatchException | IOException e) {
 			e.printStackTrace();
 		} 
-		return img; 
+		return outputfile; 
 	}
 	private static BufferedImage toBufferedImage(Image src) {
 		// TODO calculates 

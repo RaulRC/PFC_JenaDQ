@@ -18,7 +18,7 @@ public class Testing {
 	public static void main(String[] args) {
 		Rinvoker r = new Rinvoker(); 
 		
-		String data = "a<-rnorm(100); barplot(a); dev.off()";
+		String data = "a<-rnorm(10); barplot(a); dev.off()";
 		
 		//r.getPlot("data(iris); attach(iris); plot(Sepal.Length, Petal.Length, col=unclass(Species)); dev.off()");
 		r.getPlot(data);

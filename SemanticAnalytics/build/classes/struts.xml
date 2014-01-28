@@ -16,11 +16,16 @@
 		<action name="upload" class="JenaApp.actions.UploadAction">
 			<result name="success">uriData.jsp</result>
 			<result name="error">Error.jsp</result>
-		</action>	
+		</action>
 		<action name="calculations" class="R.actions.Calculations">
 			<result name="success">dataResults.jsp</result>
 			<result name="error">Error.jsp</result>
 		</action>
+<!-- 	<action name="graph" class="R.actions.Calculations" method="graph">
+			<result name="success">dataResults.jsp</result>
+			<result name="error">Error.jsp</result>
+		</action>
+-->
 	</package>
 </struts>
 

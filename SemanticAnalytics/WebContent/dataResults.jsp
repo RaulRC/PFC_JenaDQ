@@ -12,11 +12,13 @@
 <h3>DataQuery results</h3>
 <br>
 <hr>
-	<s:form>
+	<s:form action="graph">
 		<p>
 			<b>R output:</b>
 			<s:property value="result" />
 		</p>
+<%--		<s:submit label="See the graph"/>
+ --%>
 	</s:form>
 </body>
 </html>
