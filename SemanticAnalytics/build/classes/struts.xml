@@ -21,11 +21,15 @@
 			<result name="success">dataResults.jsp</result>
 			<result name="error">Error.jsp</result>
 		</action>
-<!-- 	<action name="graph" class="R.actions.Calculations" method="graph">
-			<result name="success">dataResults.jsp</result>
+		<action name="graph" class="R.actions.Calculations" method="graph">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="bufferSize">10240</param>
+			</result>
 			<result name="error">Error.jsp</result>
 		</action>
--->
+
 	</package>
 </struts>
 

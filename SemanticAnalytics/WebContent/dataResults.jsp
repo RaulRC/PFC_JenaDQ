@@ -17,8 +17,8 @@
 			<b>R output:</b>
 			<s:property value="result" />
 		</p>
-<%--		<s:submit label="See the graph"/>
- --%>
+		<s:submit name="See the graph" />
+
 	</s:form>
 </body>
 </html>
