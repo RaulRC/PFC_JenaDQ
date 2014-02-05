@@ -1,17 +1,21 @@
 package R.Dominion;
 
 import java.awt.Frame;
+
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 
+import org.apache.tomcat.jni.Time;
 import org.rosuda.REngine.REXP;
 import org.rosuda.REngine.REXPMismatchException;
 import org.rosuda.REngine.REngineException;
@@ -29,7 +33,7 @@ public class Rinvoker {
 		}
 	}
 	
-	public void RinvokerClose(){
+	public void RinvokerClose() {
 		c.close();
 	}
 	// TODO --- Operations ----------------------------
@@ -53,19 +57,25 @@ public class Rinvoker {
 	 *  - barplot, point plot, etc.
 	 *  - add some options in the chart (date, X/Y axis, etc)
 	 */
-	public File getPlot(String data){
-		Image img = null;
-		BufferedImage bi = null;
-		File outputfile = null;
+	public File getPlot(String data) throws InterruptedException{
+
+		File outputfile = new File(".");
+
 		REXP x; 
+		Date d = new Date(); 
+		long title = d.getTime();
+		outputfile = new File("D://tempFiles/" + title+ "-temp.jpg");
 		try {
-			x= c.parseAndEval("try(jpeg('test.jpg',quality=90))");
-			c.parseAndEval(data);
-			x = c.parseAndEval("r=readBin('test.jpg','raw',1024*1024); unlink('test.jpg'); r");
-			img = Toolkit.getDefaultToolkit().createImage(x.asBytes());
+			if(!data.endsWith("dev.off()") && !data.endsWith("dev.off();"))
+				data+=";dev.off();";
 			
-			bi = toBufferedImage(img); 
-			outputfile = new File("./tempFiles/temp.jpg");
+			x= c.parseAndEval("try(jpeg('"+title+"-temp.jpg',quality=90))");
+			c.parseAndEval(data);
+			x = c.parseAndEval("r=readBin('"+title+"-temp.jpg','raw',1024*1024); unlink('"+title+"-temp.jpg'); r");
+			Image img = Toolkit.getDefaultToolkit().createImage(x.asBytes());
+			RenderedImage rn=null;
+						
+			BufferedImage bi = toBufferedImage(img); 
 			ImageIO.write(bi, "jpg", outputfile);
 
 		} catch (REngineException | REXPMismatchException | IOException e) {
@@ -73,8 +83,8 @@ public class Rinvoker {
 		} 
 		return outputfile; 
 	}
-	private static BufferedImage toBufferedImage(Image src) {
-		// TODO calculates 
+	private static BufferedImage toBufferedImage(Image src) throws InterruptedException {
+		// TODO calculates - ImageObserver needed
         int w = src.getWidth(null);
         int h = src.getHeight(null);
         int type = BufferedImage.TYPE_INT_RGB;  // other options
@@ -82,9 +92,14 @@ public class Rinvoker {
         	w = 450; 
         	h = 450; 
         }
+
+        
         BufferedImage dest = new BufferedImage(w, h, type);
         Graphics2D g2 = dest.createGraphics();
-        g2.drawImage(src, 0, 0, null);
+
+        //TODO: Security Issue!!!!
+        while(!g2.drawImage(src, 0, 0, null));
+
         g2.dispose();
         return dest;
     }

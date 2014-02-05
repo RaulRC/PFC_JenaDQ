@@ -18,25 +18,13 @@ import java.io.InputStream;
  
 import org.apache.struts2.convention.annotation.Result;
 
-@Result(
-	    name = "success", 
-	    type = "image/jpeg", 
-	    params = { 
-	        "contentType", "${type}", 
-	        "inputName", "stream", 
-	        "bufferSize", "1024", 
-	        "contentDisposition", "attachment;filename=\"${filename}\""
-	    }
-	)
+
 
 public class Calculations extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String data;
 	private double result; 
-	private Rinvoker r; 
 	
-    private String type = "image/jpeg";
-    private String filename;
     private InputStream fileInputStream;
 
 	
@@ -50,7 +38,7 @@ public class Calculations extends ActionSupport {
 		String ret=SUCCESS;
 
 		try{
-			r = new Rinvoker(); 
+			Rinvoker r = new Rinvoker(); 
 			setResult(r.simpleOperation(data));
 			r.RinvokerClose();
 		}
@@ -70,9 +58,13 @@ public class Calculations extends ActionSupport {
 		String ret=SUCCESS;
 
 		try{
-			filename = "temp.jpg";
-			File img = new File("D:\\temp.jpg");
+
+			Rinvoker r = new Rinvoker(); 
+			System.out.println("DATA: " + data);
+			File img = r.getPlot(data);
 			fileInputStream = new FileInputStream(img);
+			r.RinvokerClose();
+
 		}
 		catch(Exception e ){
 			e.printStackTrace();

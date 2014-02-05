@@ -34,5 +34,13 @@
     <s:submit/>
 </s:form>
 
+<br>
+<br>
+<p><b>Type a R expression with graphical result</b>: </p>
+<s:form action="graph" >
+    <s:textfield name="data" label="R expression with graphical result:"/>
+    <s:submit/>
+</s:form>
+
 </body>
 </html>

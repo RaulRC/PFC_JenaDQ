@@ -2,6 +2,8 @@ package Dominion;
 
 import java.util.LinkedList;
 
+import org.rosuda.REngine.Rserve.RserveException;
+
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -14,14 +16,23 @@ public class Testing {
 
 	/**
 	 * @param args
+	 * @throws InterruptedException 
+	 * @throws RserveException 
 	 */
-	public static void main(String[] args) {
-		Rinvoker r = new Rinvoker(); 
-		
-		String data = "a<-rnorm(10); barplot(a); dev.off()";
-		
+	public static void main(String[] args) throws InterruptedException {
+		 
 		//r.getPlot("data(iris); attach(iris); plot(Sepal.Length, Petal.Length, col=unclass(Species)); dev.off()");
-		r.getPlot(data);
-		r.RinvokerClose();
+		for (int i=0; i<10; i++){
+
+			Rinvoker r = new Rinvoker();
+			//String data = "data(iris); attach(iris); plot(Sepal.Length, Petal.Length, col=unclass(Species)); dev.off()";
+			String data = "a<-rnorm(100); barplot(a); dev.off()";	
+			r.getPlot(data);
+			System.out.println("Image ["+ (i+1) +"] printed");
+			r.RinvokerClose();
+ 
+			
+		}
+
 	}
 }
