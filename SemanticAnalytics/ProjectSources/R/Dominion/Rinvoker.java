@@ -66,14 +66,17 @@ public class Rinvoker {
 		long title = d.getTime();
 		outputfile = new File("D://tempFiles/" + title+ "-temp.jpg");
 		try {
+			// Little parser
 			if(!data.endsWith("dev.off()") && !data.endsWith("dev.off();"))
-				data+=";dev.off();";
+				if (!data.endsWith(";"))
+					data+=";dev.off();";
+				else
+					data+="dev.off();";
 			
 			x= c.parseAndEval("try(jpeg('"+title+"-temp.jpg',quality=90))");
 			c.parseAndEval(data);
 			x = c.parseAndEval("r=readBin('"+title+"-temp.jpg','raw',1024*1024); unlink('"+title+"-temp.jpg'); r");
 			Image img = Toolkit.getDefaultToolkit().createImage(x.asBytes());
-			RenderedImage rn=null;
 						
 			BufferedImage bi = toBufferedImage(img); 
 			ImageIO.write(bi, "jpg", outputfile);
@@ -93,7 +96,6 @@ public class Rinvoker {
         	h = 450; 
         }
 
-        
         BufferedImage dest = new BufferedImage(w, h, type);
         Graphics2D g2 = dest.createGraphics();
 
