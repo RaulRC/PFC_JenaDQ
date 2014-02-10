@@ -6,11 +6,18 @@ import org.rosuda.REngine.Rserve.RserveException;
 
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.tdb.TDB;
+import com.hp.hpl.jena.tdb.TDBFactory;
+import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.vocabulary.VCARD;
+
 import R.Dominion.*;
 public class Testing {
 
@@ -19,20 +26,24 @@ public class Testing {
 	 * @throws InterruptedException 
 	 * @throws RserveException 
 	 */
+	static String personURI    = "http://somewhere/JohnSmith";
+	static String fullName     = "John Smith";
+	static String directory = "D:\\tempFiles2" ;
 	public static void main(String[] args) throws InterruptedException {
-		 
-		//r.getPlot("data(iris); attach(iris); plot(Sepal.Length, Petal.Length, col=unclass(Species)); dev.off()");
-		for (int i=0; i<10; i++){
 
-			Rinvoker r = new Rinvoker();
-			//String data = "data(iris); attach(iris); plot(Sepal.Length, Petal.Length, col=unclass(Species)); dev.off()";
-			String data = "a<-rnorm(100); barplot(a); dev.off()";	
-			r.getPlot(data);
-			System.out.println("Image ["+ (i+1) +"] printed");
-			r.RinvokerClose();
- 
-			
-		}
+		
+		Dataset dataset = TDBFactory.createDataset(directory) ;
+		Model tdb = dataset.getNamedModel("graph-bib");
+//		String source = "SomeDocuments/bibliotecas.n3";
+//		FileManager.get().readModel(tdb, source);
+//		tdb.close();
+//
+//		
+		tdb = dataset.getNamedModel("graph-bib");
+		tdb.write(System.out, "N-TRIPLES");
+		
+		
+		dataset.close();
 
 	}
 }
