@@ -4,21 +4,9 @@ import java.util.LinkedList;
 
 import org.rosuda.REngine.Rserve.RserveException;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.tdb.TDB;
-import com.hp.hpl.jena.tdb.TDBFactory;
-import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.vocabulary.VCARD;
-
-import R.Dominion.*;
 public class Testing {
 
 	/**
@@ -31,19 +19,32 @@ public class Testing {
 	static String directory = "D:\\tempFiles2" ;
 	public static void main(String[] args) throws InterruptedException {
 
-		
-		Dataset dataset = TDBFactory.createDataset(directory) ;
-		Model tdb = dataset.getNamedModel("graph-bib");
-//		String source = "SomeDocuments/bibliotecas.n3";
-//		FileManager.get().readModel(tdb, source);
-//		tdb.close();
+// TDB Example		
+//		Dataset dataset = TDBFactory.createDataset(directory) ;
+//		Model tdb = dataset.getNamedModel("graph-bib");
 //
+//		tdb = dataset.getNamedModel("graph-bib");
+//		tdb.write(System.out, "N-TRIPLES");
 //
-		tdb = dataset.getNamedModel("graph-bib");
-		tdb.write(System.out, "N-TRIPLES");
-
+//		
+//		dataset.close();
 		
-		dataset.close();
+		DQModel dq = new DQModel("http://dbpedia.org/data/Iceland.n3"); 
+		//dq.showModel();
+		
+		Operation oper = new Operation(dq.getModel()); 
+		LinkedList<Property> pl = oper.getAllProperties();
+		Property p; 
+		ResIterator iter = null;
+// returns the number of "<string>" instances 
+		while(!pl.isEmpty()){
+			p = pl.remove();
+			if(p.toString().contains("stateOfOrigin"))
+				iter = dq.getModel().listSubjectsWithProperty(p);
+		}
+		System.out.println(iter.toList().size());
+		
+		
 
 	}
 }
