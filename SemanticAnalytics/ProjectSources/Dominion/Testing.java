@@ -38,10 +38,10 @@ public class Testing {
 //		FileManager.get().readModel(tdb, source);
 //		tdb.close();
 //
-//		
+//
 		tdb = dataset.getNamedModel("graph-bib");
 		tdb.write(System.out, "N-TRIPLES");
-		
+
 		
 		dataset.close();
 
