@@ -12,6 +12,6 @@ public class APISemDQ {
 		
 	}
 	public void deleteContextualRule(){
-		
+		int b; 
 	}
 }
