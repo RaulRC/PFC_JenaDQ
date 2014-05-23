@@ -2,13 +2,6 @@ package JenaDQ;
 
 public class MeasurementResult {
 
-	public MeasurementResult(String mName, String mDimension, Object mResult) {
-		super();
-		this.mName = mName;
-		this.mDimension = mDimension;
-		this.mResult = mResult;
-	}
-
 	private String mName;
 	private String mDimension;
 	private Object mResult;

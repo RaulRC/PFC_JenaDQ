@@ -2,7 +2,6 @@ package JenaDQ;
 
 import java.util.LinkedList;
 
-import com.hp.hpl.jena.Jena;
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class DQDimension {
@@ -36,8 +35,8 @@ public class DQDimension {
 	}
 
 	public LinkedList<MeasurementResult> executeMeasures() {
-		// TODO - implement DQDimension.executeMeasures
-		throw new UnsupportedOperationException();
+		return null;
+
 	}
 
 }
