@@ -3,8 +3,31 @@ package JenaDQ;
 import java.util.LinkedList;
 
 import com.hp.hpl.jena.rdf.model.Model;
+/**
+ * This class associates a JenaModel (RDF file or similar)
+ * with a set of DQ Dimensions to assess
+ * 
+ * @author Raúl Reguillo
+ * @param dqDimensionList
+ * @param dataset
+ * @param assessmentResult
+ * 
+ * @see JenaModel
+ * 
+ *
+ */
+@SuppressWarnings("rawtypes")
+public class DQAssessment implements Comparable{
 
-public class DQAssessment {
+	/**
+	 * Constructor
+	 * @param dataset (Jena Model)
+	 */
+	public DQAssessment(Model dataset) {
+		super();
+		this.dataset = dataset;
+	}
+
 
 	private LinkedList<DQDimension> dqDimensionList;
 	private Model dataset;
@@ -28,6 +51,26 @@ public class DQAssessment {
 	public int publishResult() {
 		// TODO - implement DQAssessment.publishResult
 		throw new UnsupportedOperationException();
+	}
+
+	public Model getDataset() {
+		return dataset;
+	}
+
+	public void setDataset(Model dataset) {
+		this.dataset = dataset;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public boolean equals(Object arg0){
+		// TODO 
+		return true;
 	}
 
 }
