@@ -1,6 +1,5 @@
 package Test;
 
-import java.io.InputStream;
 import java.util.LinkedList;
 
 import DQModel.DQModel;
@@ -9,9 +8,8 @@ import JenaDQ.DQDimension;
 import JenaDQ._dimCompleteness;
 import JenaDQ._dimPrecisionConsistency;
 
-import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.util.FileManager;
 
 public class testClass {
 
@@ -29,12 +27,14 @@ public class testClass {
 		DQDimension dq2 = new _dimPrecisionConsistency(m); 
 		
 		l.add(dq1); 
-		
-		System.out.println(((_dimCompleteness) l.element()).m_interlinkingCompleteness()); 
+		//System.out.println(((_dimCompleteness) l.element()).m_interlinkingCompleteness()); 
 		//m.write(System.out); 
+
 		DQAssessment dq = new DQAssessment(l, m); 
 		// Get all the ontologies involved
-		//System.out.println(m.getModel().getNsPrefixMap().toString());
+		System.out.println(m.getModel().getNsPrefixMap().toString());
+
+		
 		
 	}
 

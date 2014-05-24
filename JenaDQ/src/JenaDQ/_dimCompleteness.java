@@ -2,6 +2,8 @@ package JenaDQ;
 
 import DQModel.DQModel;
 
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -38,5 +40,9 @@ public class _dimCompleteness extends DQDimension {
 		//System.out.println("RESULT: " + countNoUri+"/"+total +" = " + result);
 		return mRes; 
 	}
+	public JenaDQ.MeasurementResult m2() {
+		MeasurementResult mRes = new MeasurementResult("m2", this.dimName); 
 
+		return mRes; 
+	}
 }
