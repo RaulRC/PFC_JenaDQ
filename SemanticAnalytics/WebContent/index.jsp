@@ -11,8 +11,7 @@
 </head>
 <body>
 	<h1>Hello :D</h1>
-	<p>The purpose of this app is to get habilities with Apache Jena
-		Framework.</p>
+	<p>Test Webpage</p>
 	<br>
 	<br>
 	<p>

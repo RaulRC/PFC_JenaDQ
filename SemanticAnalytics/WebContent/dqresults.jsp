@@ -27,5 +27,9 @@
 			<td align="center"><s:property value="mr.getContextualResult()" /></td>
 		</tr>
 	</table>
+	<hr>
+	<br>
+	<br>
+	<a href="index.jsp">Back</a>
 </body>
 </html>
