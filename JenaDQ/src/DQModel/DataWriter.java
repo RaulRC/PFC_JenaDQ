@@ -1,4 +1,4 @@
-package JenaDQ;
+package DQModel;
 
 import com.hp.hpl.jena.rdf.model.Model;
 

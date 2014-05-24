@@ -2,11 +2,13 @@ package JenaDQ;
 
 import java.util.LinkedList;
 
+import DQModel.DQModel;
+
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class DQAssessment {
 
-	public DQAssessment(LinkedList<DQDimension> dqDimensionList, Model dataset) {
+	public DQAssessment(LinkedList<DQDimension> dqDimensionList, DQModel dataset) {
 		super();
 		this.dqDimensionList = dqDimensionList;
 		this.dataset = dataset;
@@ -16,7 +18,7 @@ public class DQAssessment {
 	}
 	
 	private LinkedList<DQDimension> dqDimensionList;
-	private Model dataset;
+	private DQModel dataset;
 
 	public int executeAssessment() {
 		// TODO - implement DQAssessment.executeAssessment
@@ -29,7 +31,7 @@ public class DQAssessment {
 	}
 	
 	public String toString(){
-		return "DQAssessment: \n" + dataset.write(System.out, "N3") + "\n" + dqDimensionList.toString();
+		return "DQAssessment: \n" + dataset.toString() + "\n" + dqDimensionList.toString();
 	}
 
 }

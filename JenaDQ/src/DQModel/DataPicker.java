@@ -1,4 +1,4 @@
-package JenaDQ;
+package DQModel;
 
 import java.io.InputStream;
 
