@@ -2,13 +2,20 @@ package JenaDQ;
 
 import java.util.LinkedList;
 
+import DQModel.DQModel;
+
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class DQDimension {
 
-	private String dimName;
-	private Model targetModel;
-	private LinkedList<MeasurementResult> dimResults;
+	public DQDimension(DQModel targetmodel) {
+		super();
+		this.targetModel = targetmodel;
+	}
+
+	protected String dimName;
+	protected DQModel targetModel;
+	protected LinkedList<MeasurementResult> dimResults;
 
 	public String getDimName() {
 		return this.dimName;
@@ -18,11 +25,11 @@ public class DQDimension {
 		this.dimName = dimName;
 	}
 
-	public Model getTargetModel() {
+	public DQModel getTargetModel() {
 		return this.targetModel;
 	}
 
-	public void setTargetModel(Model targetModel) {
+	public void setTargetModel(DQModel targetModel) {
 		this.targetModel = targetModel;
 	}
 
@@ -37,6 +44,9 @@ public class DQDimension {
 	public LinkedList<MeasurementResult> executeMeasures() {
 		return null;
 
+	}
+	public double calculateDQMeasure(double nNot, double nTot){
+		return 1 - nNot/nTot; 
 	}
 
 }

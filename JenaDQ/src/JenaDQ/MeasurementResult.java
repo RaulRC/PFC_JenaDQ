@@ -2,9 +2,17 @@ package JenaDQ;
 
 public class MeasurementResult {
 
+	public MeasurementResult(String mName, String mDimension) {
+		super();
+		this.mName = mName;
+		this.mDimension = mDimension;
+		this.mContextualResult = null; 
+	}
+
 	private String mName;
 	private String mDimension;
-	private Object mResult;
+	private double mResult;
+	private Object mContextualResult; 
 
 	public String getMName() {
 		return this.mName;
@@ -26,8 +34,23 @@ public class MeasurementResult {
 		return this.mResult;
 	}
 
-	public void setMResult(Object mResult) {
+	public void setMResult(double mResult) {
 		this.mResult = mResult;
+	}
+
+	public Object getmContextualResult() {
+		return mContextualResult;
+	}
+
+	public void setmContextualResult(Object mContextualResult) {
+		this.mContextualResult = mContextualResult;
+	}
+
+	@Override
+	public String toString() {
+		return "MeasurementResult [mName=" + mName + ", mDimension="
+				+ mDimension + ", mResult=" + mResult + ", mContextualResult="
+				+ mContextualResult + "]";
 	}
 
 }

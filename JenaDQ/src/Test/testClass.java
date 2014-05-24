@@ -21,21 +21,20 @@ public class testClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String userURI = "http://dbpedia.org/data/The_Fellowship_of_the_Ring.n3"; 
+//		String userURI = "http://datos.gijon.es/doc/medio-ambiente/areas-recreativas.ttl";
+		DQModel m = new DQModel(userURI); 
 		
 		LinkedList<DQDimension> l = new LinkedList<DQDimension>(); 
-		DQDimension dq1 = new _dimCompleteness(); 
-		DQDimension dq2 = new _dimPrecisionConsistency(); 
+		_dimCompleteness dq1 = new _dimCompleteness(m); 
+		DQDimension dq2 = new _dimPrecisionConsistency(m); 
 		
-		l.add(dq1); l.add(dq2); 
+		l.add(dq1); 
 		
-		DQModel m = new DQModel(userURI); 
-
+		System.out.println(((_dimCompleteness) l.element()).m_interlinkingCompleteness()); 
 		//m.write(System.out); 
-		
 		DQAssessment dq = new DQAssessment(l, m); 
 		// Get all the ontologies involved
-		System.out.println(dq.toString());
-		System.out.println(m.getModel().getNsPrefixMap().toString());
+		//System.out.println(m.getModel().getNsPrefixMap().toString());
 		
 	}
 
