@@ -32,8 +32,9 @@
 		<s:textarea label="Query" name="dataQuery" cols="100" rows="15"/>
 		<s:submit name="Send" value="Query"></s:submit>
 	</s:form>
+	<s:form action="dqassessment">
+		<s:submit name="dq" value="Dq Assessment"/>
+	</s:form>
 
-	<hr />
-
-</body>
+	<hr /></body>
 </html>
