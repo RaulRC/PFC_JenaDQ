@@ -32,7 +32,7 @@ public class _dimCompleteness extends DQDimension {
 			st = iter.next();
 			total++;
 			rdfn = st.getObject(); 
-			if (!rdfn.isResource())
+			if (!rdfn.isURIResource())
 				countNoUri++;
 		}
 		result = this.calculateDQMeasure(countNoUri, total); 

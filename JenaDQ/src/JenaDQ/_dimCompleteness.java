@@ -32,7 +32,7 @@ public class _dimCompleteness extends DQDimension {
 			st = iter.next();
 			total++;
 			rdfn = st.getObject(); 
-			if (!rdfn.isResource())
+			if (!rdfn.isURIResource())
 				countNoUri++;
 		}
 		result = this.calculateDQMeasure(countNoUri, total); 
@@ -42,7 +42,24 @@ public class _dimCompleteness extends DQDimension {
 	}
 	public JenaDQ.MeasurementResult m2() {
 		MeasurementResult mRes = new MeasurementResult("m2", this.dimName); 
-
+		
+		RDFNode rdfn;
+		Statement st;
+		StmtIterator iter = this.getTargetModel().getModel().listStatements();
+		
+		int countNoUri = 0; 
+		int total = 0;
+		double result = 0; 
+		
+		while(iter.hasNext()){
+			st = iter.next();
+			total++;
+			rdfn = st.getObject(); 
+			if (!rdfn.isURIResource() )
+				countNoUri++;
+		}
+		result = this.calculateDQMeasure(countNoUri, total); 
+		mRes.setMResult(result);
 		return mRes; 
 	}
 }

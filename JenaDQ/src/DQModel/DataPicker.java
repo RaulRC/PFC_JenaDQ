@@ -57,6 +57,11 @@ public class DataPicker {
 			m.read(in, null, "RDF/XML");
 			setFormat("RDF/XML");
 			break;
+		default:
+			m.read(in, null, "N3");
+			setFormat("N3");
+			break;
+
 		}
 		setModel(m);
 		dqmodel.setDqmodel(m); 
