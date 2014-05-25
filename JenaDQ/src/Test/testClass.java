@@ -52,7 +52,7 @@ public class testClass {
 	               " :The_Lord_of_the_Rings ?p ?x\n} WHERE { :The_Lord_of_the_Rings ?p ?x .}\n";
 	               
  
-	    String queryString = 
+	    String queryString =  
 
 	            "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
 	            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
