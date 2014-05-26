@@ -2,13 +2,17 @@ package Test;
 
 import java.util.LinkedList;
 
+import utilities.UriUtil;
+
 import DQModel.DQModel;
 import JenaDQ.DQAssessment;
 import JenaDQ.DQDimension;
 import JenaDQ._dimCompleteness;
 import JenaDQ._dimPrecisionConsistency;
 
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -18,6 +22,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
+import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
 public class testClass {
 
@@ -26,16 +31,20 @@ public class testClass {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String userURI = "http://dbpedia.org/data/Masahiro_Yasuoka.n3"; 
-//		String userURI = "http://datos.gijon.es/doc/medio-ambiente/areas-recreativas.ttl";
+//		String userURI = "http://dbpedia.org/data/Masahiro_Yasuoka.n3"; 
+		String userURI = "http://datos.gijon.es/doc/medio-ambiente/areas-recreativas.ttl";
 		DQModel m = new DQModel(userURI); 
 		
 		LinkedList<DQDimension> l = new LinkedList<DQDimension>(); 
 		_dimCompleteness dq1 = new _dimCompleteness(m); 
 		DQDimension dq2 = new _dimPrecisionConsistency(m); 
 		
-		l.add(dq1); 
+		
+		l.add(dq1);
+		_dimCompleteness dc = (_dimCompleteness) l.element();
 		System.out.println(((_dimCompleteness) l.element()).m_interlinkingCompleteness().toString()); 
+		
+		System.out.println(dc.m_schemaCompleteness());
 		//m.write(System.out); 
 
 		DQAssessment dq = new DQAssessment(l, m); 
@@ -47,9 +56,10 @@ public class testClass {
 	    String queryString2 =  
 
 	            "PREFIX : <http://dbpedia.org/resource/>\n" +
-	            "PREFIX onto: <http://dbpedia.org/ontology/>\n" +
+//	            "PREFIX onto: <http://dbpedia.org/ontology/>\n" +
 	            "CONSTRUCT {\n" +
-	               " :The_Lord_of_the_Rings ?p ?x\n} WHERE { :The_Lord_of_the_Rings ?p ?x .}\n";
+	               " :Lord_of_the_rings ?p ?x\n} WHERE { " +
+	               ":Lord_of_the_rings ?p ?x .}\n";
 	               
  
 	    String queryString =  
@@ -74,19 +84,22 @@ public class testClass {
 	               
 	            "}\n LIMIT 10";
 	    
-	    Query query = QueryFactory.create(queryString);
-	//  QueryEngineHTTP qexec = QueryExecutionFactory.sparqlservice(service, query);
-	    QueryEngineHTTP qexec = QueryExecutionFactory.createServiceRequest(service, query);
-	    ResultSet results = qexec.execSelect();
-	    for ( ; results.hasNext() ; ) {
-	        QuerySolution soln = results.nextSolution() ;
-	        System.out.println(soln);
-	    }
+//	    Query query = QueryFactory.create(queryString);
+//	    QueryEngineHTTP qexec = QueryExecutionFactory.createServiceRequest(service, query);
+//	    ResultSet results = qexec.execSelect();
+//	    for ( ; results.hasNext() ; ) {
+//	        QuerySolution soln = results.nextSolution() ;
+//	        System.out.println(soln);
+//	    }
 	    
-	    Query query2 = QueryFactory.create(queryString2);
-	    QueryExecution qexec2 = QueryExecutionFactory.sparqlService(service, queryString2);
-	    Model results2 = qexec2.execConstruct();
-	    results2.write(System.out, "TURTLE");
+//	    Query query2 = QueryFactory.create(queryString2);
+//	    QueryExecution qexec2 = QueryExecutionFactory.sparqlService(service, queryString2);
+//	    Model results2 = qexec2.execConstruct();
+//	    Model results2 = UriUtil.getResourceFromEndpoint(service, queryString2).getModel();
+	    //results2.write(System.out, "N3");
+
+	   
+	    	
 	}
 
 }

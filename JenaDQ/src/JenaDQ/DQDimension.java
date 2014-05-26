@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import DQModel.DQModel;
 
 import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
@@ -52,21 +53,25 @@ public class DQDimension {
 
 	}
 	public double calculateDQMeasure(double nNot, double nTot){
-		return 1 - nNot/nTot; 
+		return (1 - (nNot/nTot)); 
 	}
 	/**
 	 * Recibe una query y un endpoint, devuelve un modelo RDF 
 	 * @param endpoint
 	 * @param queryString
+	 * @param prefix mapping
 	 */
-	public void getResourceFromURI(String endpoint, String queryString){
+	public DQModel getResourceFromURI(String endpoint, String queryString){
 	    Query query = QueryFactory.create(queryString);
-	    QueryEngineHTTP qexec = QueryExecutionFactory.createServiceRequest(endpoint, query);
-	    ResultSet results = qexec.execSelect();
-	    for ( ; results.hasNext() ; ) {
-	        QuerySolution soln = results.nextSolution() ;
-	        System.out.println(soln);
-	    }
+	    QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
+	    DQModel dq = new DQModel(); 
+	    Model results = qexec.execConstruct();
+	    dq.setDqmodel((Model) results); 
+//	    for ( ; results.hasNext() ; ) {
+//	        QuerySolution soln = results.nextSolution() ;
+//	        System.out.println(soln);
+//	    }
+	    return dq; 
 	}
 
 }
