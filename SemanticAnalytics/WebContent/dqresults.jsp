@@ -20,12 +20,14 @@
 			<td align="center"><b>Value</b></td>
 			<td align="center"><b>Contextual Value</b></td>
 		</tr>
-		<tr>
-			<td align="center"><s:property value="mr.getMDimension()" /></td>
-			<td align="center"><s:property value="mr.getMName()" /></td>
-			<td align="center"><s:property value="mr.getMResult()" /></td>
-			<td align="center"><s:property value="mr.getContextualResult()" /></td>
-		</tr>
+		<s:iterator value="mr" status="itStatus">
+			<tr>
+				<td align="center"><s:property value="getMDimension()" /></td>
+				<td align="center"><s:property value="getMName()" /></td>
+				<td align="center"><s:property value="getMResult()" /></td>
+				<td align="center"><s:property value="getContextualResult()" /></td>
+			</tr>
+		</s:iterator>
 	</table>
 	<hr>
 	<br>

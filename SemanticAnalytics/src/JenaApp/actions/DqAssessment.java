@@ -1,5 +1,6 @@
 package JenaApp.actions;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class DqAssessment extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
-	private MeasurementResult mr; 
+	private LinkedList<MeasurementResult> mr; 
 	private Model model; 
 	
 	public String execute() {
@@ -26,7 +27,10 @@ public class DqAssessment extends ActionSupport {
 			setModel((Model)session.get("model")); 
 			dq.setDqmodel(getModel());
 			_dimCompleteness comp= new _dimCompleteness(dq); 
-			setMr(comp.m_interlinkingCompleteness());
+			mr = new LinkedList<MeasurementResult>();
+			mr.add(comp.m_interlinkingCompleteness());
+			mr.add(comp.m_schemaCompleteness());
+			setMr(mr);
 		}
 		catch(Exception e){
 			//TODO set correct exception
@@ -35,11 +39,11 @@ public class DqAssessment extends ActionSupport {
 		return ret; 
 	}
 
-	public MeasurementResult getMr() {
+	public LinkedList<MeasurementResult> getMr() {
 		return mr;
 	}
 
-	public void setMr(MeasurementResult mr) {
+	public void setMr(LinkedList<MeasurementResult> mr) {
 		this.mr = mr;
 	}
 
