@@ -30,37 +30,38 @@ public class testClass {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-//		String userURI = "http://dbpedia.org/data/Masahiro_Yasuoka.n3"; 
+
 		String userURI = "http://datos.gijon.es/doc/medio-ambiente/areas-recreativas.ttl";
 		DQModel m = new DQModel(userURI); 
 		
 		LinkedList<DQDimension> l = new LinkedList<DQDimension>(); 
 		_dimCompleteness dq1 = new _dimCompleteness(m); 
 		DQDimension dq2 = new _dimPrecisionConsistency(m); 
-		
-		
+			
 		l.add(dq1);
 		_dimCompleteness dc = (_dimCompleteness) l.element();
 		System.out.println(((_dimCompleteness) l.element()).m_interlinkingCompleteness().toString()); 
-		
-		System.out.println(dc.m_schemaCompleteness());
-		//m.write(System.out); 
 
 		DQAssessment dq = new DQAssessment(l, m); 
 		// Get all the ontologies involved
 		//System.out.println(m.getModel().getNsPrefixMap().toString());
 
-//	    String service = "http://dbpedia.org/snorql";
-	    String service = "http://lod.openlinksw.com/sparql";
+/*
+ * ENDPOINTS		
+ */
+	    String service = "http://dbpedia.org/sparql";
+//	    String service = "http://querybuilder.dbpedia.org/";
+//	    String service = "http://lod.openlinksw.com/sparql";
+//		String service = "http://datos.gijon.es/page/12217-servicio-sparql";
+//		String service = "es.dbpedia.org/sparql";
 	    String queryString2 =  
 
-	            "PREFIX : <http://dbpedia.org/resource/>\n" +
-//	            "PREFIX onto: <http://dbpedia.org/ontology/>\n" +
-	            "CONSTRUCT {\n" +
-	               " :Lord_of_the_rings ?p ?x\n} WHERE { " +
-	               ":Lord_of_the_rings ?p ?x .}\n";
-	               
+	            "CONSTRUCT {" +
+	               " <http://dbpedia.org/resource/The_Lord_of_the_Rings> ?p ?x} WHERE { " +
+	               " <http://dbpedia.org/resource/The_Lord_of_the_Rings> ?p ?x }";
+
+	    String queryString3 = 
+				"CONSTRUCT FROM <http://dbpedia.org/data/The_Lord_of_the_Rings.n3> WHERE { ?s ?p ?o } ";
  
 	    String queryString =  
 
@@ -92,14 +93,15 @@ public class testClass {
 //	        System.out.println(soln);
 //	    }
 	    
-//	    Query query2 = QueryFactory.create(queryString2);
-//	    QueryExecution qexec2 = QueryExecutionFactory.sparqlService(service, queryString2);
-//	    Model results2 = qexec2.execConstruct();
-//	    Model results2 = UriUtil.getResourceFromEndpoint(service, queryString2).getModel();
-	    //results2.write(System.out, "N3");
-
-	   
-	    	
+//	    Query query2 = QueryFactory.create(queryString);
+//	    QueryExecution qexec2 = QueryExecutionFactory.sparqlService(service, query2);
+	    Model results2 = UriUtil.getResourceFromEndpoint(service, queryString2).getModel();
+	    System.out.println(results2.size());
+	    results2.write(System.out, "TTL");
+	    System.out.println(results2.size());
+	    
+//	   DQModel dqq = new DQModel(service,  "http://dbpedia.org/resource/The_Lord_of_the_Rings");
+//	   dqq.showModel();
 	}
 
 }

@@ -10,6 +10,7 @@ import DQModel.DQModel;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntProperty;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -110,5 +111,16 @@ public class _dimCompleteness extends DQDimension {
 		result =  this.calculateDQMeasure(notIn, total); 
 		mRes.setMResult(result);
 		return mRes; 
+	}
+	
+	public JenaDQ.MeasurementResult m_graphCompletenesByLevel(int dephlevel) {
+		MeasurementResult mRes = new MeasurementResult("Completeness Level 0-" + dephlevel, this.dimName);
+		mRes.setMResult(compLevel(this.getTargetModel().getModel(), dephlevel));
+		return null;
+	}
+
+	private double compLevel(Model model, int dephlevel) {
+		// TODO
+		return 0;
 	}
 }

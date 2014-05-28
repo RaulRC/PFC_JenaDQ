@@ -17,29 +17,25 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 
 public class ParkingExample {
-	public static void main(String[] args) throws IOException {
-		/*
-		 * DO NOT DELETE
-		 * IT WORKS!
-		 */
-		String ontology_service = "http://ambit.uni-plovdiv.bg:8080/ontology";
-		String endpoint = "otee:Endpoints";
-		String endpointsSparql = 
-		"PREFIX ot:<http://www.opentox.org/api/1.1#>\n"+
-		"	PREFIX ota:<http://www.opentox.org/algorithms.owl#>\n"+
-		"	PREFIX owl:<http://www.w3.org/2002/07/owl#>\n"+
-		"	PREFIX dc:<http://purl.org/dc/elements/1.1/>\n"+
-		"	PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+
-		"	PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
-		"	PREFIX otee:<http://www.opentox.org/echaEndpoints.owl#>\n"+
-		"		select ?url ?title\n"+
-		"		where {\n"+
-		"		?url rdfs:subClassOf %s.\n"+
-		"		?url dc:title ?title.\n"+
-		"		}\n";
+    public static void main( String[] args ) {
+        String s2 = "PREFIX  g:    <http://www.w3.org/2003/01/geo/wgs84_pos#>\n" +
+                "PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                "PREFIX  onto: <http://dbpedia.org/ontology/>\n" +
+                "\n" +
+                "SELECT  ?subject ?stadium ?lat ?long\n" +
+                "WHERE\n" +
+                "  { ?subject g:lat ?lat .\n" +
+                "    ?subject g:long ?long .\n" +
+                "    ?subject <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> onto:Stadium .\n" +
+                "    ?subject rdfs:label ?stadium\n" +
+                "    FILTER ( ( ( ( ( ?lat >= 52.4814 ) && ( ?lat <= 57.4814 ) ) && ( ?long >= -1.89358 ) ) && ( ?long <= 3.10642 ) ) && ( lang(?stadium) = \"en\" ) )\n" +
+                "  }\n" +
+                "LIMIT   5\n" +
+                "";
 
-	 QueryExecution x = QueryExecutionFactory.sparqlService(ontology_service, String.format(endpointsSparql,endpoint));
-	 ResultSet results = x.execSelect();
-	 ResultSetFormatter.out(System.out, results);
-	}
+        Query query = QueryFactory.create(s2); //s2 = the query above
+        QueryExecution qExe = QueryExecutionFactory.sparqlService( "http://dbpedia.org/sparql", query );
+        ResultSet results = qExe.execSelect();
+        ResultSetFormatter.out(System.out, results, query) ;
+    }
 }
