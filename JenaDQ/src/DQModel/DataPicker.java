@@ -89,9 +89,11 @@ public class DataPicker {
 	public DQModel getModel(String endpoint, String URI){
 		DQModel dqmodel = new DQModel(); 
 		String constructModelString =  
-				 "CONSTRUCT {" +
-			               " <"+URI+"> ?p ?x} WHERE { " +
-			               " <"+URI+"> ?p ?x }";
+				"CONSTRUCT {" +
+						" <"+URI+"> ?p ?x} WHERE { " +
+						" <"+URI+"> ?p ?x }";
+		// TODO Try with CONSTRUCT FROM uri
+		// TODO sameTerm URI ?x
 		Query query = QueryFactory.create(constructModelString);
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
 		Model m = qexec.execConstruct();
@@ -100,6 +102,33 @@ public class DataPicker {
 		dqmodel.setFormat("N3"); 
 		return dqmodel; 
 	}
+
+	public DQModel getModel(String endpoint, String URI, boolean includeSubject){
+		DQModel dqmodel = new DQModel(); 
+		String constructModelString =""; 
+		
+		if (includeSubject==true){
+			constructModelString =  
+					"CONSTRUCT {" +
+							" <"+URI+"> ?p ?x} WHERE { " +
+							" <"+URI+"> ?p ?x }";
+		}
+		else{
+			constructModelString =  
+					"CONSTRUCT {" +
+							" <"+URI+"> ?p ?x} WHERE { " +
+							" <"+URI+"> ?p ?x . FILTER ( <"+URI+"> != ?x ) }";
+		}
+
+		Query query = QueryFactory.create(constructModelString);
+		QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
+		Model m = qexec.execConstruct();
+		setModel(m);
+		dqmodel.setDqmodel(m); 
+		dqmodel.setFormat("N3"); 
+		return dqmodel; 
+	}
+
 
 	@SuppressWarnings("unused")
 	public String checkFormat(String filename) {

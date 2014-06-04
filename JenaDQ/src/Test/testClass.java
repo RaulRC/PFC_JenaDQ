@@ -1,6 +1,8 @@
 package Test;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import utilities.UriUtil;
 
@@ -21,6 +23,9 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.RSIterator;
+import com.hp.hpl.jena.rdf.model.ReifiedStatement;
 import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
@@ -65,18 +70,6 @@ public class testClass {
  
 	    String queryString =  
 
-	            "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
-	            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
-	            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
-	            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-	            "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
-	            "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
-	            "PREFIX : <http://dbpedia.org/resource/>\n" +
-	            "PREFIX dbpedia2: <http://dbpedia.org/property/>\n" +
-	            "PREFIX dbpedia: <http://dbpedia.org/>\n" +
-	            "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
-	            "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
-	            "\n" +
 	            "SELECT ?name ?birth ?death ?person WHERE {\n" +
 	               " ?person dbo:birthPlace :Spain .\n" +
 	               "?person dbo:birthDate ?birth .\n" +
@@ -95,13 +88,36 @@ public class testClass {
 	    
 //	    Query query2 = QueryFactory.create(queryString);
 //	    QueryExecution qexec2 = QueryExecutionFactory.sparqlService(service, query2);
-	    Model results2 = UriUtil.getResourceFromEndpoint(service, queryString2).getModel();
-	    System.out.println(results2.size());
-	    results2.write(System.out, "TTL");
-	    System.out.println(results2.size());
+//	    Model results2 = UriUtil.getResourceFromEndpoint(service, queryString2).getModel();
+//	    System.out.println(results2.size());
+//	    results2.write(System.out, "TTL");
+//	    System.out.println(results2.size());
 	    
-//	   DQModel dqq = new DQModel(service,  "http://dbpedia.org/resource/The_Lord_of_the_Rings");
-//	   dqq.showModel();
+	   DQModel dqq = new DQModel(service,  "http://dbpedia.org/resource/World_of_Warcraft");
+	   dqq.showModel();
+//	   ArrayList<String> uriList = UriUtil.getURIResourceList(dqq.getModel());
+//	   LinkedList<String> secondLevelList = new LinkedList<String>();
+//	   System.out.println(uriList.size());
+//	   ListIterator<String> iter = uriList.listIterator();
+//	   String current_model_URI = "";
+//	   DQModel current_model; 
+//	   RDFNode n; 
+//
+//	   while (iter.hasNext()){
+//		   current_model_URI = iter.next();
+//		   current_model = new DQModel(service, current_model_URI); 
+//		   try {
+//			secondLevelList.addAll(UriUtil.getURIResourceList(current_model.getModel()));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	   }
+//	   System.out.println(secondLevelList.toString());
+//	   
+//	   System.out.println(secondLevelList.size());
+//
+
 	}
 
 }
