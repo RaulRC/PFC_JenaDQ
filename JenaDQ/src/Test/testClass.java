@@ -84,6 +84,7 @@ public class testClass {
 //	    for ( ; results.hasNext() ; ) {
 //	        QuerySolution soln = results.nextSolution() ;
 //	        System.out.println(soln);
+//	        soln.
 //	    }
 	    
 //	    Query query2 = QueryFactory.create(queryString);

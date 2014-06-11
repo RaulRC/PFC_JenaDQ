@@ -94,6 +94,16 @@ public class UriUtil {
 		return resources;
 	}
 
+	/**
+	 * 
+	 * Recover from server one by one
+	 * 
+	 * @param endpoint
+	 * @param uri
+	 * @param depth
+	 * @return Leveled array list of resources
+	 */
+
 	public static ArrayList<ArrayList<RDFNode>> getResourcesInDepth(String endpoint, String uri, int depth){
 		// Init
 		ArrayList<ArrayList<RDFNode>> resources = new ArrayList<ArrayList<RDFNode>>();
@@ -132,6 +142,66 @@ public class UriUtil {
 				arrayBuffer.addAll(buffer); 
 				resources.add(arrayBuffer); 
 			}
+		}
+		return resources;
+	}
+
+	/**
+	 * Return the same arrayList but obtained through SPARQL query
+	 * faster but less scalable
+	 * @param endpoint
+	 * @param uri
+	 * @param depth
+	 * @return
+	 */
+	public static ArrayList<ArrayList<RDFNode>> getResourcesInDepthQuery(String endpoint, String uri, int depth){
+		// Init
+		ArrayList<ArrayList<RDFNode>> resources = new ArrayList<ArrayList<RDFNode>>();
+		DQModel dq = new DQModel(endpoint, uri,false); 
+		QuerySolution sol;
+		Query query;
+		QueryEngineHTTP qexec;
+		ArrayList<RDFNode> lvlCollection;		//LVL 0
+		resources.add(getURIResourceList(dq.getModel()));
+		if (depth == 0){
+			String finalQuery = "SELECT DISTINCT ?obj WHERE { <" + uri+"> ?p1 ?obj . }";
+			query = QueryFactory.create(finalQuery);
+			qexec = QueryExecutionFactory.createServiceRequest(endpoint, query);
+			ResultSet resultsQuery = qexec.execSelect();
+			lvlCollection = new ArrayList(); 
+			
+			while(resultsQuery.hasNext())
+				lvlCollection.add(resultsQuery.next().get("?obj"));
+			
+			resources.add(lvlCollection);
+		}
+		else{
+			// FILTER (!sameTERM(?obj,?o1)) . <<- maybe not neccesary
+			String headerQuery = "SELECT DISTINCT ?obj WHERE { <" + uri+"> ?p1 ?o1 .";
+			String qAux = ""; 
+			String finalQuery=""; 
+
+
+			for (int i=1; i<=depth; i++){
+				lvlCollection = new ArrayList(); 
+				//				Creating query 
+				qAux += "\n ?o"+i+" ?p"+(i+1) ;
+				finalQuery = headerQuery + qAux + " ?obj . FILTER (!sameTERM(?obj,?o"+i+")) .}"; 
+				System.out.println(i + ": " + finalQuery);
+				// Executing query
+				query = QueryFactory.create(finalQuery);
+				qexec = QueryExecutionFactory.createServiceRequest(endpoint, query);
+				ResultSet resultsQuery = qexec.execSelect();
+				// store results
+				while(resultsQuery.hasNext())
+					lvlCollection.add(resultsQuery.next().get("?obj"));
+
+				resources.add(i, lvlCollection);
+
+				// restore query 
+				qAux += " ?o"+(i+1)+ " . ";
+			}
+
 		}
 		return resources;
 	}
