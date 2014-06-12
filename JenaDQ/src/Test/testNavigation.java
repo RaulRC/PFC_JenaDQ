@@ -22,7 +22,7 @@ public class testNavigation {
 
 		ArrayList<ArrayList<RDFNode>> levels = new ArrayList<ArrayList<RDFNode>>();
 
-		levels = UriUtil.getResourcesInDepthQuery(endpoint, uri, depth);	
+		levels = UriUtil.getResourcesInDepth(endpoint, uri, depth);	
 		
 		for(int i=0; i<=depth; i++)
 			System.out.print(i+":" +levels.get(i).size() + "\t" );
