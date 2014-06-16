@@ -73,5 +73,12 @@ public class DQDimension {
 //	    }
 	    return dq; 
 	}
+	/**
+	 * To override
+	 * @return
+	 */
+	public JenaDQ.MeasurementResult _executeMeasurement() {
+		return null; 
+	}
 
 }

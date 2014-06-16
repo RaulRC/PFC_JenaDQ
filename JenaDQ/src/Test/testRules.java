@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import DQModel.DQModel;
+import JenaDQ.DQDimension;
+import JenaDQ._dimCompleteness;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -30,32 +32,40 @@ public class testRules {
 		// RULES
 		FileReader in = new FileReader("D:\\rules\\example.rules");
 		BufferedReader br = new BufferedReader(in); 
+		String endpoint = "http://dbpedia.org/sparql";
+		String uri = "http://dbpedia.org/resource/Metallica";
+		int depth=1;
 		List rules = Rule.parseRules(Rule.rulesParserFromReader(br));
 		System.out.println(rules.toString());
+		
+		DQDimension completeness = new _dimCompleteness(new DQModel(endpoint, uri), rules, depth, endpoint, uri); 
+		
+		completeness._executeMeasurement();
 
-		//MODEL
-		DQModel dq = new DQModel("http://dbpedia.org/sparql", "http://dbpedia.org/resource/The_Lord_of_the_Rings"); 
 		
-		//REASONER
-		Reasoner reasoner = new GenericRuleReasoner(rules);
-		
-		InfModel inf = ModelFactory.createInfModel(reasoner, dq.getModel());
-		
-	    ValidityReport validity = inf.validate();
-	    if (validity.isValid()) {
-	        System.out.println("OK");
-	    } else {
-	        System.out.println("Conflicts");
-	        for (Iterator i = validity.getReports(); i.hasNext(); ) {
-	            System.out.println(" - " + i.next());
-	        }
-	    }
-	    
-	    NodeIterator i = inf.listObjects();
-	    
-	    while (i.hasNext())
-	    	System.out.println(i.next().toString());
-		
+//		//MODEL
+//		DQModel dq = new DQModel("http://dbpedia.org/sparql", "http://dbpedia.org/resource/The_Lord_of_the_Rings"); 
+//		
+//		//REASONER
+//		Reasoner reasoner = new GenericRuleReasoner(rules);
+//		
+//		InfModel inf = ModelFactory.createInfModel(reasoner, dq.getModel());
+//		
+//	    ValidityReport validity = inf.validate();
+//	    if (validity.isValid()) {
+//	        System.out.println("OK");
+//	    } else {
+//	        System.out.println("Conflicts");
+//	        for (Iterator i = validity.getReports(); i.hasNext(); ) {
+//	            System.out.println(" - " + i.next());
+//	        }
+//	    }
+//	    
+//	    NodeIterator i = inf.listObjects();
+//	    
+//	    while (i.hasNext())
+//	    	System.out.println(i.next().toString());
+//		
 	}
 
 }
