@@ -9,6 +9,13 @@ public class MeasurementResult {
 		this.mContextualResult = null; 
 	}
 
+	public MeasurementResult(String mName, String mDimension, double mResult) {
+		super();
+		this.mName = mName;
+		this.mDimension = mDimension;
+		this.mResult = mResult;
+	}
+
 	private String mName;
 	private String mDimension;
 	private double mResult;

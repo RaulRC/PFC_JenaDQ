@@ -11,13 +11,8 @@ import DQModel.DQModel;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.rdf.model.InfModel;
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.NodeIterator;
-import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -25,17 +20,16 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
-import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 public class _dimCompleteness extends DQDimension {
 
-	@SuppressWarnings("rawtypes")
-	private List ruleList;
+	private List<Rule> ruleList;
 	private int depth; 
 	private String endpoint; 
 	private String uriLvLZero; 
 
-	public _dimCompleteness(DQModel targetmodel, List useRules, int depth, String endpoint, String uri) {
+	public _dimCompleteness(DQModel targetmodel, List<Rule> useRules, int depth, String endpoint, String uri) {
 		super(targetmodel);
 		this.dimName = "Completeness"; 
 		this.setRuleList(useRules);
@@ -44,7 +38,7 @@ public class _dimCompleteness extends DQDimension {
 		this.setUriLvLZero(uri); 
 	}
 
-	public _dimCompleteness(DQModel targetmodel, List rules) {
+	public _dimCompleteness(DQModel targetmodel, List<Rule> rules) {
 		super(targetmodel);
 		this.dimName = "Completeness"; 
 		this.setRuleList(rules);
@@ -60,6 +54,7 @@ public class _dimCompleteness extends DQDimension {
 	 * Calculates the number of interlinks in resources
 	 * @return MeasurementResult InterlinkingCompleteness
 	 */
+	@Deprecated
 	public JenaDQ.MeasurementResult m_interlinkingCompleteness() {
 		MeasurementResult mRes = new MeasurementResult("InterlinkingCompleteness", this.dimName); 
 
@@ -90,6 +85,7 @@ public class _dimCompleteness extends DQDimension {
 	 * @return MeasurementResult schemaCompleteness
 	 * Falta comprobar clase por clase
 	 */
+	@Deprecated
 	public JenaDQ.MeasurementResult m_schemaCompleteness() {
 		MeasurementResult mRes = new MeasurementResult("SchemaCompleteness", this.dimName); 
 
@@ -98,8 +94,6 @@ public class _dimCompleteness extends DQDimension {
 		int total = 0;
 		int notIn = 0;
 		double result = 0;
-		ExtendedIterator<OntProperty> ontProp; 
-
 		OntModel base = ModelFactory.createOntologyModel(); 
 		List<OntProperty> ontList = new LinkedList<OntProperty> (); 
 
@@ -109,7 +103,6 @@ public class _dimCompleteness extends DQDimension {
 				base.read(prefixCollection.next());
 				ontList.addAll(base.listAllOntProperties().toList());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				//e.printStackTrace();
 			}
 		}
@@ -145,28 +138,28 @@ public class _dimCompleteness extends DQDimension {
 	/**
 	 * ExecuteMeasurement Completeness
 	 */
-	@SuppressWarnings("unused")
-	public JenaDQ.MeasurementResult _executeMeasurement() {
-		MeasurementResult mRes = new MeasurementResult("Global Completeness Measurement in level [0, " + getDepth()+"] ", this.dimName);
+	public ArrayList<JenaDQ.MeasurementResult> _executeMeasurement() {
 		ArrayList<ArrayList<RDFNode>> results = UriUtil.getResourcesInDepthQuery(getEndpoint(), getUriLvLZero(), getDepth());
 
-		ArrayList<Double> resultsByLevel = new ArrayList(); 
-
-		for(ArrayList<RDFNode> al:results)
-			System.out.println(al.size()+"\t");
-
-		Model aux = ModelFactory.createDefaultModel(); 
-
+		// Results are gonna be here
+		ArrayList<Double> resultsByLevel = new ArrayList<Double>();
+		ArrayList<MeasurementResult> mRes = new ArrayList<MeasurementResult>(); 
+		
+		int total; 
+		int notExist;
+		
+		// LVL 0 - first graph -----------------------------------------------------------
 		DQModel dq = new DQModel(getEndpoint(), getUriLvLZero());
 		Reasoner reasoner = new GenericRuleReasoner(getRuleList());
 
+		// TODO DQ property to assess
 		Resource o = ResourceFactory.createResource("http://watever.com/assessment#NoCompleteness");
 		Resource s = ResourceFactory.createResource(getUriLvLZero());
 
 		InfModel inf = ModelFactory.createInfModel(reasoner,dq.getModel()); 
 		StmtIterator iter = null;; 
-		
-		// LVL 0 - first graph
+
+
 		if(getDepth()>=0){
 			if(validate(inf).isValid()){
 				iter = inf.listStatements(s, null, o);
@@ -176,17 +169,16 @@ public class _dimCompleteness extends DQDimension {
 					resultsByLevel.add(1.0);
 			}
 		}
-		int total=0; 
-		int notExist=0; 
-
+		//LVL 0 - first graph END--------------------------------------------------------
+		total=0; 
+		notExist=0; 
+		// For each list and each node in list
 		for(ArrayList<RDFNode> list:results){
-
 			total = list.size();
 			notExist = 0; 
 			for(RDFNode node:list){
 				if(node.isURIResource()){
 					dq = new DQModel(getEndpoint(), node.toString());
-					//						reasoner = new GenericRuleReasoner(getRuleList());
 					s = ResourceFactory.createResource(node.toString());
 					inf = ModelFactory.createInfModel(reasoner,dq.getModel()); 
 
@@ -194,25 +186,30 @@ public class _dimCompleteness extends DQDimension {
 						iter = inf.listStatements(s, null, o);
 						if(iter.hasNext()){
 							notExist+=1;
-							//								System.out.println(iter.next().toString());
 						}
 					}
 				}
 			}
-			//				resultsByLevel.add((float) (1 - (notExist/total)));
 			resultsByLevel.add(calculateDQMeasure(notExist, total));
-			System.out.println("Added in level: " +calculateDQMeasure(notExist, total)+ " "+total+ " "+notExist );
 			notExist=0; 
 		}
 
-
-		System.out.println(resultsByLevel.toString());
-
-
-		mRes.setMResult(compLevel(this.getTargetModel().getModel(), getDepth()));
+		// Generating DQ results
+		for(int i=0; i< resultsByLevel.size(); i++)
+			mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i))); 
+		
+		//TODO generate RDF result
+		// Reasoner -> apply the contextual rules here
+		// generate final RDF with DQ assessment 
+		// and publish
 		return mRes;
 	}
 
+	/**
+	 * Return a validity report (is valid)
+	 * @param inf
+	 * @return
+	 */
 	private ValidityReport validate(InfModel inf) {
 		ValidityReport val = inf.validate(); 
 		if(val.isValid()){
@@ -220,24 +217,18 @@ public class _dimCompleteness extends DQDimension {
 		}
 		else{
 			System.out.println("Conflicts");
-			for (Iterator i = val.getReports(); i.hasNext(); ) {
+			for (Iterator<?> i = val.getReports(); i.hasNext(); ) {
 				System.out.println(" - " + i.next());
 			}
 		}
 		return val; 
 	}
 
-	private double compLevel(Model model, int dephlevel) {
-		// TODO
-		return 0;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public List getRuleList() {
+	public List<Rule> getRuleList() {
 		return ruleList;
 	}
 
-	public void setRuleList(@SuppressWarnings("rawtypes") List ruleList) {
+	public void setRuleList(List<Rule> ruleList) {
 		this.ruleList = ruleList;
 	}
 

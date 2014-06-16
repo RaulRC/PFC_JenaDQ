@@ -1,5 +1,6 @@
 package JenaDQ;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import DQModel.DQModel;
@@ -77,7 +78,7 @@ public class DQDimension {
 	 * To override
 	 * @return
 	 */
-	public JenaDQ.MeasurementResult _executeMeasurement() {
+	public ArrayList<MeasurementResult> _executeMeasurement() {
 		return null; 
 	}
 

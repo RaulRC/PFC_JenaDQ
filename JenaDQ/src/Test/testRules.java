@@ -3,11 +3,13 @@ package Test;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import DQModel.DQModel;
 import JenaDQ.DQDimension;
+import JenaDQ.MeasurementResult;
 import JenaDQ._dimCompleteness;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -34,14 +36,18 @@ public class testRules {
 		BufferedReader br = new BufferedReader(in); 
 		String endpoint = "http://dbpedia.org/sparql";
 		String uri = "http://dbpedia.org/resource/Manakkara";
-		int depth=3;
+		int depth=2;
 		List rules = Rule.parseRules(Rule.rulesParserFromReader(br));
 		System.out.println(rules.toString());
 		
 		DQDimension completeness = new _dimCompleteness(new DQModel(endpoint, uri), rules, depth, endpoint, uri); 
 		
-		completeness._executeMeasurement();
-
+		ArrayList<MeasurementResult> i = completeness._executeMeasurement();
+		for(int j=0; j<i.size(); j++)
+			System.out.println(i.get(j).toString());
+//		for(MeasurementResult result:i)
+//			System.out.println(i);
+			
 		
 //		//MODEL
 //		DQModel dq = new DQModel("http://dbpedia.org/sparql", "http://dbpedia.org/resource/The_Lord_of_the_Rings"); 
