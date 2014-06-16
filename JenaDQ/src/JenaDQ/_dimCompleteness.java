@@ -149,8 +149,11 @@ public class _dimCompleteness extends DQDimension {
 	public JenaDQ.MeasurementResult _executeMeasurement() {
 		MeasurementResult mRes = new MeasurementResult("Global Completeness Measurement in level [0, " + getDepth()+"] ", this.dimName);
 		ArrayList<ArrayList<RDFNode>> results = UriUtil.getResourcesInDepthQuery(getEndpoint(), getUriLvLZero(), getDepth());
-		results.remove(0); 
+
 		ArrayList<Double> resultsByLevel = new ArrayList(); 
+
+		for(ArrayList<RDFNode> al:results)
+			System.out.println(al.size()+"\t");
 
 		Model aux = ModelFactory.createDefaultModel(); 
 
@@ -163,46 +166,46 @@ public class _dimCompleteness extends DQDimension {
 		InfModel inf = ModelFactory.createInfModel(reasoner,dq.getModel()); 
 		StmtIterator iter = null;; 
 		
-		if(validate(inf).isValid()){
-			iter = inf.listStatements(s, null, o);
-			// LVL 0 - first graph
-			if(iter.hasNext())
-				resultsByLevel.add(0.0); 
-			else
-				resultsByLevel.add(1.0);
+		// LVL 0 - first graph
+		if(getDepth()>=0){
+			if(validate(inf).isValid()){
+				iter = inf.listStatements(s, null, o);
+				if(iter.hasNext())
+					resultsByLevel.add(0.0); 
+				else
+					resultsByLevel.add(1.0);
+			}
 		}
-		
-		if(getDepth()>0){
-			int total=0; 
-			int notExist=0; 
+		int total=0; 
+		int notExist=0; 
 
-			for(ArrayList<RDFNode> list:results){
-				
-				total = list.size();
-				notExist = 0; 
-				for(RDFNode node:list){
-					if(node.isURIResource()){
-						dq = new DQModel(getEndpoint(), node.toString());
-//						reasoner = new GenericRuleReasoner(getRuleList());
-						s = ResourceFactory.createResource(node.toString());
-						inf = ModelFactory.createInfModel(reasoner,dq.getModel()); 
+		for(ArrayList<RDFNode> list:results){
 
-						if(validate(inf).isValid()){
-							iter = inf.listStatements(s, null, o);
-							if(iter.hasNext()){
-								notExist+=1;
-//								System.out.println(iter.next().toString());
-							}
+			total = list.size();
+			notExist = 0; 
+			for(RDFNode node:list){
+				if(node.isURIResource()){
+					dq = new DQModel(getEndpoint(), node.toString());
+					//						reasoner = new GenericRuleReasoner(getRuleList());
+					s = ResourceFactory.createResource(node.toString());
+					inf = ModelFactory.createInfModel(reasoner,dq.getModel()); 
+
+					if(validate(inf).isValid()){
+						iter = inf.listStatements(s, null, o);
+						if(iter.hasNext()){
+							notExist+=1;
+							//								System.out.println(iter.next().toString());
 						}
 					}
 				}
-//				resultsByLevel.add((float) (1 - (notExist/total)));
-				resultsByLevel.add(calculateDQMeasure(notExist, total));
-				System.out.println("Added in level: " +calculateDQMeasure(notExist, total)+ " "+total+ " "+notExist );
-				notExist=0; 
 			}
-		}	
-		
+			//				resultsByLevel.add((float) (1 - (notExist/total)));
+			resultsByLevel.add(calculateDQMeasure(notExist, total));
+			System.out.println("Added in level: " +calculateDQMeasure(notExist, total)+ " "+total+ " "+notExist );
+			notExist=0; 
+		}
+
+
 		System.out.println(resultsByLevel.toString());
 
 
@@ -213,7 +216,7 @@ public class _dimCompleteness extends DQDimension {
 	private ValidityReport validate(InfModel inf) {
 		ValidityReport val = inf.validate(); 
 		if(val.isValid()){
-//			System.out.println("OK");
+			//			System.out.println("OK");
 		}
 		else{
 			System.out.println("Conflicts");

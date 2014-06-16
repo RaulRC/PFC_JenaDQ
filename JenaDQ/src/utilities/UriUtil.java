@@ -120,7 +120,7 @@ public class UriUtil {
 		if (depth == 0)
 			return resources;
 		else{
-			for (int i=1; i<=depth; i++){
+			for (int i=1; i<depth; i++){
 				iterNode = resources.get(i-1).iterator();
 				buffer = new HashSet<RDFNode>(); 
 				while (iterNode.hasNext()){
@@ -182,7 +182,7 @@ public class UriUtil {
 			String finalQuery=""; 
 
 
-			for (int i=1; i<=depth; i++){
+			for (int i=1; i<depth; i++){
 				lvlCollection = new ArrayList(); 
 				//				Creating query 
 				qAux += "\n ?o"+i+" ?p"+(i+1) ;

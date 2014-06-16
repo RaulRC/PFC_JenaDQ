@@ -33,8 +33,8 @@ public class testRules {
 		FileReader in = new FileReader("D:\\rules\\example.rules");
 		BufferedReader br = new BufferedReader(in); 
 		String endpoint = "http://dbpedia.org/sparql";
-		String uri = "http://dbpedia.org/resource/Metallica";
-		int depth=1;
+		String uri = "http://dbpedia.org/resource/Manakkara";
+		int depth=3;
 		List rules = Rule.parseRules(Rule.rulesParserFromReader(br));
 		System.out.println(rules.toString());
 		
