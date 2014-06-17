@@ -1,5 +1,6 @@
 package JenaDQ;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import DQModel.DQModel;
@@ -72,6 +73,13 @@ public class DQDimension {
 //	        System.out.println(soln);
 //	    }
 	    return dq; 
+	}
+	/**
+	 * To override
+	 * @return
+	 */
+	public ArrayList<MeasurementResult> _executeMeasurement() {
+		return null; 
 	}
 
 }

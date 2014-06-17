@@ -9,6 +9,10 @@
 			<result name="success">uriData.jsp</result>
 			<result name="error">Error.jsp</result>
 		</action>
+		<action name="uriEndpoint" class="JenaApp.actions.uriEndpoint">
+			<result name="success">uriData.jsp</result>
+			<result name="error">Error.jsp</result>
+		</action>
 		<action name="queryModel" class="JenaApp.actions.queryModel">
 			<result name="success">QueryResults.jsp</result>
 			<result name="error">Error.jsp</result>

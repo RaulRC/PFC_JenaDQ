@@ -29,12 +29,19 @@
 		</s:iterator>
 	</table>
 	<s:form action="queryModel">
-		<s:textarea label="Query" name="dataQuery" cols="100" rows="15"/>
+		<s:textarea label="Query" name="dataQuery" cols="100" rows="15" />
 		<s:submit name="Send" value="Query"></s:submit>
 	</s:form>
-	<s:form action="dqassessment">
-		<s:submit name="dq" value="Dq Assessment"/>
+	<br>
+	<br>
+
+	<hr />
+	<s:form action="dqassessment" method="post" enctype="multipart/form-data">
+		<s:textfield label="Depth" name="depth"/>
+		<s:file name="file" label="Use Rules File to upload" />
+		<s:submit name="dq" value="Dq Assessment" />
 	</s:form>
 
-	<hr /></body>
+	<hr />
+</body>
 </html>

@@ -4,8 +4,13 @@ import java.util.LinkedList;
 
 import org.rosuda.REngine.Rserve.RserveException;
 
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.query.ReadWrite;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.ResIterator;
+import com.hp.hpl.jena.tdb.TDBFactory;
+import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.VCARD;
 public class Testing {
 
@@ -20,17 +25,15 @@ public class Testing {
 	public static void main(String[] args) throws InterruptedException {
 
 // TDB Example		
-//		Dataset dataset = TDBFactory.createDataset(directory) ;
+		Dataset dataset = TDBFactory.createDataset(directory) ;
 //		Model tdb = dataset.getNamedModel("graph-bib");
-//
-//		tdb = dataset.getNamedModel("graph-bib");
+	//	Model tdb = dataset.getNamedModel("modelo-islandia"); 
+//		Model tdbmodel = TDBFactory.createModel("http://dbpedia.org/data/Iceland.n3")
+		DQModel dq = new DQModel("http://dbpedia.org/data/Iceland.n3");
+		dataset.begin(ReadWrite.WRITE);
+		FileManager.get().readModel(dq.getModel(), "http://dbpedia.org/data/Iceland.n3");
 //		tdb.write(System.out, "N-TRIPLES");
-//
-//		
-//		dataset.close();
-		
-		DQModel dq = new DQModel("http://dbpedia.org/data/Iceland.n3"); 
-		//dq.showModel();
+		dataset.close();
 		
 		Operation oper = new Operation(dq.getModel()); 
 		LinkedList<Property> pl = oper.getAllProperties();

@@ -25,6 +25,21 @@ public class DQModel {
 		this.model = aux.getModel();
 		this.format = aux.getFormat();
 	}
+	// Constructor for Endpoint
+	public DQModel(String endpoint, String URI) {
+		DataPicker dp = new DataPicker();
+		DQModel aux; 
+		aux = dp.getModel(endpoint, URI);
+		this.model = aux.getModel();
+		this.format = aux.getFormat();
+	}
+	public DQModel(String endpoint, String URI, boolean sameSubject) {
+		DataPicker dp = new DataPicker();
+		DQModel aux; 
+		aux = dp.getModel(endpoint, URI, sameSubject);
+		this.model = aux.getModel();
+		this.format = aux.getFormat();
+	}
 	public Model getModel() {
 		return model;
 	}

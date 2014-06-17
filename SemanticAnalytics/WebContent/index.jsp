@@ -46,6 +46,23 @@
 	</s:form>
 	<br>
 	<br>
+	
+	
+	<br>
+	<br>
+	<br>
+	<p>
+		<b>Use an URI and ENDPOINT</b> 
+	</p>
+	<s:form action="uriEndpoint" method="post" enctype="multipart/form-data">
+		<s:textfield name="uri" label="Put here your URI" />
+		<s:textfield name="endpoint" label="Put here your ENDPOINT" />
+		<s:submit />
+	</s:form>
+	<br>
+	<br>
+	
+	
 	<p>
 		<b>Type a R expression</b>:
 	</p>
