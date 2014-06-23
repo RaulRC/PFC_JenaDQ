@@ -1,17 +1,23 @@
 package JenaDQ;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import utilities.UriUtil;
+import vocabulary.DQA;
 import DQModel.DQModel;
 
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.rdf.model.InfModel;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
@@ -21,15 +27,18 @@ import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.vocabulary.VCARD;
 
 public class _dimCompleteness extends DQDimension {
 
 	private List<Rule> ruleList;
+	private List<Rule> contextualRuleList;
 	private int depth; 
 	private String endpoint; 
 	private String uriLvLZero; 
+	private ArrayList<Double> assessmentResults; 
 
-	public _dimCompleteness(DQModel targetmodel, List<Rule> useRules, int depth, String endpoint, String uri) {
+	public _dimCompleteness(DQModel targetmodel, List<Rule> useRules, List<Rule> contextualRuleList, int depth, String endpoint, String uri) {
 		super(targetmodel);
 		this.dimName = "Completeness"; 
 		this.setRuleList(useRules);
@@ -144,10 +153,10 @@ public class _dimCompleteness extends DQDimension {
 		// Results are gonna be here
 		ArrayList<Double> resultsByLevel = new ArrayList<Double>();
 		ArrayList<MeasurementResult> mRes = new ArrayList<MeasurementResult>(); 
-		
+
 		int total; 
 		int notExist;
-		
+
 		// LVL 0 - first graph -----------------------------------------------------------
 		DQModel dq = new DQModel(getEndpoint(), getUriLvLZero());
 		Reasoner reasoner = new GenericRuleReasoner(getRuleList());
@@ -197,12 +206,60 @@ public class _dimCompleteness extends DQDimension {
 		// Generating DQ results
 		for(int i=0; i< resultsByLevel.size(); i++)
 			mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i))); 
-		
+
+
+
 		//TODO generate RDF result
+
+		setAssessmentResults(resultsByLevel);
+		Model m = this._getRDFModel();
+
 		// Reasoner -> apply the contextual rules here
+		
+		Reasoner reasoner2 = new GenericRuleReasoner(getContextualRuleList());
+		InfModel inf2 = ModelFactory.createInfModel(reasoner2,m); 
+		
+		validate(inf2); 
+		
+		
 		// generate final RDF with DQ assessment 
 		// and publish
+		m.write(System.out, "RDF/XML");
+		
 		return mRes;
+	}
+
+	public Model _getRDFModel(){
+
+		Model m = ModelFactory.createDefaultModel();
+		Date d = new Date(); 
+		//TODO getTime no funcionará si quiero unirlos después
+		Resource assessment = null;
+
+		ArrayList<Model> mList = new ArrayList<Model>(); 
+
+		// UNA MANERA
+		for(int i = 0; i< assessmentResults.size(); i++){
+			mList.add(ModelFactory.createDefaultModel());
+			assessment = mList.get(i).createResource(DQA.NS+"IDENTIFIER").addProperty(DQA.COMPLETENESS, 
+					mList.get(i).createResource()
+					.addProperty(DQA.COMPLETENESS_LEVEL, i+"")
+					.addProperty(DQA.COMPLETENESS_LEVEL_RESULT, assessmentResults.get(i) +""));
+		}
+		
+		// OTRA
+//		for(int i = 0; i< assessmentResults.size(); i++){
+//			mList.add(ModelFactory.createDefaultModel());
+//			assessment = mList.get(i).createResource(DQA.NS+"IDENTIFIER").addProperty(DQA.COMPLETENESS, 
+//					mList.get(i).createResource()
+//					.addProperty(DQA.COMPLETENESS_LEVEL_RESULT, mList.get(i).createTypedLiteral(assessmentResults.get(i), "lvl "+i)));
+//		}
+
+		for(Model mod:mList)
+			m = m.union(mod);
+
+		return m; 
+
 	}
 
 	/**
@@ -254,5 +311,21 @@ public class _dimCompleteness extends DQDimension {
 
 	public void setUriLvLZero(String uriLvLZero) {
 		this.uriLvLZero = uriLvLZero;
+	}
+
+	public ArrayList<Double> getAssessmentResults() {
+		return assessmentResults;
+	}
+
+	public void setAssessmentResults(ArrayList<Double> assessmentResults) {
+		this.assessmentResults = assessmentResults;
+	}
+
+	public List<Rule> getContextualRuleList() {
+		return contextualRuleList;
+	}
+
+	public void setContextualRuleList(List<Rule> contextualRuleList) {
+		this.contextualRuleList = contextualRuleList;
 	}
 }

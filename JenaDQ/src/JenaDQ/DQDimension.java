@@ -62,6 +62,7 @@ public class DQDimension {
 	 * @param queryString
 	 * @param prefix mapping
 	 */
+	@Deprecated
 	public DQModel getResourceFromURI(String endpoint, String queryString){
 	    Query query = QueryFactory.create(queryString);
 	    QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
@@ -79,6 +80,12 @@ public class DQDimension {
 	 * @return
 	 */
 	public ArrayList<MeasurementResult> _executeMeasurement() {
+		return null; 
+	}
+	public Model _getRDFModel(){
+		return null; 
+	}
+	public Model _contextualFinalModel(){
 		return null; 
 	}
 

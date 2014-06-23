@@ -36,11 +36,16 @@ public class testRules {
 		BufferedReader br = new BufferedReader(in); 
 		String endpoint = "http://dbpedia.org/sparql";
 		String uri = "http://dbpedia.org/resource/Manakkara";
-		int depth=2;
+		int depth=3;
 		List rules = Rule.parseRules(Rule.rulesParserFromReader(br));
+		in = new FileReader("D:\\rules\\contextual.rules");
+		br = new BufferedReader(in); 
+		List contextualRules = Rule.parseRules(Rule.rulesParserFromReader(br));
+		
 		System.out.println(rules.toString());
 		
-		DQDimension completeness = new _dimCompleteness(new DQModel(endpoint, uri), rules, depth, endpoint, uri); 
+		DQDimension completeness = new _dimCompleteness(new DQModel(endpoint, uri), rules, contextualRules, depth, endpoint, uri); 
+		
 		
 		ArrayList<MeasurementResult> i = completeness._executeMeasurement();
 		for(int j=0; j<i.size(); j++)
