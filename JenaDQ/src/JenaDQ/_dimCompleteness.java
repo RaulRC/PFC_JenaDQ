@@ -15,6 +15,7 @@ import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.rdf.model.InfModel;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -27,6 +28,7 @@ import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.VCARD;
 
 public class _dimCompleteness extends DQDimension {
@@ -45,6 +47,7 @@ public class _dimCompleteness extends DQDimension {
 		this.setDepth(depth); 
 		this.setEndpoint(endpoint); 
 		this.setUriLvLZero(uri); 
+		this.contextualRuleList=contextualRuleList; 
 	}
 
 	public _dimCompleteness(DQModel targetmodel, List<Rule> rules) {
@@ -209,23 +212,21 @@ public class _dimCompleteness extends DQDimension {
 
 
 
-		//TODO generate RDF result
-
+		//generate RDF result
 		setAssessmentResults(resultsByLevel);
-		Model m = this._getRDFModel();
-
 		// Reasoner -> apply the contextual rules here
-		
-		Reasoner reasoner2 = new GenericRuleReasoner(getContextualRuleList());
-		InfModel inf2 = ModelFactory.createInfModel(reasoner2,m); 
-		
-		validate(inf2); 
-		
-		
 		// generate final RDF with DQ assessment 
-		// and publish
-		m.write(System.out, "RDF/XML");
+		// TODO and publish
+		Model m = this._getRDFModel();
 		
+		// Set Up mRes (maybe is not neccesary)
+
+
+		System.out.println("\n\n");
+		m.write(System.out, "N3");
+		System.out.println("\n\n");
+
+		// TODO CHECK RETURN TYPE -> better if we just return the model of the assessment
 		return mRes;
 	}
 
@@ -236,27 +237,47 @@ public class _dimCompleteness extends DQDimension {
 		//TODO getTime no funcionará si quiero unirlos después
 		Resource assessment = null;
 
-		ArrayList<Model> mList = new ArrayList<Model>(); 
+		ArrayList<Model> mList = new ArrayList<Model>();
+
+		Reasoner reasoner2 = new GenericRuleReasoner(getContextualRuleList());
+		InfModel  inf2 = null; 
+
+
 
 		// UNA MANERA
+		Literal lResult = null; 
+		Literal lLevel = null; 
+
+		ArrayList<Model> result = new ArrayList<Model>();  
 		for(int i = 0; i< assessmentResults.size(); i++){
 			mList.add(ModelFactory.createDefaultModel());
-			assessment = mList.get(i).createResource(DQA.NS+"IDENTIFIER").addProperty(DQA.COMPLETENESS, 
-					mList.get(i).createResource()
-					.addProperty(DQA.COMPLETENESS_LEVEL, i+"")
-					.addProperty(DQA.COMPLETENESS_LEVEL_RESULT, assessmentResults.get(i) +""));
-		}
-		
-		// OTRA
-//		for(int i = 0; i< assessmentResults.size(); i++){
-//			mList.add(ModelFactory.createDefaultModel());
-//			assessment = mList.get(i).createResource(DQA.NS+"IDENTIFIER").addProperty(DQA.COMPLETENESS, 
-//					mList.get(i).createResource()
-//					.addProperty(DQA.COMPLETENESS_LEVEL_RESULT, mList.get(i).createTypedLiteral(assessmentResults.get(i), "lvl "+i)));
-//		}
 
-		for(Model mod:mList)
+			lResult = mList.get(i).createTypedLiteral(new Double(assessmentResults.get(i)));
+			lLevel  = mList.get(i).createTypedLiteral(new Integer(i)); 
+
+			assessment = mList.get(i).createResource(DQA.NS+"IDENTIFIER")
+					.addProperty(RDF.type, DQA.NS+"ContextualAssessment")
+					.addProperty(DQA.COMPLETENESS, 
+							mList.get(i).createResource()
+							.addProperty(DQA.COMPLETENESS_LEVEL, lLevel)
+							.addProperty(DQA.COMPLETENESS_LEVEL_RESULT, lResult));
+
+
+			// inference here
+
+			inf2 = ModelFactory.createInfModel(reasoner2,mList.get(i) );
+			validate(inf2); 
+
+			//			inf2.write(System.out, "N3");
+
+			result.add(inf2);  
+
+		}
+
+		for(Model mod:result)
 			m = m.union(mod);
+
+		//		m.write(System.out, "N3"); 
 
 		return m; 
 
