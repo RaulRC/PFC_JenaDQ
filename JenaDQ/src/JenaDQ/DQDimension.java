@@ -79,7 +79,7 @@ public class DQDimension {
 	 * To override
 	 * @return
 	 */
-	public ArrayList<MeasurementResult> _executeMeasurement() {
+	public Model _executeMeasurement() {
 		return null; 
 	}
 	public Model _getRDFModel(){

@@ -150,7 +150,7 @@ public class _dimCompleteness extends DQDimension {
 	/**
 	 * ExecuteMeasurement Completeness
 	 */
-	public ArrayList<JenaDQ.MeasurementResult> _executeMeasurement() {
+	public Model _executeMeasurement() {
 		ArrayList<ArrayList<RDFNode>> results = UriUtil.getResourcesInDepthQuery(getEndpoint(), getUriLvLZero(), getDepth());
 
 		// Results are gonna be here
@@ -165,7 +165,7 @@ public class _dimCompleteness extends DQDimension {
 		Reasoner reasoner = new GenericRuleReasoner(getRuleList());
 
 		// TODO DQ property to assess
-		Resource o = ResourceFactory.createResource("http://watever.com/assessment#NoCompleteness");
+		Resource o = ResourceFactory.createResource(DQA.NS+"NoCompleteness");
 		Resource s = ResourceFactory.createResource(getUriLvLZero());
 
 		InfModel inf = ModelFactory.createInfModel(reasoner,dq.getModel()); 
@@ -206,28 +206,20 @@ public class _dimCompleteness extends DQDimension {
 			notExist=0; 
 		}
 
-		// Generating DQ results
-		for(int i=0; i< resultsByLevel.size(); i++)
-			mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i))); 
-
-
-
 		//generate RDF result
 		setAssessmentResults(resultsByLevel);
 		// Reasoner -> apply the contextual rules here
 		// generate final RDF with DQ assessment 
 		// TODO and publish
 		Model m = this._getRDFModel();
+
+		// Generating DQ results
 		
-		// Set Up mRes (maybe is not neccesary)
+		for(int i=0; i< resultsByLevel.size(); i++)
+			mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i))); 
 
-
-		System.out.println("\n\n");
-		m.write(System.out, "N3");
-		System.out.println("\n\n");
-
-		// TODO CHECK RETURN TYPE -> better if we just return the model of the assessment
-		return mRes;
+		return m; 
+//		return mRes;
 	}
 
 	public Model _getRDFModel(){

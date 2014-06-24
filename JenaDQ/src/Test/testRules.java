@@ -13,6 +13,7 @@ import JenaDQ.MeasurementResult;
 import JenaDQ._dimCompleteness;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -35,6 +36,7 @@ public class testRules {
 		FileReader in = new FileReader("D:\\rules\\example.rules");
 		BufferedReader br = new BufferedReader(in); 
 		String endpoint = "http://dbpedia.org/sparql";
+//		String endpoint = "http://lod.openlinksw.com/sparql";
 		String uri = "http://dbpedia.org/resource/Manakkara";
 		int depth=2;
 		List rules = Rule.parseRules(Rule.rulesParserFromReader(br));
@@ -48,9 +50,10 @@ public class testRules {
 		DQDimension completeness = new _dimCompleteness(new DQModel(endpoint, uri), rules, contextualRules, depth, endpoint, uri); 
 		
 		
-		ArrayList<MeasurementResult> i = completeness._executeMeasurement();
-		for(int j=0; j<i.size(); j++)
-			System.out.println(i.get(j).toString());
+		Model i = completeness._executeMeasurement();
+
+		i.write(System.out, "N3"); 
+		
 //		for(MeasurementResult result:i)
 //			System.out.println(i);
 			
