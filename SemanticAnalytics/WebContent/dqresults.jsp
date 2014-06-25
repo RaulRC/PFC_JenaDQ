@@ -25,7 +25,7 @@
 				<td align="center"><s:property value="getMDimension()" /></td>
 				<td align="center"><s:property value="getMName()" /></td>
 				<td align="center"><s:property value="getMResult()" /></td>
-				<td align="center"><s:property value="getContextualResult()" /></td>
+				<td align="center"><s:property value="getmContextualResult()" /></td>
 			</tr>
 		</s:iterator>
 	</table>

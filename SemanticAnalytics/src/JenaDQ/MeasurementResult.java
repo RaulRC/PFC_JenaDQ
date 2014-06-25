@@ -7,6 +7,7 @@ public class MeasurementResult {
 		this.mName = mName;
 		this.mDimension = mDimension;
 		this.mContextualResult = null; 
+		
 	}
 
 	public MeasurementResult(String mName, String mDimension, double mResult) {
@@ -15,11 +16,19 @@ public class MeasurementResult {
 		this.mDimension = mDimension;
 		this.mResult = mResult;
 	}
+	
+	public MeasurementResult(String mName, String mDimension, double mResult, String cResult) {
+		super();
+		this.mName = mName;
+		this.mDimension = mDimension;
+		this.mResult = mResult;
+		this.mContextualResult=cResult; 
+	}
 
 	private String mName;
 	private String mDimension;
 	private double mResult;
-	private Object mContextualResult; 
+	private String mContextualResult; 
 
 	public String getMName() {
 		return this.mName;
@@ -45,11 +54,11 @@ public class MeasurementResult {
 		this.mResult = mResult;
 	}
 
-	public Object getmContextualResult() {
+	public String getmContextualResult() {
 		return mContextualResult;
 	}
 
-	public void setmContextualResult(Object mContextualResult) {
+	public void setmContextualResult(String mContextualResult) {
 		this.mContextualResult = mContextualResult;
 	}
 

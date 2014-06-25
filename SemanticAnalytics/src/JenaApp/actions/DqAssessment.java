@@ -30,7 +30,17 @@ public class DqAssessment extends ActionSupport {
 	private int depth; 
 	private String endpoint; 
 	private String uri; 
-	private File file;
+	private List<File> file;
+	private File contextualrules;
+	
+	public File getContextualRules() {
+		return contextualrules;
+	}
+
+	public void setContextualRules(File contextualRules) {
+		this.contextualrules = contextualRules;
+	}
+
 	private String filename;
 	
 	
@@ -40,8 +50,10 @@ public class DqAssessment extends ActionSupport {
 		DQModel dq = new DQModel(); 
 		// TODO --------------------------------------------------------
 		InputStream in=null;
+		InputStream inc=null;
 		try {
-			in = new FileInputStream(this.file);
+			in = new FileInputStream(file.get(0));
+			inc = new FileInputStream(file.get(1)); 
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -50,6 +62,11 @@ public class DqAssessment extends ActionSupport {
 		BufferedReader br = new BufferedReader(new InputStreamReader(in)); 
 		List<Rule> useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
 		System.out.println(useRules);
+		
+		BufferedReader brc = new BufferedReader(new InputStreamReader(inc)); 
+		List<Rule> contextualRules = Rule.parseRules(Rule.rulesParserFromReader(brc));
+		System.out.println(contextualRules);
+		
 		// ----------------------------------------------------------------
 		try{
 			setModel((Model)session.get("model")); 
@@ -57,9 +74,10 @@ public class DqAssessment extends ActionSupport {
 			setEndpoint((String)session.get("ENDPOINT"));
 			
 			dq.setDqmodel(getModel());
-			_dimCompleteness comp= new _dimCompleteness(dq, useRules, getDepth(),getEndpoint(),getUri() ); 
+			_dimCompleteness comp= new _dimCompleteness(dq, useRules, contextualRules, getDepth(),getEndpoint(),getUri() ); 
 			mr = new ArrayList<MeasurementResult>();
-			mr.addAll(comp._executeMeasurement());
+			comp._executeMeasurement();
+			mr.addAll(comp.getmRes());
 			setMr(mr);
 		}
 		catch(Exception e){
@@ -117,11 +135,11 @@ public class DqAssessment extends ActionSupport {
 		this.filename = filename;
 	}
 
-	public File getFile() {
+	public List<File> getFile() {
 		return file;
 	}
 
-	public void setFile(File file) {
+	public void setFile(List<File> file) {
 		this.file = file;
 	}
 

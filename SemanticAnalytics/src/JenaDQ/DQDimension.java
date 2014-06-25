@@ -24,6 +24,27 @@ public class DQDimension {
 	protected String dimName;
 	protected DQModel targetModel;
 	protected LinkedList<MeasurementResult> dimResults;
+	
+	// Results
+	
+	protected Model finalModel; 
+	public Model getFinalModel() {
+		return finalModel;
+	}
+
+	public void setFinalModel(Model finalModel) {
+		this.finalModel = finalModel;
+	}
+
+	public ArrayList<MeasurementResult> getmRes() {
+		return mRes;
+	}
+
+	public void setmRes(ArrayList<MeasurementResult> mRes) {
+		this.mRes = mRes;
+	}
+
+	protected ArrayList<MeasurementResult> mRes; 
 
 	public String getDimName() {
 		return this.dimName;
@@ -62,6 +83,7 @@ public class DQDimension {
 	 * @param queryString
 	 * @param prefix mapping
 	 */
+	@Deprecated
 	public DQModel getResourceFromURI(String endpoint, String queryString){
 	    Query query = QueryFactory.create(queryString);
 	    QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
@@ -78,7 +100,13 @@ public class DQDimension {
 	 * To override
 	 * @return
 	 */
-	public ArrayList<MeasurementResult> _executeMeasurement() {
+	public Model _executeMeasurement() {
+		return null; 
+	}
+	public Model _getRDFModel(){
+		return null; 
+	}
+	public Model _contextualFinalModel(){
 		return null; 
 	}
 
