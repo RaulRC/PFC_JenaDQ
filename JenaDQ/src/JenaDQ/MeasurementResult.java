@@ -54,7 +54,7 @@ public class MeasurementResult {
 		this.mResult = mResult;
 	}
 
-	public Object getmContextualResult() {
+	public String getmContextualResult() {
 		return mContextualResult;
 	}
 

@@ -225,15 +225,12 @@ public class _dimCompleteness extends DQDimension {
 		setAssessmentResults(resultsByLevel);
 		// Reasoner -> apply the contextual rules here
 		// generate final RDF with DQ assessment 
-		// TODO and publish
 		this.setFinalModel(this._getRDFModel());
 
 		// Generating DQ results
-		
+		 // Setting up the Data Structure no RDF for easily pick the results
 		String query= ""; 
-		
 		Query q=null;
-
 		for(int i=0; i< resultsByLevel.size(); i++){
 
 			query="PREFIX dqa: <http://www.dqassessment.org/ontologies/2014/9/DQA.owl#>\n" +
@@ -252,17 +249,19 @@ public class _dimCompleteness extends DQDimension {
 			else
 				mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i)));
 		}
-		
-		
 		return this.finalModel; 
-//		return mRes;
 	}
 
+	/**
+	 * Generates the finla RDF Model with the rules 
+	 */
 	public Model _getRDFModel(){
 
 		Model m = ModelFactory.createDefaultModel();
+		@SuppressWarnings("unused")
 		Date d = new Date(); 
 		//TODO getTime no funcionará si quiero unirlos después
+		@SuppressWarnings("unused")
 		Resource assessment = null;
 
 		ArrayList<Model> mList = new ArrayList<Model>();
@@ -270,9 +269,6 @@ public class _dimCompleteness extends DQDimension {
 		Reasoner reasoner2 = new GenericRuleReasoner(getContextualRuleList());
 		InfModel  inf2 = null; 
 
-
-
-		// UNA MANERA
 		Literal lResult = null; 
 		Literal lLevel = null; 
 
@@ -292,21 +288,14 @@ public class _dimCompleteness extends DQDimension {
 
 
 			// inference here
-
 			inf2 = ModelFactory.createInfModel(reasoner2,mList.get(i) );
 			validate(inf2); 
-
-			//			inf2.write(System.out, "N3");
-
 			result.add(inf2);  
 
 		}
-
+		// Time to compact all models generated in one
 		for(Model mod:result)
 			m = m.union(mod);
-
-		//		m.write(System.out, "N3"); 
-
 		return m; 
 
 	}
