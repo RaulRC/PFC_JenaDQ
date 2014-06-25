@@ -52,7 +52,14 @@ public class testRules {
 		
 		Model i = completeness._executeMeasurement();
 
-		i.write(System.out, "N3"); 
+		
+		for(MeasurementResult mres:completeness.getmRes())
+			System.out.println(mres.toString());
+//		i.write(System.out, "N3"); 
+		
+		
+		
+	
 		
 //		for(MeasurementResult result:i)
 //			System.out.println(i);

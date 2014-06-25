@@ -14,6 +14,11 @@ import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -40,6 +45,14 @@ public class _dimCompleteness extends DQDimension {
 	private String uriLvLZero; 
 	private ArrayList<Double> assessmentResults; 
 
+	public ArrayList<MeasurementResult> getmRes() {
+		return mRes;
+	}
+
+	public void setmRes(ArrayList<MeasurementResult> mRes) {
+		this.mRes = mRes;
+	}
+
 	public _dimCompleteness(DQModel targetmodel, List<Rule> useRules, List<Rule> contextualRuleList, int depth, String endpoint, String uri) {
 		super(targetmodel);
 		this.dimName = "Completeness"; 
@@ -48,6 +61,7 @@ public class _dimCompleteness extends DQDimension {
 		this.setEndpoint(endpoint); 
 		this.setUriLvLZero(uri); 
 		this.contextualRuleList=contextualRuleList; 
+		mRes=null;
 	}
 
 	public _dimCompleteness(DQModel targetmodel, List<Rule> rules) {
@@ -55,6 +69,7 @@ public class _dimCompleteness extends DQDimension {
 		this.dimName = "Completeness"; 
 		this.setRuleList(rules);
 		this.setDepth(0); 
+		mRes = null; 
 	}
 	public _dimCompleteness(DQModel targetmodel) {
 		super(targetmodel);
@@ -155,7 +170,7 @@ public class _dimCompleteness extends DQDimension {
 
 		// Results are gonna be here
 		ArrayList<Double> resultsByLevel = new ArrayList<Double>();
-		ArrayList<MeasurementResult> mRes = new ArrayList<MeasurementResult>(); 
+		mRes = new ArrayList<MeasurementResult>(); 
 
 		int total; 
 		int notExist;
@@ -211,14 +226,35 @@ public class _dimCompleteness extends DQDimension {
 		// Reasoner -> apply the contextual rules here
 		// generate final RDF with DQ assessment 
 		// TODO and publish
-		Model m = this._getRDFModel();
+		this.setFinalModel(this._getRDFModel());
 
 		// Generating DQ results
 		
-		for(int i=0; i< resultsByLevel.size(); i++)
-			mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i))); 
+		String query= ""; 
+		
+		Query q=null;
 
-		return m; 
+		for(int i=0; i< resultsByLevel.size(); i++){
+
+			query="PREFIX dqa: <http://www.dqassessment.org/ontologies/2014/9/DQA.owl#>\n" +
+					"SELECT ?x WHERE { " +
+					"?a dqa:CompletenessInLevel ?y. \n" +
+							"?a dqa:ContextualMeasureInLevel ?x . " +
+							"FILTER ( ?y = " + i + ") } \n";
+
+					
+			q = QueryFactory.create(query);
+			QueryExecution qExe = QueryExecutionFactory.create(q, getFinalModel());
+			ResultSet resultsRes = qExe.execSelect();
+			
+			if(resultsRes.hasNext())
+				mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i),resultsRes.next().getResource("?x").toString()));
+			else
+				mRes.add(new MeasurementResult("Lvl "+i, this.dimName, resultsByLevel.get(i)));
+		}
+		
+		
+		return this.finalModel; 
 //		return mRes;
 	}
 

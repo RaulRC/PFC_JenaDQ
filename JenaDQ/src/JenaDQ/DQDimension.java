@@ -24,6 +24,27 @@ public class DQDimension {
 	protected String dimName;
 	protected DQModel targetModel;
 	protected LinkedList<MeasurementResult> dimResults;
+	
+	// Results
+	
+	protected Model finalModel; 
+	public Model getFinalModel() {
+		return finalModel;
+	}
+
+	public void setFinalModel(Model finalModel) {
+		this.finalModel = finalModel;
+	}
+
+	public ArrayList<MeasurementResult> getmRes() {
+		return mRes;
+	}
+
+	public void setmRes(ArrayList<MeasurementResult> mRes) {
+		this.mRes = mRes;
+	}
+
+	protected ArrayList<MeasurementResult> mRes; 
 
 	public String getDimName() {
 		return this.dimName;
