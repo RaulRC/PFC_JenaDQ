@@ -2,6 +2,7 @@ package JenaDQ;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import DQModel.DQModel;
 
@@ -12,6 +13,7 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 public class DQDimension {
@@ -21,12 +23,72 @@ public class DQDimension {
 		this.targetModel = targetmodel;
 	}
 
+	public DQDimension() {
+		// TODO Auto-generated constructor stub
+	}
+
 	protected String dimName;
 	protected DQModel targetModel;
 	protected LinkedList<MeasurementResult> dimResults;
+	protected List<Rule> useRules; 
+	protected List<Rule> contextualRules; 
+	protected int depth; 
+	
+	protected String URI; 
+	protected String endpoint; 
+	protected String assessmentIdentifier; 
+	
 	
 	// Results
 	
+	public String getAssessmentIdentifier() {
+		return assessmentIdentifier;
+	}
+
+	public void setAssessmentIdentifier(String assessmentIdentifier) {
+		this.assessmentIdentifier = assessmentIdentifier;
+	}
+
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	public List<Rule> getUseRules() {
+		return useRules;
+	}
+
+	public void setUseRules(List<Rule> useRules) {
+		this.useRules = useRules;
+	}
+
+	public List<Rule> getContextualRules() {
+		return contextualRules;
+	}
+
+	public void setContextualRules(List<Rule> contextualRules) {
+		this.contextualRules = contextualRules;
+	}
+
 	protected Model finalModel; 
 	public Model getFinalModel() {
 		return finalModel;

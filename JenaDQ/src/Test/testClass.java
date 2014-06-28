@@ -47,7 +47,7 @@ public class testClass {
 		_dimCompleteness dc = (_dimCompleteness) l.element();
 		System.out.println(((_dimCompleteness) l.element()).m_interlinkingCompleteness().toString()); 
 
-		DQAssessment dq = new DQAssessment(l, m); 
+//		DQAssessment dq = new DQAssessment(l, m); 
 		// Get all the ontologies involved
 		//System.out.println(m.getModel().getNsPrefixMap().toString());
 

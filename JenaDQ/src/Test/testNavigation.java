@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import utilities.UriUtil;
-import DQModel.DQModel;
 import JenaDQ.DQDimension;
 import JenaDQ._dimCompleteness;
 

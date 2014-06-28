@@ -2,8 +2,6 @@ package Test;
 
 import java.util.Iterator;
 
-import DQModel.DQModel;
-
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
