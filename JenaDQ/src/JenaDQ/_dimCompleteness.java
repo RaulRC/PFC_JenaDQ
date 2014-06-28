@@ -38,7 +38,6 @@ import com.hp.hpl.jena.vocabulary.VCARD;
 
 public class _dimCompleteness extends DQDimension {
 
-
 	private ArrayList<Double> assessmentResults;
 
 	public ArrayList<MeasurementResult> getmRes() {
@@ -73,8 +72,9 @@ public class _dimCompleteness extends DQDimension {
 		super(targetmodel);
 		this.dimName = "Completeness";
 	}
-	public _dimCompleteness(){
-		super(); 
+
+	public _dimCompleteness() {
+		super();
 	}
 
 	/**
@@ -286,6 +286,8 @@ public class _dimCompleteness extends DQDimension {
 							DQA.COMPLETENESS,
 							mList.get(i)
 									.createResource()
+									.addProperty(DQA.COMPLETENESS_URI,
+											this.getURI())
 									.addProperty(DQA.COMPLETENESS_LEVEL, lLevel)
 									.addProperty(DQA.COMPLETENESS_LEVEL_RESULT,
 											lResult));
@@ -322,7 +324,6 @@ public class _dimCompleteness extends DQDimension {
 		return val;
 	}
 
-
 	public void setRuleList(List<Rule> ruleList) {
 		this.useRules = ruleList;
 	}
@@ -342,7 +343,6 @@ public class _dimCompleteness extends DQDimension {
 	public void setEndpoint(String endpoint) {
 		this.endpoint = endpoint;
 	}
-
 
 	public ArrayList<Double> getAssessmentResults() {
 		return assessmentResults;

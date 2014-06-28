@@ -89,10 +89,10 @@ public class DQAssessment {
 		this.depth = depth;
 	}
 
-	public int executeAssessment() {
+	public Model executeAssessment() {
 		// TODO - implement DQAssessment.executeAssessment
 		// set FinalModel here
-		int result = 0;
+
 		Model m = ModelFactory.createDefaultModel(); 
 		// Setting DQDimension parameters
 		for (DQDimension dqdim : dqDimensionList) {
@@ -103,10 +103,9 @@ public class DQAssessment {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				result = -1;
 			}
 		}
-		return result;
+		return m;
 	}
 
 	/**
@@ -121,6 +120,7 @@ public class DQAssessment {
 		dqdim.setDepth(this.getDepth());
 		dqdim.setURI(this.getURI());
 		dqdim.setEndpoint(this.getEndpoint());
+		dqdim.setAssessmentIdentifier(this.getDQAssessmentIdentifier());
 	}
 
 	public int publishResult() {

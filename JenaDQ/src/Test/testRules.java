@@ -10,6 +10,7 @@ import java.util.List;
 
 import DQModel.DQModel;
 import JenaDQ.DQAssessment;
+import JenaDQ.DQAssessmentPlan;
 import JenaDQ.DQDimension;
 import JenaDQ.MeasurementResult;
 import JenaDQ._dimCompleteness;
@@ -40,6 +41,7 @@ public class testRules {
 		String endpoint = "http://dbpedia.org/sparql";
 		// String endpoint = "http://lod.openlinksw.com/sparql";
 		String uri = "http://dbpedia.org/resource/Manakkara";
+		String uri2 = "http://dbpedia.org/resource/The_Lord_of_the_Rings";
 		int depth = 2;
 		List rules = Rule.parseRules(Rule.rulesParserFromReader(br));
 		FileReader in2 = new FileReader("D:\\rules\\contextual.rules");
@@ -49,28 +51,29 @@ public class testRules {
 		System.out.println(rules.toString());
 		System.out.println(contextualRules.toString());
 
+		
+		//SETTING PLAN -  DQAPLAN
+		DQAssessmentPlan dqplan = new DQAssessmentPlan();
+		LinkedList<DQAssessment> dqplanlist= new LinkedList();
+		dqplan.setAssessmentList(dqplanlist);
+		
+		//SETTING LIST OF DIMENSIONS I'm GOING TO ASSESS
 		LinkedList<DQDimension> dqdimlist = new LinkedList();
-
 		dqdimlist.add((DQDimension) new _dimCompleteness());
 
-		DQAssessment dqassessment = new DQAssessment(dqdimlist, uri, endpoint,
-				contextualRules, rules, depth, "IDENTIFIER_GENERATED");
+		// ADDING ASSESSMENTS
+		dqplanlist.add(new DQAssessment(dqdimlist, uri, endpoint,
+				contextualRules, rules, depth, "IDENTIFIER_GENERATED"));
+		dqplanlist.add(new DQAssessment(dqdimlist, uri2, endpoint,
+				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 		
-		dqassessment.executeAssessment();
+		// EXECUTE PLAN
+		dqplan.executePlan();
 		
-		Model mod = dqassessment.getFinalModel(); 
+		Model mod = dqplan.getFinalModel(); 
 		
 		mod.write(System.out, "N3"); 
 
-		// DQDimension completeness = new _dimCompleteness(new DQModel(endpoint,
-		// uri), rules, contextualRules, depth, endpoint, uri);
-		//
-		// Model i = completeness._executeMeasurement();
-		//
-		// for (MeasurementResult mres : completeness.getmRes())
-		// System.out.println(mres.toString());
-		//
-		// i.write(System.out, "N3");
 
 	}
 

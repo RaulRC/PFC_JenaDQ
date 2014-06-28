@@ -19,6 +19,7 @@ public class DQA {
 	public static final Resource NAMESPACE = m_model.createResource( NS );
 	
 	public static final Property COMPLETENESS =  m_model.createProperty( NS + "Completeness" );
+	public static final Property COMPLETENESS_URI =  m_model.createProperty( NS + "inURI" );
 	public static final Property COMPLETENESS_LEVEL =  m_model.createProperty( NS + "CompletenessInLevel" );
 	public static final Property COMPLETENESS_LEVEL_RESULT =  m_model.createProperty( NS + "CompletenessMeasureInLevel" );
 	
