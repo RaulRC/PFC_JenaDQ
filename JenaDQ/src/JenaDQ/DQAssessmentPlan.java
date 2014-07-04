@@ -9,9 +9,7 @@ public class DQAssessmentPlan {
 
 	private boolean isPublic;
 	private LinkedList<DQAssessment> assessmentList;
-	private Model finalModel; 
-	
-	
+	private Model finalModel;
 
 	public DQAssessmentPlan(boolean isPublic,
 			LinkedList<DQAssessment> assessmentList) {
@@ -19,9 +17,9 @@ public class DQAssessmentPlan {
 		this.isPublic = isPublic;
 		this.assessmentList = assessmentList;
 	}
-	
-	public DQAssessmentPlan(){
-		
+
+	public DQAssessmentPlan() {
+
 	}
 
 	public boolean isIsPublic() {
@@ -35,23 +33,24 @@ public class DQAssessmentPlan {
 	public LinkedList<DQAssessment> getAssessmentList() {
 		return this.assessmentList;
 	}
+
 	public void setAssessmentList(LinkedList<DQAssessment> dqalist) {
 		this.assessmentList = dqalist;
 	}
 
-	
 	/**
 	 * Execute plan
+	 * 
 	 * @return
 	 */
 	public Model executePlan() {
-		Model m = ModelFactory.createDefaultModel(); 
-		
-		for(DQAssessment dqassess:this.getAssessmentList())
+		Model m = ModelFactory.createDefaultModel();
+
+		for (DQAssessment dqassess : this.getAssessmentList())
 			m = m.union(dqassess.executeAssessment());
-		
-		this.setFinalModel(m); 
-		return m; 
+
+		this.setFinalModel(m);
+		return m;
 	}
 
 	public int publishPlan() {
@@ -65,6 +64,16 @@ public class DQAssessmentPlan {
 
 	public void setFinalModel(Model finalModel) {
 		this.finalModel = finalModel;
+	}
+	
+	// API OPERATIONS
+	
+	/** 
+	 * Add an assessment to Plan
+	 * @param assessment
+	 */
+	public void addDQAssessment(DQAssessment assessment){
+		this.getAssessmentList().add(assessment);
 	}
 
 }

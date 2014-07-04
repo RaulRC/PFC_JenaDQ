@@ -27,4 +27,5 @@ public class DQA {
 //	public static final Property COMPLETENESS_LEVEL_CONTEXTUAL =  m_model.createProperty( NS + "ContextualCompletenessInLevel" );
 	public static final Property COMPLETENESS_LEVEL_RESULT_CONTEXTUAL =  m_model.createProperty( NS + "ContextualMeasureInLevel" );
 	
+	public static final Property ACCESIBILITY =  m_model.createProperty( NS + "Accesibility" );
 }

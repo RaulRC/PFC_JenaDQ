@@ -1,5 +1,6 @@
 package JenaDQ;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class DQAssessment {
 	}
 
 	public DQAssessment() {
+		this.dqDimensionList = new LinkedList<DQDimension>(); 
+		this.useRules = new ArrayList<Rule>(); 
+		this.contextualRules = new ArrayList<Rule>(); 
 
 	}
 
@@ -93,7 +97,7 @@ public class DQAssessment {
 		// TODO - implement DQAssessment.executeAssessment
 		// set FinalModel here
 
-		Model m = ModelFactory.createDefaultModel(); 
+		Model m = ModelFactory.createDefaultModel();
 		// Setting DQDimension parameters
 		for (DQDimension dqdim : dqDimensionList) {
 			setParameters(dqdim);
@@ -159,6 +163,32 @@ public class DQAssessment {
 
 	public void setFinalModel(Model finalModel) {
 		this.finalModel = finalModel;
+	}
+	
+	// API OPERATIONS
+	
+	/**
+	 * Add a new Dimension to assess
+	 * @param dimension
+	 */
+	public void addDQDimension(DQDimension dimension){
+		this.getDqDimensionList().add(dimension);
+	}
+	
+	/**
+	 * Add new rules to existing ones
+	 * @param contextualRules
+	 */
+	public void addContextualRules(List<Rule> contextualRules){
+		this.getContextualRules().addAll(contextualRules);
+	}
+	
+	/**
+	 * Add new rules to existing ones
+	 * @param useRules
+	 */
+	public void addUseRules(List<Rule> useRules){
+		this.getUseRules().addAll(useRules);
 	}
 
 }

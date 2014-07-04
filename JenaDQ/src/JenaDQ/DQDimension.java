@@ -30,17 +30,16 @@ public class DQDimension {
 	protected String dimName;
 	protected DQModel targetModel;
 	protected LinkedList<MeasurementResult> dimResults;
-	protected List<Rule> useRules; 
-	protected List<Rule> contextualRules; 
-	protected int depth; 
-	
-	protected String URI; 
-	protected String endpoint; 
-	protected String assessmentIdentifier; 
-	
-	
+	protected List<Rule> useRules;
+	protected List<Rule> contextualRules;
+	protected int depth;
+
+	protected String URI;
+	protected String endpoint;
+	protected String assessmentIdentifier;
+
 	// Results
-	
+
 	public String getAssessmentIdentifier() {
 		return assessmentIdentifier;
 	}
@@ -89,7 +88,8 @@ public class DQDimension {
 		this.contextualRules = contextualRules;
 	}
 
-	protected Model finalModel; 
+	protected Model finalModel;
+
 	public Model getFinalModel() {
 		return finalModel;
 	}
@@ -106,7 +106,7 @@ public class DQDimension {
 		this.mRes = mRes;
 	}
 
-	protected ArrayList<MeasurementResult> mRes; 
+	protected ArrayList<MeasurementResult> mRes;
 
 	public String getDimName() {
 		return this.dimName;
@@ -136,40 +136,49 @@ public class DQDimension {
 		return null;
 
 	}
-	public double calculateDQMeasure(double nNot, double nTot){
-		return (1 - (nNot/nTot)); 
+
+	public double calculateDQMeasure(double nNot, double nTot) {
+		return (1 - (nNot / nTot));
 	}
+
 	/**
-	 * Recibe una query y un endpoint, devuelve un modelo RDF 
+	 * Recibe una query y un endpoint, devuelve un modelo RDF
+	 * 
 	 * @param endpoint
 	 * @param queryString
-	 * @param prefix mapping
+	 * @param prefix
+	 *            mapping
 	 */
 	@Deprecated
-	public DQModel getResourceFromURI(String endpoint, String queryString){
-	    Query query = QueryFactory.create(queryString);
-	    QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
-	    DQModel dq = new DQModel(); 
-	    Model results = qexec.execConstruct();
-	    dq.setDqmodel((Model) results); 
-//	    for ( ; results.hasNext() ; ) {
-//	        QuerySolution soln = results.nextSolution() ;
-//	        System.out.println(soln);
-//	    }
-	    return dq; 
+	public DQModel getResourceFromURI(String endpoint, String queryString) {
+		Query query = QueryFactory.create(queryString);
+		QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint,
+				query);
+		DQModel dq = new DQModel();
+		Model results = qexec.execConstruct();
+		dq.setDqmodel((Model) results);
+		// for ( ; results.hasNext() ; ) {
+		// QuerySolution soln = results.nextSolution() ;
+		// System.out.println(soln);
+		// }
+		return dq;
 	}
+
 	/**
 	 * To override
+	 * 
 	 * @return
 	 */
 	public Model _executeMeasurement() {
-		return null; 
+		return null;
 	}
-	public Model _getRDFModel(){
-		return null; 
+
+	public Model _getRDFModel() {
+		return null;
 	}
-	public Model _contextualFinalModel(){
-		return null; 
+
+	public Model _contextualFinalModel() {
+		return null;
 	}
 
 }

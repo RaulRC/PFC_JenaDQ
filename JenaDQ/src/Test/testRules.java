@@ -13,6 +13,7 @@ import JenaDQ.DQAssessment;
 import JenaDQ.DQAssessmentPlan;
 import JenaDQ.DQDimension;
 import JenaDQ.MeasurementResult;
+import JenaDQ._dimAccesibility;
 import JenaDQ._dimCompleteness;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -51,29 +52,35 @@ public class testRules {
 		System.out.println(rules.toString());
 		System.out.println(contextualRules.toString());
 
-		
-		//SETTING PLAN -  DQAPLAN
+		// TODO - API
+		// SETTING PLAN - DQAPLAN
 		DQAssessmentPlan dqplan = new DQAssessmentPlan();
-		LinkedList<DQAssessment> dqplanlist= new LinkedList();
+		LinkedList<DQAssessment> dqplanlist = new LinkedList();
 		dqplan.setAssessmentList(dqplanlist);
-		
-		//SETTING LIST OF DIMENSIONS I'm GOING TO ASSESS
+
+		// SETTING LIST OF DIMENSIONS I'm GOING TO ASSESS
 		LinkedList<DQDimension> dqdimlist = new LinkedList();
-		dqdimlist.add((DQDimension) new _dimCompleteness());
+		dqdimlist.add((DQDimension) new _dimAccesibility());
+		dqdimlist.add((DQDimension) new _dimCompleteness()); 
 
 		// ADDING ASSESSMENTS
-		dqplanlist.add(new DQAssessment(dqdimlist, uri, endpoint,
-				contextualRules, rules, depth, "IDENTIFIER_GENERATED"));
-		dqplanlist.add(new DQAssessment(dqdimlist, uri2, endpoint,
-				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
+//		dqplanlist.add(new DQAssessment(dqdimlist, uri, endpoint,
+//				contextualRules, rules, depth, "IDENTIFIER_GENERATED"));
+//		dqplanlist.add(new DQAssessment(dqdimlist, uri2, endpoint,
+//				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 		
+		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri, endpoint,
+				contextualRules, rules, depth, "IDENTIFIER_GENERATED"));
+//		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri2, endpoint,
+//				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
+		
+
 		// EXECUTE PLAN
 		dqplan.executePlan();
-		
-		Model mod = dqplan.getFinalModel(); 
-		
-		mod.write(System.out, "N3"); 
 
+		Model mod = dqplan.getFinalModel();
+
+		mod.write(System.out, "N3");
 
 	}
 

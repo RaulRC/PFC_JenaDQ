@@ -277,7 +277,8 @@ public class _dimCompleteness extends DQDimension {
 			lResult = mList.get(i).createTypedLiteral(
 					new Double(assessmentResults.get(i)));
 			lLevel = mList.get(i).createTypedLiteral(new Integer(i));
-
+			// TODO prefixes
+//			mList.get(i).setNsPrefix("dqa", DQA.NS); 
 			assessment = mList
 					.get(i)
 					.createResource(DQA.NS + this.assessmentIdentifier)
@@ -294,6 +295,7 @@ public class _dimCompleteness extends DQDimension {
 
 			// inference here
 			inf2 = ModelFactory.createInfModel(reasoner2, mList.get(i));
+//			inf2.setNsPrefix("dqa", DQA.NS); 
 			validate(inf2);
 			result.add(inf2);
 
@@ -326,22 +328,6 @@ public class _dimCompleteness extends DQDimension {
 
 	public void setRuleList(List<Rule> ruleList) {
 		this.useRules = ruleList;
-	}
-
-	public int getDepth() {
-		return depth;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	public String getEndpoint() {
-		return endpoint;
-	}
-
-	public void setEndpoint(String endpoint) {
-		this.endpoint = endpoint;
 	}
 
 	public ArrayList<Double> getAssessmentResults() {
