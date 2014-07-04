@@ -1,10 +1,7 @@
 package JenaDQ;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,12 +10,10 @@ import vocabulary.DQA;
 
 import DQModel.DQModel;
 
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
-import com.hp.hpl.jena.vocabulary.XSD;
 
 public class DQAssessment {
 
@@ -109,6 +104,7 @@ public class DQAssessment {
 
 		Model m = ModelFactory.createDefaultModel();
 		// Setting DQDimension parameters
+		// TIME
 		Calendar cal = GregorianCalendar.getInstance();
 		Literal value = m.createTypedLiteral(cal);
 		m.createResource(DQA.NS + this.getDQAssessmentIdentifier()).addProperty(DQA.INTIME, value);

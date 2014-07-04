@@ -1,39 +1,16 @@
 package Test;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
-
-import utilities.UriUtil;
-
 import DQModel.DQModel;
-import JenaDQ.DQAssessment;
 import JenaDQ.DQDimension;
 import JenaDQ._dimCompleteness;
-import JenaDQ._dimPrecisionConsistency;
-
-import com.hp.hpl.jena.ontology.OntClass;
-import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.ontology.OntProperty;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.RSIterator;
-import com.hp.hpl.jena.rdf.model.ReifiedStatement;
-import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
-import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
 public class testClass {
 
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 
 		String userURI = "http://datos.gijon.es/doc/medio-ambiente/areas-recreativas.ttl";
@@ -41,10 +18,9 @@ public class testClass {
 		
 		LinkedList<DQDimension> l = new LinkedList<DQDimension>(); 
 		_dimCompleteness dq1 = new _dimCompleteness(m); 
-		DQDimension dq2 = new _dimPrecisionConsistency(m); 
+
 			
 		l.add(dq1);
-		_dimCompleteness dc = (_dimCompleteness) l.element();
 		System.out.println(((_dimCompleteness) l.element()).m_interlinkingCompleteness().toString()); 
 
 //		DQAssessment dq = new DQAssessment(l, m); 

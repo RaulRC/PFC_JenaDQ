@@ -130,7 +130,6 @@ public class DataPicker {
 	}
 
 
-	@SuppressWarnings("unused")
 	public String checkFormat(String filename) {
 		String format = filename.substring(filename.length()-EXTENSION_LENGTH);
 		switch(format.toLowerCase()){

@@ -1,26 +1,16 @@
 package utilities;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-
 import DQModel.DQModel;
-import DQModel.DataPicker;
-
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.Bag;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
@@ -39,7 +29,7 @@ public class UriUtil {
 		return dq; 
 	}
 	public static ArrayList<RDFNode> getURIResourceList(Model m){
-		//TODO check jena CONTAINERS
+		
 		// http://jena.apache.org/tutorials/rdf_api.html
 		ArrayList<RDFNode> luri = new ArrayList<RDFNode>();
 		StmtIterator st = m.listStatements();
@@ -53,7 +43,7 @@ public class UriUtil {
 		return luri; 
 	}
 
-	// TODO ArrayList<ArrayList<RDFNode>>
+
 	/**
 	 * 
 	 * This method search for triples with format: uri ?p ?o
@@ -66,8 +56,6 @@ public class UriUtil {
 	 * @return ArrayList<RDFNode> with the recursive search in depth = n (0..n)
 	 */
 	public static ArrayList<RDFNode> getResourcesInLevel(String endpoint, String uri, int depth){
-		// TODO: Search with GRAPH indication
-		// TODO: Search in ArrayList<ArrayList<RDFNode>>
 		ArrayList<RDFNode> resources = new ArrayList<RDFNode>();
 		DQModel dq = new DQModel(endpoint, uri); 
 		resources = getURIResourceList(dq.getModel()); 
@@ -85,7 +73,7 @@ public class UriUtil {
 						System.out.println("Expanding... "+aux.toString());
 						buffer.addAll(getResourcesInLevel(aux.toString(), endpoint, depth-1));
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
+						
 					}
 				}
 			}
@@ -115,8 +103,6 @@ public class UriUtil {
 		HashSet<RDFNode> buffer;
 		ArrayList<RDFNode> arrayBuffer; 
 		Iterator<RDFNode> iterNode;
-		boolean exists = false; 
-
 		if (depth == 0)
 			return resources;
 		else{
@@ -125,7 +111,6 @@ public class UriUtil {
 				buffer = new HashSet<RDFNode>(); 
 				while (iterNode.hasNext()){
 					aux = iterNode.next();
-					exists = false; 
 					try {
 						if(aux.isURIResource()){
 
@@ -134,7 +119,7 @@ public class UriUtil {
 
 						}
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
+						
 						System.out.println("exception occur");
 					}
 				}
@@ -158,32 +143,32 @@ public class UriUtil {
 		// Init
 		ArrayList<ArrayList<RDFNode>> resources = new ArrayList<ArrayList<RDFNode>>();
 		DQModel dq = new DQModel(endpoint, uri,false); 
-		QuerySolution sol;
 		Query query;
 		QueryEngineHTTP qexec;
 		ArrayList<RDFNode> lvlCollection;		//LVL 0
+		
 		resources.add(getURIResourceList(dq.getModel()));
-		if (depth == 0){
-			String finalQuery = "SELECT DISTINCT ?obj WHERE { <" + uri+"> ?p1 ?obj . }";
-			query = QueryFactory.create(finalQuery);
-			qexec = QueryExecutionFactory.createServiceRequest(endpoint, query);
-			ResultSet resultsQuery = qexec.execSelect();
-			lvlCollection = new ArrayList(); 
+//		if (depth <= 0){
+//			String finalQuery = "SELECT DISTINCT ?obj WHERE { <" + uri+"> ?p1 ?obj . }";
+//			query = QueryFactory.create(finalQuery);
+//			qexec = QueryExecutionFactory.createServiceRequest(endpoint, query);
+//			ResultSet resultsQuery = qexec.execSelect();
+//			lvlCollection = new ArrayList(); 
+//			
+//			while(resultsQuery.hasNext())
+//				lvlCollection.add(resultsQuery.next().get("?obj"));
+//			
+//			resources.add(lvlCollection);
+//		}
+		if (depth > 0){
 			
-			while(resultsQuery.hasNext())
-				lvlCollection.add(resultsQuery.next().get("?obj"));
-			
-			resources.add(lvlCollection);
-		}
-		else{
-			// FILTER (!sameTERM(?obj,?o1)) . <<- maybe not neccesary
 			String headerQuery = "SELECT DISTINCT ?obj WHERE { <" + uri+"> ?p1 ?o1 .";
 			String qAux = ""; 
 			String finalQuery=""; 
 
 
 			for (int i=1; i<depth; i++){
-				lvlCollection = new ArrayList(); 
+				lvlCollection = new ArrayList<RDFNode>(); 
 				//				Creating query 
 				qAux += "\n ?o"+i+" ?p"+(i+1) ;
 				finalQuery = headerQuery + qAux + " ?obj . FILTER (!sameTERM(?obj,?o"+i+")) .}"; 
