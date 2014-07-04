@@ -177,7 +177,7 @@ public class _dimCompleteness extends DQDimension {
 
 		InfModel inf = ModelFactory.createInfModel(reasoner, dq.getModel());
 		StmtIterator iter = null;
-		;
+		
 
 		if (getDepth() >= 0) {
 			if (validate(inf).isValid()) {
@@ -220,16 +220,23 @@ public class _dimCompleteness extends DQDimension {
 		// generate final RDF with DQ assessment
 		this.setFinalModel(this._getRDFModel());
 
+		generateMRES(resultsByLevel); 
+
+		return this.finalModel;
+	}
+
+	@Deprecated
+	public void generateMRES(ArrayList<Double> results) {
 		// Generating DQ results
 		// Setting up the Data Structure no RDF for easily pick the results
 		String query = "";
 		Query q = null;
-		for (int i = 0; i < resultsByLevel.size(); i++) {
+		for (int i = 0; i < results.size(); i++) {
 
 			query = "PREFIX dqa: <http://www.dqassessment.org/ontologies/2014/9/DQA.owl#>\n"
 					+ "SELECT ?x WHERE { "
-					+ "?a dqa:CompletenessInLevel ?y. \n"
-					+ "?a dqa:ContextualMeasureInLevel ?x . "
+					+ "?a dqa:CompletenessMeasure ?y. \n"
+					+ "?a dqa:ContextualMeasurel ?x . "
 					+ "FILTER ( ?y = " + i + ") } \n";
 
 			q = QueryFactory.create(query);
@@ -239,14 +246,13 @@ public class _dimCompleteness extends DQDimension {
 
 			if (resultsRes.hasNext())
 				mRes.add(new MeasurementResult("Lvl " + i, this.dimName,
-						resultsByLevel.get(i), resultsRes.next()
-								.getResource("?x").toString()));
+						results.get(i), resultsRes.next()
+						.getResource("?x").toString()));
 			else
 				mRes.add(new MeasurementResult("Lvl " + i, this.dimName,
-						resultsByLevel.get(i)));
+						results.get(i)));
 		}
 
-		return this.finalModel;
 	}
 
 	/**
@@ -277,24 +283,24 @@ public class _dimCompleteness extends DQDimension {
 					new Double(assessmentResults.get(i)));
 			lLevel = mList.get(i).createTypedLiteral(new Integer(i));
 			// TODO prefixes
-//			mList.get(i).setNsPrefix("dqa", DQA.NS); 
+			//			mList.get(i).setNsPrefix("dqa", DQA.NS); 
 			assessment = mList
 					.get(i)
 					.createResource(DQA.NS + this.assessmentIdentifier)
-					.addProperty(RDF.type, DQA.CONTEXTUAL_RESULT)
+					.addProperty(RDF.type, DQA.COMPLETENESS)
 					.addProperty(
-							DQA.COMPLETENESS,
+							DQA.COMPLETENESS_RESULT,
 							mList.get(i)
-									.createResource()
-									.addProperty(DQA.INURI,
-											this.getURI())
+							.createResource()
+							.addProperty(DQA.INURI,
+									this.getURI())
 									.addProperty(DQA.INLEVEL, lLevel)
-									.addProperty(DQA.COMPLETENESS_RESULT,
+									.addProperty(DQA.COMPLETENESS_MEASUREMENT,
 											lResult));
 
 			// inference here
 			inf2 = ModelFactory.createInfModel(reasoner2, mList.get(i));
-//			inf2.setNsPrefix("dqa", DQA.NS); 
+			//			inf2.setNsPrefix("dqa", DQA.NS); 
 			validate(inf2);
 			result.add(inf2);
 

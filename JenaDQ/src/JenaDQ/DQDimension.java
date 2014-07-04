@@ -192,5 +192,7 @@ public class DQDimension {
 	public void resetResults(){
 		this.assessmentResults=new ArrayList<Double>(); 
 	}
-
+	@Deprecated
+	public void generateMRES(ArrayList<Double> results) {
+	}
 }

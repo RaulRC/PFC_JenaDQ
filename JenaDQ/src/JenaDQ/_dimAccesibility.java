@@ -113,7 +113,7 @@ public class _dimAccesibility extends DQDimension {
 			}
 		}
 		result = this.calculateDQMeasure(countNoUri, total);
-		System.out.println(this.URI + " ->>>> " + result);
+
 		this.assessmentResults.add(result); 
 		mRes.get(0).setMResult(result);
 		// Generate model
@@ -142,10 +142,10 @@ public class _dimAccesibility extends DQDimension {
 		.createResource(DQA.NS + this.assessmentIdentifier)
 		.addProperty(RDF.type, DQA.ACCESIBILITY)
 		.addProperty(
-				DQA.ACCESIBILITY,
+				DQA.ACCESIBILITY_RESULT,
 				m.createResource()
 				.addProperty(DQA.INURI, this.getURI())
-				.addProperty(DQA.ACCESIBILITY_RESULT, result)); 
+				.addProperty(DQA.ACCESIBILITY_MEASUREMENT, result)); 
 
 		// inference here
 		inf = ModelFactory.createInfModel(reasoner,m);
@@ -153,6 +153,37 @@ public class _dimAccesibility extends DQDimension {
 		validate(inf);	
 		return inf;
 	}
+	
+	@Deprecated
+	public void generateMRES(ArrayList<Double> results) {
+		// Generating DQ results
+		// Setting up the Data Structure no RDF for easily pick the results
+		String query = "";
+		Query q = null;
+		for (int i = 0; i < results.size(); i++) {
+
+			query = "PREFIX dqa: <http://www.dqassessment.org/ontologies/2014/9/DQA.owl#>\n"
+					+ "SELECT ?x WHERE { "
+					+ "?a dqa:AccesibilityMeasure ?y. \n"
+					+ "?a dqa:ContextualMeasurel ?x . "
+					+ "FILTER ( ?y = " + i + ") } \n";
+
+			q = QueryFactory.create(query);
+			QueryExecution qExe = QueryExecutionFactory.create(q,
+					getFinalModel());
+			ResultSet resultsRes = qExe.execSelect();
+
+			if (resultsRes.hasNext())
+				mRes.add(new MeasurementResult("Interlinking", this.dimName,
+						results.get(i), resultsRes.next()
+						.getResource("?x").toString()));
+			else
+				mRes.add(new MeasurementResult("Interlinking", this.dimName,
+						results.get(i)));
+		}
+
+	}
+	
 
 	/**
 	 * Return a validity report (is valid)

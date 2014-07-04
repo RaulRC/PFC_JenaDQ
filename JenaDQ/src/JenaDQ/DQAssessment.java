@@ -118,6 +118,7 @@ public class DQAssessment {
 			try {
 				m = m.union(dqdim._executeMeasurement());
 				this.setFinalModel(m);
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -24,13 +24,15 @@ public class DQA {
 	public static final Property INTIME = m_model.createProperty( NS + "AssessmentDate");
 	
 	public static final Property COMPLETENESS =  m_model.createProperty( NS + "CompletenessAssessment" );
-	public static final Property COMPLETENESS_RESULT =  m_model.createProperty( NS + "CompletenessMeasure" );
+	public static final Property COMPLETENESS_RESULT =  m_model.createProperty( NS + "CompletenessResult" );
+	public static final Property COMPLETENESS_MEASUREMENT=  m_model.createProperty( NS + "CompletenessMeasure" );
 	
 //	public static final Property COMPLETENESS_CONTEXTUAL =  m_model.createProperty( NS + "ContextualCompleteness" );
 //	public static final Property COMPLETENESS_LEVEL_CONTEXTUAL =  m_model.createProperty( NS + "ContextualCompletenessInLevel" );
 
 	
 	public static final Property ACCESIBILITY =  m_model.createProperty( NS + "AccesibilityAssessment" );
-	public static final Property ACCESIBILITY_RESULT=  m_model.createProperty( NS + "AccesibilityMeasure" );
+	public static final Property ACCESIBILITY_RESULT=  m_model.createProperty( NS + "AccesibilityResult" );
+	public static final Property ACCESIBILITY_MEASUREMENT=  m_model.createProperty( NS + "AccesibilityMeasure" );
 
 }
