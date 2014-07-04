@@ -37,8 +37,17 @@ public class DQDimension {
 	protected String URI;
 	protected String endpoint;
 	protected String assessmentIdentifier;
+	protected ArrayList<Double> assessmentResults; 
 
 	// Results
+
+	public ArrayList<Double> getAssessmentResults() {
+		return assessmentResults;
+	}
+
+	public void setAssessmentResults(ArrayList<Double> assessmentResults) {
+		this.assessmentResults = assessmentResults;
+	}
 
 	public String getAssessmentIdentifier() {
 		return assessmentIdentifier;
@@ -179,6 +188,9 @@ public class DQDimension {
 
 	public Model _contextualFinalModel() {
 		return null;
+	}
+	public void resetResults(){
+		this.assessmentResults=new ArrayList<Double>(); 
 	}
 
 }

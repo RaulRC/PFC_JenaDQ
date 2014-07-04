@@ -1,14 +1,24 @@
 package JenaDQ;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
+import vocabulary.DQA;
+
 import DQModel.DQModel;
 
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.vocabulary.XSD;
 
 public class DQAssessment {
 
@@ -99,6 +109,10 @@ public class DQAssessment {
 
 		Model m = ModelFactory.createDefaultModel();
 		// Setting DQDimension parameters
+		Calendar cal = GregorianCalendar.getInstance();
+		Literal value = m.createTypedLiteral(cal);
+		m.createResource(DQA.NS + this.getDQAssessmentIdentifier()).addProperty(DQA.INTIME, value);
+		
 		for (DQDimension dqdim : dqDimensionList) {
 			setParameters(dqdim);
 			try {
@@ -109,6 +123,7 @@ public class DQAssessment {
 				e.printStackTrace();
 			}
 		}
+		//TODO RESET RESULTS (maybe)
 		return m;
 	}
 
@@ -125,6 +140,7 @@ public class DQAssessment {
 		dqdim.setURI(this.getURI());
 		dqdim.setEndpoint(this.getEndpoint());
 		dqdim.setAssessmentIdentifier(this.getDQAssessmentIdentifier());
+		dqdim.resetResults();
 	}
 
 	public int publishResult() {
@@ -164,9 +180,9 @@ public class DQAssessment {
 	public void setFinalModel(Model finalModel) {
 		this.finalModel = finalModel;
 	}
-	
+
 	// API OPERATIONS
-	
+
 	/**
 	 * Add a new Dimension to assess
 	 * @param dimension
@@ -174,7 +190,7 @@ public class DQAssessment {
 	public void addDQDimension(DQDimension dimension){
 		this.getDqDimensionList().add(dimension);
 	}
-	
+
 	/**
 	 * Add new rules to existing ones
 	 * @param contextualRules
@@ -182,7 +198,7 @@ public class DQAssessment {
 	public void addContextualRules(List<Rule> contextualRules){
 		this.getContextualRules().addAll(contextualRules);
 	}
-	
+
 	/**
 	 * Add new rules to existing ones
 	 * @param useRules

@@ -38,7 +38,6 @@ import com.hp.hpl.jena.vocabulary.VCARD;
 
 public class _dimCompleteness extends DQDimension {
 
-	private ArrayList<Double> assessmentResults;
 
 	public ArrayList<MeasurementResult> getmRes() {
 		return mRes;
@@ -282,15 +281,15 @@ public class _dimCompleteness extends DQDimension {
 			assessment = mList
 					.get(i)
 					.createResource(DQA.NS + this.assessmentIdentifier)
-					.addProperty(RDF.type, DQA.NS + "ContextualAssessment")
+					.addProperty(RDF.type, DQA.CONTEXTUAL_RESULT)
 					.addProperty(
 							DQA.COMPLETENESS,
 							mList.get(i)
 									.createResource()
-									.addProperty(DQA.COMPLETENESS_URI,
+									.addProperty(DQA.INURI,
 											this.getURI())
-									.addProperty(DQA.COMPLETENESS_LEVEL, lLevel)
-									.addProperty(DQA.COMPLETENESS_LEVEL_RESULT,
+									.addProperty(DQA.INLEVEL, lLevel)
+									.addProperty(DQA.COMPLETENESS_RESULT,
 											lResult));
 
 			// inference here

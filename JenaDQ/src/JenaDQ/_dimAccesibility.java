@@ -38,7 +38,6 @@ import com.hp.hpl.jena.vocabulary.VCARD;
 
 public class _dimAccesibility extends DQDimension {
 
-	private ArrayList<Double> assessmentResults;
 
 	public ArrayList<MeasurementResult> getmRes() {
 		return mRes;
@@ -89,53 +88,9 @@ public class _dimAccesibility extends DQDimension {
 
 
 	/**
-	 * @name schemaCompleteness method Chek if every class and property from
-	 *       Ont. are present in the model too
-	 * @return MeasurementResult schemaCompleteness Falta comprobar clase por
-	 *         clase
-	 */
-	@Deprecated
-	public JenaDQ.MeasurementResult m_schemaCompleteness() {
-		MeasurementResult mRes = new MeasurementResult("SchemaCompleteness",
-				this.dimName);
-
-		Iterator<String> prefixCollection = this.getTargetModel().getModel()
-				.getNsPrefixMap().values().iterator();
-
-		int total = 0;
-		int notIn = 0;
-		double result = 0;
-		OntModel base = ModelFactory.createOntologyModel();
-		List<OntProperty> ontList = new LinkedList<OntProperty>();
-
-		while (prefixCollection.hasNext()) {
-			try {
-				base = ModelFactory.createOntologyModel();
-				base.read(prefixCollection.next());
-				ontList.addAll(base.listAllOntProperties().toList());
-			} catch (Exception e) {
-				// e.printStackTrace();
-			}
-		}
-		System.out.println(ontList.toString());
-		total = ontList.size();
-		StmtIterator modelPropList = this.getTargetModel().getModel()
-				.listStatements();
-
-		while (modelPropList.hasNext()) {
-			if (!ontList.contains(modelPropList.next().getPredicate()))
-				notIn++;
-		}
-		result = this.calculateDQMeasure(notIn, total);
-		mRes.setMResult(result);
-		return mRes;
-	}
-
-	/**
 	 * ExecuteMeasurement Completeness
 	 */
 	public Model _executeMeasurement() {
-
 
 		RDFNode rdfn;
 		Statement st;
@@ -158,6 +113,7 @@ public class _dimAccesibility extends DQDimension {
 			}
 		}
 		result = this.calculateDQMeasure(countNoUri, total);
+		System.out.println(this.URI + " ->>>> " + result);
 		this.assessmentResults.add(result); 
 		mRes.get(0).setMResult(result);
 		// Generate model
@@ -184,10 +140,12 @@ public class _dimAccesibility extends DQDimension {
 		//			mList.get(i).setNsPrefix("dqa", DQA.NS); 
 		m
 		.createResource(DQA.NS + this.assessmentIdentifier)
-		.addProperty(RDF.type, DQA.NS + "AccesibilityAssessment")
+		.addProperty(RDF.type, DQA.ACCESIBILITY)
 		.addProperty(
 				DQA.ACCESIBILITY,
-				result); 
+				m.createResource()
+				.addProperty(DQA.INURI, this.getURI())
+				.addProperty(DQA.ACCESIBILITY_RESULT, result)); 
 
 		// inference here
 		inf = ModelFactory.createInfModel(reasoner,m);
@@ -226,4 +184,5 @@ public class _dimAccesibility extends DQDimension {
 	public void setAssessmentResults(ArrayList<Double> assessmentResults) {
 		this.assessmentResults = assessmentResults;
 	}
+
 }

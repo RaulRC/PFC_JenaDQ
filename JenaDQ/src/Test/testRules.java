@@ -42,7 +42,7 @@ public class testRules {
 		String endpoint = "http://dbpedia.org/sparql";
 		// String endpoint = "http://lod.openlinksw.com/sparql";
 		String uri = "http://dbpedia.org/resource/Manakkara";
-		String uri2 = "http://dbpedia.org/resource/The_Lord_of_the_Rings";
+		String uri2 = "http://dbpedia.org/resource/Metallica";
 		int depth = 2;
 		List rules = Rule.parseRules(Rule.rulesParserFromReader(br));
 		FileReader in2 = new FileReader("D:\\rules\\contextual.rules");
@@ -71,8 +71,8 @@ public class testRules {
 		
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri, endpoint,
 				contextualRules, rules, depth, "IDENTIFIER_GENERATED"));
-//		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri2, endpoint,
-//				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
+		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri2, endpoint,
+				contextualRules, rules, 1, "ANOTHER_IDENTIFIER"));
 		
 
 		// EXECUTE PLAN
