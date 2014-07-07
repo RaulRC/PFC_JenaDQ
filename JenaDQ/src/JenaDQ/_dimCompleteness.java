@@ -151,10 +151,17 @@ public class _dimCompleteness extends DQDimension {
 	 * ExecuteMeasurement Completeness
 	 */
 	public Model _executeMeasurement() {
+		long startTime = System.currentTimeMillis();
 		ArrayList<ArrayList<RDFNode>> results = UriUtil
 				.getResourcesInDepthQuery(getEndpoint(), this.getURI(),
 						getDepth());
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("TIME ELAPSED WITH NODES: "+ (double) (estimatedTime/1000.0));
 
+		//TODO for testing
+		for(ArrayList<RDFNode> ar:results)
+			System.out.println("Nodes: "+ar.size());
+		
 		// Results are gonna be here
 		ArrayList<Double> resultsByLevel = new ArrayList<Double>();
 		mRes = new ArrayList<MeasurementResult>();

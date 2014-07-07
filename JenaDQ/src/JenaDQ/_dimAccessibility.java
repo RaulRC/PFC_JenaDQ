@@ -32,7 +32,7 @@ import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 
-public class _dimAccesibility extends DQDimension {
+public class _dimAccessibility extends DQDimension {
 
 
 	public ArrayList<MeasurementResult> getmRes() {
@@ -43,7 +43,7 @@ public class _dimAccesibility extends DQDimension {
 		this.mRes = mRes;
 	}
 
-	public _dimAccesibility(DQModel targetmodel, List<Rule> useRules,
+	public _dimAccessibility(DQModel targetmodel, List<Rule> useRules,
 			List<Rule> contextualRuleList, int depth, String endpoint,
 			String uri) {
 		super(targetmodel);
@@ -57,7 +57,7 @@ public class _dimAccesibility extends DQDimension {
 		this.assessmentResults = new ArrayList<Double>(); 
 	}
 
-	public _dimAccesibility(DQModel targetmodel, List<Rule> rules) {
+	public _dimAccessibility(DQModel targetmodel, List<Rule> rules) {
 		super(targetmodel);
 		this.dimName = "Accesibility";
 		this.setRuleList(rules);
@@ -67,7 +67,7 @@ public class _dimAccesibility extends DQDimension {
 		this.assessmentResults = new ArrayList<Double>(); 
 	}
 
-	public _dimAccesibility(DQModel targetmodel) {
+	public _dimAccessibility(DQModel targetmodel) {
 		super(targetmodel);
 		this.dimName = "Accesibility";
 		mRes = new ArrayList<MeasurementResult>();
@@ -75,7 +75,7 @@ public class _dimAccesibility extends DQDimension {
 		this.assessmentResults = new ArrayList<Double>(); 
 	}
 
-	public _dimAccesibility() {
+	public _dimAccessibility() {
 		super();
 		mRes = new ArrayList<MeasurementResult>();
 		mRes.add(new MeasurementResult("Interlinking", this.dimName));

@@ -15,7 +15,7 @@ import JenaDQ._dimCompleteness;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
-public class testRules {
+public class testPaper {
 
 	/**
 	 * @param args
@@ -28,7 +28,7 @@ public class testRules {
 		FileReader in = new FileReader("D:\\rules\\example.rules");
 		BufferedReader br = new BufferedReader(in);
 		String endpoint = "http://dbpedia.org/sparql";
-		// String endpoint = "http://lod.openlinksw.com/sparql";
+//		 String endpoint = "http://lod.openlinksw.com/sparql";
 		String uri = "http://dbpedia.org/resource/Manakkara";
 		String uri2 = "http://dbpedia.org/resource/Metallica";
 		String uri3 = "http://dbpedia.org/resource/Life_of_Pi";
@@ -53,7 +53,7 @@ public class testRules {
 		dqdimlist.add((DQDimension) new _dimCompleteness()); 
 		
 		LinkedList<DQDimension> dqdimlist2 = new LinkedList<DQDimension>();
-		dqdimlist2.add((DQDimension) new _dimAccessibility());
+		dqdimlist2.add((DQDimension) new _dimCompleteness());
 
 		// ADDING ASSESSMENTS
 //		dqplanlist.add(new DQAssessment(dqdimlist, uri, endpoint,
@@ -61,20 +61,21 @@ public class testRules {
 //		dqplanlist.add(new DQAssessment(dqdimlist, uri2, endpoint,
 //				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 		
-		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri, endpoint,
-				contextualRules, rules, 2, "IDENTIFIER_GENERATED"));
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
-				contextualRules, rules, 0, "ANOTHER_IDENTIFIER"));
-		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri3, endpoint,
-				contextualRules, rules, 1, "ANOTHER_ONEMORETIME"));
+				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
+//		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
+//				contextualRules, rules, 0, "ANOTHER_IDENTIFIER"));
+//		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri3, endpoint,
+//				contextualRules, rules, 1, "ANOTHER_ONEMORETIME"));
 		
 
 		// EXECUTE PLAN
+		// TIMES
+		long startTime = System.currentTimeMillis();
 		dqplan.executePlan();
-
-		Model mod = dqplan.getFinalModel();
-
-		mod.write(System.out, "TTL");
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println("TIME ELAPSED: "+ (double) (estimatedTime/1000.0));
+	
 
 
 	}
