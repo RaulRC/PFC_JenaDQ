@@ -2,8 +2,6 @@ package JenaDQ;
 
 import java.util.ArrayList;
 
-import java.util.Iterator;
-
 import java.util.List;
 
 
@@ -30,7 +28,6 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.reasoner.Reasoner;
-import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -203,24 +200,6 @@ public class _dimAccessibility extends DQDimension {
 	}
 	
 
-	/**
-	 * Return a validity report (is valid)
-	 * 
-	 * @param inf
-	 * @return
-	 */
-	private ValidityReport validate(InfModel inf) {
-		ValidityReport val = inf.validate();
-		if (val.isValid()) {
-			// System.out.println("OK");
-		} else {
-			System.out.println("Conflicts");
-			for (Iterator<?> i = val.getReports(); i.hasNext();) {
-				System.out.println(" - " + i.next());
-			}
-		}
-		return val;
-	}
 
 	public void setRuleList(List<Rule> ruleList) {
 		this.useRules = ruleList;

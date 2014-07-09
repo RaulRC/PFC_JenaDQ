@@ -1,6 +1,7 @@
 package JenaDQ;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 public class DQDimension {
@@ -200,4 +203,25 @@ public class DQDimension {
 	@Deprecated
 	public void generateMRES(ArrayList<Double> results) {
 	}
+	
+	/**
+	 * Return a validity report (is valid)
+	 * 
+	 * @param inf
+	 * @return
+	 */
+
+	protected ValidityReport validate(InfModel inf) {
+		ValidityReport val = inf.validate();
+		if (val.isValid()) {
+			// System.out.println("OK");
+		} else {
+			System.out.println("Conflicts");
+			for (Iterator<?> i = val.getReports(); i.hasNext();) {
+				System.out.println(" - " + i.next());
+			}
+		}
+		return val;
+	}
+
 }

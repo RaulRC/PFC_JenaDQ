@@ -9,7 +9,6 @@ import java.util.List;
 import utilities.UriUtil;
 import vocabulary.DQA;
 import DQModel.DQModel;
-import JenaDQExceptions.AssessmentException;
 import JenaDQExceptions.IdentifierException;
 import JenaDQExceptions.ModelGenerationException;
 import JenaDQExceptions.RuleException;
@@ -32,7 +31,6 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.reasoner.Reasoner;
-import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -336,25 +334,6 @@ public class _dimCompleteness extends DQDimension {
 			m = m.union(mod);
 		return m;
 
-	}
-
-	/**
-	 * Return a validity report (is valid)
-	 * 
-	 * @param inf
-	 * @return
-	 */
-	private ValidityReport validate(InfModel inf) {
-		ValidityReport val = inf.validate();
-		if (val.isValid()) {
-			// System.out.println("OK");
-		} else {
-			System.out.println("Conflicts");
-			for (Iterator<?> i = val.getReports(); i.hasNext();) {
-				System.out.println(" - " + i.next());
-			}
-		}
-		return val;
 	}
 
 	public void setRuleList(List<Rule> ruleList) {

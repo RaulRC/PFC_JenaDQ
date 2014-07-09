@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.List;
 
+import DQModel.DQModel;
 import JenaDQ.DQAssessment;
 import JenaDQ.DQAssessmentPlan;
 import JenaDQ.DQDimension;
@@ -64,19 +65,37 @@ public class testRules {
 //				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 		
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri, endpoint,
-				contextualRules, rules, 2, "IDENTIFIER_ONE"));
+				contextualRules, rules, 2, "IDENTIFIER"));
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
-				contextualRules, rules, 0, "IDENTIFIER_TWO"));
+				contextualRules, rules, 0, "IDENTIFIER"));
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri3, endpoint,
-				contextualRules, rules, 1, "IDENTIFIER_THREE"));
+				contextualRules, rules, 1, "IDENTIFIER"));
 		
-
+// --- COMPARISON MODEL
+		// FIRST MODEL
+//		dqplan.executePlan();
+//		Model mod = dqplan.getFinalModel();
+//		System.out.println("First model completed");
+		
+//		dqplan.getAssessmentList().clear();
+//		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
+//				contextualRules, rules, 0, "IDENTIFIER"));
+		
+		// SECOND MODEL
+//		dqplan.executePlan();
+//		Model mod2 = dqplan.getFinalModel();
+//		System.out.println("Second model completed");
+//		
+//		DQModel dqm = new DQModel(mod2, "N3"); 
+//		Model comparison = dqm.compareModelWith(mod);
+//		
+//		comparison.write(System.out, "N3");
+//		mod.write(System.out, "TTL");
+// --------- COMPARISON END
+		
 		dqplan.executePlan();
 		Model mod = dqplan.getFinalModel();
-
 		mod.write(System.out, "TTL");
-
-
 	}
 
 }

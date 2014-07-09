@@ -73,5 +73,11 @@ public class DQModel {
 		DataWriter dw = new DataWriter(); 
 		dw.showModelWithFormat(this, format); 
 	}
+	
+	// COMPARISON
+	
+	public Model compareModelWith(Model m){
+		return this.getModel().difference(m); 
+	}
 
 }
