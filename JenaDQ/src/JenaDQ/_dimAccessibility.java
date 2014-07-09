@@ -9,6 +9,10 @@ import java.util.List;
 
 import vocabulary.DQA;
 import DQModel.DQModel;
+import JenaDQExceptions.IdentifierException;
+import JenaDQExceptions.ModelGenerationException;
+import JenaDQExceptions.RuleException;
+import JenaDQExceptions.URIException;
 
 
 import com.hp.hpl.jena.query.Query;
@@ -85,9 +89,22 @@ public class _dimAccessibility extends DQDimension {
 
 	/**
 	 * ExecuteMeasurement Completeness
+	 * @throws IdentifierException 
+	 * @throws RuleException 
+	 * @throws URIException 
 	 */
-	public Model _executeMeasurement() {
+	public Model _executeMeasurement() throws IdentifierException, RuleException, URIException {
 
+		if(this.getAssessmentIdentifier().equals(""))
+			throw new IdentifierException(); 
+		
+		if(this.getContextualRules().size()==0)
+			throw new RuleException(); 
+		
+		if(this.getURI().equals(""))
+			throw new URIException(); 
+
+		
 		RDFNode rdfn;
 		Statement st;
 		StmtIterator iter = this.getTargetModel().getModel().listStatements();
@@ -113,7 +130,12 @@ public class _dimAccessibility extends DQDimension {
 		this.assessmentResults.add(result); 
 		mRes.get(0).setMResult(result);
 		// Generate model
-		this.setFinalModel(this._getRDFModel());
+		try {
+			this.setFinalModel(this._getRDFModel());
+		} catch (ModelGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// Return model
 		return this.getFinalModel();
 	}
@@ -121,7 +143,7 @@ public class _dimAccessibility extends DQDimension {
 	/**
 	 * Generates the final RDF Model with the rules
 	 */
-	public Model _getRDFModel() {
+	public Model _getRDFModel() throws ModelGenerationException{
 
 		Model m = ModelFactory.createDefaultModel();
 

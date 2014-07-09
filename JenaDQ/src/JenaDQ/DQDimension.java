@@ -5,6 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import DQModel.DQModel;
+import JenaDQExceptions.IdentifierException;
+import JenaDQExceptions.ModelGenerationException;
+import JenaDQExceptions.RuleException;
+import JenaDQExceptions.URIException;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -34,6 +38,8 @@ public class DQDimension {
 	protected String endpoint;
 	protected String assessmentIdentifier;
 	protected ArrayList<Double> assessmentResults; 
+	
+	protected Model finalModel;
 
 	// Results
 
@@ -93,7 +99,7 @@ public class DQDimension {
 		this.contextualRules = contextualRules;
 	}
 
-	protected Model finalModel;
+
 
 	public Model getFinalModel() {
 		return finalModel;
@@ -173,12 +179,15 @@ public class DQDimension {
 	 * To override
 	 * 
 	 * @return
+	 * @throws IdentifierException 
+	 * @throws RuleException 
+	 * @throws URIException 
 	 */
-	public Model _executeMeasurement() {
+	public Model _executeMeasurement() throws IdentifierException, RuleException, URIException {
 		return null;
 	}
 
-	public Model _getRDFModel() {
+	public Model _getRDFModel() throws ModelGenerationException{
 		return null;
 	}
 

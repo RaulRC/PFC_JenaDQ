@@ -9,6 +9,11 @@ import java.util.List;
 import utilities.UriUtil;
 import vocabulary.DQA;
 import DQModel.DQModel;
+import JenaDQExceptions.AssessmentException;
+import JenaDQExceptions.IdentifierException;
+import JenaDQExceptions.ModelGenerationException;
+import JenaDQExceptions.RuleException;
+import JenaDQExceptions.URIException;
 
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntProperty;
@@ -149,8 +154,21 @@ public class _dimCompleteness extends DQDimension {
 
 	/**
 	 * ExecuteMeasurement Completeness
+	 * @throws IdentifierException 
+	 * @throws RuleException 
+	 * @throws URIException 
 	 */
-	public Model _executeMeasurement() {
+	public Model _executeMeasurement() throws IdentifierException, RuleException, URIException {
+		
+		if(this.getAssessmentIdentifier().equals(""))
+			throw new IdentifierException(); 
+		
+		if(this.getContextualRules().size()==0)
+			throw new RuleException(); 
+		
+		if(this.getURI().equals(""))
+			throw new URIException(); 
+
 		long startTime = System.currentTimeMillis();
 		ArrayList<ArrayList<RDFNode>> results = UriUtil
 				.getResourcesInDepthQuery(getEndpoint(), this.getURI(),
@@ -221,10 +239,15 @@ public class _dimCompleteness extends DQDimension {
 		setAssessmentResults(resultsByLevel);
 		// Reasoner -> apply the contextual rules here
 		// generate final RDF with DQ assessment
-		this.setFinalModel(this._getRDFModel());
+		try {
+			this.setFinalModel(this._getRDFModel());
+		} catch (ModelGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 //		generateMRES(resultsByLevel); 
-
+		
 		return this.finalModel;
 	}
 
@@ -261,7 +284,7 @@ public class _dimCompleteness extends DQDimension {
 	/**
 	 * Generates the final RDF Model with the rules
 	 */
-	public Model _getRDFModel() {
+	public Model _getRDFModel() throws ModelGenerationException{
 
 		Model m = ModelFactory.createDefaultModel();
 		@SuppressWarnings("unused")

@@ -11,6 +11,8 @@ import JenaDQ.DQAssessmentPlan;
 import JenaDQ.DQDimension;
 import JenaDQ._dimAccessibility;
 import JenaDQ._dimCompleteness;
+import JenaDQExceptions.AssessmentException;
+import JenaDQExceptions.IdentifierException;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
@@ -23,7 +25,7 @@ public class testRules {
 	 */
 
 	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, AssessmentException {
 		// RULES
 		FileReader in = new FileReader("D:\\rules\\example.rules");
 		BufferedReader br = new BufferedReader(in);
@@ -62,16 +64,14 @@ public class testRules {
 //				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 		
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri, endpoint,
-				contextualRules, rules, 2, "IDENTIFIER_GENERATED"));
+				contextualRules, rules, 2, "IDENTIFIER_ONE"));
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
-				contextualRules, rules, 0, "ANOTHER_IDENTIFIER"));
+				contextualRules, rules, 0, "IDENTIFIER_TWO"));
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri3, endpoint,
-				contextualRules, rules, 1, "ANOTHER_ONEMORETIME"));
+				contextualRules, rules, 1, "IDENTIFIER_THREE"));
 		
 
-		// EXECUTE PLAN
 		dqplan.executePlan();
-
 		Model mod = dqplan.getFinalModel();
 
 		mod.write(System.out, "TTL");
