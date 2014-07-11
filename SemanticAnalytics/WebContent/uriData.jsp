@@ -36,11 +36,14 @@
 	<br>
 
 	<hr />
-	<s:form action="dqassessment" method="post" enctype="multipart/form-data">
-		<s:textfield label="Depth" name="depth"/>
+	<s:form action="dqassessment" method="post"
+		enctype="multipart/form-data">
+		<s:textfield label="DQAssessment Identifier" name="identifier" />
+		<s:textfield label="Depth" name="depth" />
 		<s:file name="file" label="Use Rules File to upload" />
 		<s:file name="file" label="Contextual Rules File to upload" />
 		<s:submit name="dq" value="Dq Assessment" />
+
 	</s:form>
 
 	<hr />

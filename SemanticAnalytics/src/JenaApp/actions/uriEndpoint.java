@@ -11,7 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import Dominion.*;
+import DQModel.*;
+import Dominion.Operation;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -62,7 +63,7 @@ public class uriEndpoint extends ActionSupport {
 
 		try{
 			DQModel dq;
-			dq = new DQModel(uri); 
+			dq = new DQModel(this.endpoint, this.uri); 
 //			setFormat(dq.getFormat()); 
 			setModel(dq.getModel()); 
 //			dq.showModelWithFormat(getFormat());

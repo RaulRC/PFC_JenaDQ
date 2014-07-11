@@ -32,6 +32,7 @@ public class DqAssessment extends ActionSupport {
 	private String uri; 
 	private List<File> file;
 	private File contextualrules;
+	private String identifier; 
 	
 	public File getContextualRules() {
 		return contextualrules;
@@ -85,11 +86,15 @@ public class DqAssessment extends ActionSupport {
 			dqdimlist.add((DQDimension) new _dimCompleteness()); 
 
 			dqplan.addDQAssessment(new DQAssessment(dqdimlist, getUri(), getEndpoint(),
-					contextualRules, useRules, getDepth(), "IDENTIFIER"));
+					contextualRules, useRules, getDepth(), getIdentifier()));
 			
 			dqplan.executePlan();
 			
 			setMr(dqplan.getmRes());
+			// STORE MODEL TDB
+			// RETURN MODEL IN URI
+			// RETURN MODEL IN FILE FORMAT (maybe more actions)
+
 		}
 		catch(Exception e){
 			//TODO set correct exception
@@ -152,6 +157,14 @@ public class DqAssessment extends ActionSupport {
 
 	public void setFile(List<File> file) {
 		this.file = file;
+	}
+
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 
 }
