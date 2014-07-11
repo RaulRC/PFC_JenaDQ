@@ -72,13 +72,24 @@ public class DqAssessment extends ActionSupport {
 			setModel((Model)session.get("model")); 
 			setUri((String)session.get("URI"));
 			setEndpoint((String)session.get("ENDPOINT"));
-			
 			dq.setDqmodel(getModel());
-			_dimCompleteness comp= new _dimCompleteness(dq, useRules, contextualRules, getDepth(),getEndpoint(),getUri() ); 
-			mr = new ArrayList<MeasurementResult>();
-			comp._executeMeasurement();
-			mr.addAll(comp.getmRes());
-			setMr(mr);
+			
+			// SETTING PLAN - DQAPLAN
+			DQAssessmentPlan dqplan = new DQAssessmentPlan();
+			LinkedList<DQAssessment> dqplanlist = new LinkedList<DQAssessment>();
+			dqplan.setAssessmentList(dqplanlist);
+
+			// SETTING LIST OF DIMENSIONS I'm GOING TO ASSESS
+			LinkedList<DQDimension> dqdimlist = new LinkedList<DQDimension>();
+			dqdimlist.add((DQDimension) new _dimAccessibility());
+			dqdimlist.add((DQDimension) new _dimCompleteness()); 
+
+			dqplan.addDQAssessment(new DQAssessment(dqdimlist, getUri(), getEndpoint(),
+					contextualRules, useRules, getDepth(), "IDENTIFIER"));
+			
+			dqplan.executePlan();
+			
+			setMr(dqplan.getmRes());
 		}
 		catch(Exception e){
 			//TODO set correct exception

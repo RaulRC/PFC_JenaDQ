@@ -18,12 +18,21 @@ public class DQA {
 	/** <p>The namespace of the vocabulary as a resource</p> */
 	public static final Resource NAMESPACE = m_model.createResource( NS );
 	
-	public static final Property COMPLETENESS =  m_model.createProperty( NS + "Completeness" );
-	public static final Property COMPLETENESS_LEVEL =  m_model.createProperty( NS + "CompletenessInLevel" );
-	public static final Property COMPLETENESS_LEVEL_RESULT =  m_model.createProperty( NS + "CompletenessMeasureInLevel" );
+	public static final Property CONTEXTUAL_RESULT =  m_model.createProperty( NS + "ContextualMeasure" );
+	public static final Property INURI =  m_model.createProperty( NS + "InURI" );
+	public static final Property INLEVEL =  m_model.createProperty( NS + "InLevel" );
+	public static final Property INTIME = m_model.createProperty( NS + "AssessmentDate");
+	
+	public static final Property COMPLETENESS =  m_model.createProperty( NS + "CompletenessAssessment" );
+	public static final Property COMPLETENESS_RESULT =  m_model.createProperty( NS + "CompletenessResult" );
+	public static final Property COMPLETENESS_MEASUREMENT=  m_model.createProperty( NS + "CompletenessMeasure" );
 	
 //	public static final Property COMPLETENESS_CONTEXTUAL =  m_model.createProperty( NS + "ContextualCompleteness" );
 //	public static final Property COMPLETENESS_LEVEL_CONTEXTUAL =  m_model.createProperty( NS + "ContextualCompletenessInLevel" );
-	public static final Property COMPLETENESS_LEVEL_RESULT_CONTEXTUAL =  m_model.createProperty( NS + "ContextualMeasureInLevel" );
+
 	
+	public static final Property ACCESSIBILITY =  m_model.createProperty( NS + "AccessibilityAssessment" );
+	public static final Property ACCESSIBILITY_RESULT=  m_model.createProperty( NS + "AccessibilityResult" );
+	public static final Property ACCESSIBILITY_MEASUREMENT=  m_model.createProperty( NS + "AccessibilityMeasure" );
+
 }

@@ -1,18 +1,24 @@
 package JenaDQ;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import DQModel.DQModel;
+import JenaDQExceptions.IdentifierException;
+import JenaDQExceptions.ModelGenerationException;
+import JenaDQExceptions.RuleException;
+import JenaDQExceptions.URIException;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
+import com.hp.hpl.jena.reasoner.ValidityReport;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 public class DQDimension {
 
@@ -21,13 +27,83 @@ public class DQDimension {
 		this.targetModel = targetmodel;
 	}
 
+	public DQDimension() {
+	}
+
 	protected String dimName;
 	protected DQModel targetModel;
 	protected LinkedList<MeasurementResult> dimResults;
+	protected List<Rule> useRules;
+	protected List<Rule> contextualRules;
+	protected int depth;
+
+	protected String URI;
+	protected String endpoint;
+	protected String assessmentIdentifier;
+	protected ArrayList<Double> assessmentResults; 
 	
+	protected Model finalModel;
+
 	// Results
-	
-	protected Model finalModel; 
+
+	public ArrayList<Double> getAssessmentResults() {
+		return assessmentResults;
+	}
+
+	public void setAssessmentResults(ArrayList<Double> assessmentResults) {
+		this.assessmentResults = assessmentResults;
+	}
+
+	public String getAssessmentIdentifier() {
+		return assessmentIdentifier;
+	}
+
+	public void setAssessmentIdentifier(String assessmentIdentifier) {
+		this.assessmentIdentifier = assessmentIdentifier;
+	}
+
+	public String getURI() {
+		return URI;
+	}
+
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	public List<Rule> getUseRules() {
+		return useRules;
+	}
+
+	public void setUseRules(List<Rule> useRules) {
+		this.useRules = useRules;
+	}
+
+	public List<Rule> getContextualRules() {
+		return contextualRules;
+	}
+
+	public void setContextualRules(List<Rule> contextualRules) {
+		this.contextualRules = contextualRules;
+	}
+
+
+
 	public Model getFinalModel() {
 		return finalModel;
 	}
@@ -44,7 +120,7 @@ public class DQDimension {
 		this.mRes = mRes;
 	}
 
-	protected ArrayList<MeasurementResult> mRes; 
+	protected ArrayList<MeasurementResult> mRes;
 
 	public String getDimName() {
 		return this.dimName;
@@ -74,40 +150,81 @@ public class DQDimension {
 		return null;
 
 	}
-	public double calculateDQMeasure(double nNot, double nTot){
-		return (1 - (nNot/nTot)); 
+
+	public double calculateDQMeasure(double nNot, double nTot) {
+		return (1 - (nNot / nTot));
 	}
+
 	/**
-	 * Recibe una query y un endpoint, devuelve un modelo RDF 
+	 * Recibe una query y un endpoint, devuelve un modelo RDF
+	 * 
 	 * @param endpoint
 	 * @param queryString
-	 * @param prefix mapping
+	 * @param prefix
+	 *            mapping
 	 */
 	@Deprecated
-	public DQModel getResourceFromURI(String endpoint, String queryString){
-	    Query query = QueryFactory.create(queryString);
-	    QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint, query);
-	    DQModel dq = new DQModel(); 
-	    Model results = qexec.execConstruct();
-	    dq.setDqmodel((Model) results); 
-//	    for ( ; results.hasNext() ; ) {
-//	        QuerySolution soln = results.nextSolution() ;
-//	        System.out.println(soln);
-//	    }
-	    return dq; 
+	public DQModel getResourceFromURI(String endpoint, String queryString) {
+		Query query = QueryFactory.create(queryString);
+		QueryExecution qexec = QueryExecutionFactory.sparqlService(endpoint,
+				query);
+		DQModel dq = new DQModel();
+		Model results = qexec.execConstruct();
+		dq.setDqmodel((Model) results);
+		// for ( ; results.hasNext() ; ) {
+		// QuerySolution soln = results.nextSolution() ;
+		// System.out.println(soln);
+		// }
+		return dq;
 	}
+
 	/**
 	 * To override
+	 * 
+	 * @return
+	 * @throws IdentifierException 
+	 * @throws RuleException 
+	 * @throws URIException 
+	 */
+	public Model _executeMeasurement() throws IdentifierException, RuleException, URIException {
+		return null;
+	}
+
+	public Model _getRDFModel() throws ModelGenerationException{
+		return null;
+	}
+
+	public Model _contextualFinalModel() {
+		return null;
+	}
+	public void resetResults(){
+		this.assessmentResults=new ArrayList<Double>(); 
+	}
+	@Deprecated
+	public void generateMRES(ArrayList<Double> results) {
+	}
+	public String toString(){
+		return ""; 
+	}
+	
+	/**
+	 * Return a validity report (is valid)
+	 * 
+	 * @param inf
 	 * @return
 	 */
-	public Model _executeMeasurement() {
-		return null; 
-	}
-	public Model _getRDFModel(){
-		return null; 
-	}
-	public Model _contextualFinalModel(){
-		return null; 
+
+	protected ValidityReport validate(InfModel inf) {
+		ValidityReport val = inf.validate();
+		if (val.isValid()) {
+			// System.out.println("OK");
+		} else {
+			System.out.println("Conflicts");
+			for (Iterator<?> i = val.getReports(); i.hasNext();) {
+				System.out.println(" - " + i.next());
+			}
+		}
+		return val;
 	}
 
 }
