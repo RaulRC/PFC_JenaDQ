@@ -14,6 +14,7 @@
 	<p>Test Webpage</p>
 	<br>
 	<br>
+	<%-- 
 	<p>
 		Put directly the <b>URI of the resource</b>
 	</p>
@@ -21,21 +22,7 @@
 		<s:textfield name="uri" label="Put here your URI" />
 		<s:submit name="Send" value="Get URI"></s:submit>
 	</s:form>
-	<br>
-	<br>
-	<table border="1">
-		<tr>
-			<td><a
-				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php?go=1"
-				target="_blank"> Pick a random URI [New Tab] (select Dataset
-					format below)</a></td>
-			<td><a
-				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php"
-				target="_blank"> By Richard cyganiak - Random-dbpedia</a></td>
-		</tr>
-	</table>
-	<br>
-	<br>
+	
 	<br>
 	<p>
 		<b>Upload a file</b> from your computer
@@ -47,7 +34,7 @@
 	<br>
 	<br>
 	
-	
+	--%>
 	<br>
 	<br>
 	<br>
@@ -55,13 +42,27 @@
 		<b>Use an URI and ENDPOINT</b> 
 	</p>
 	<s:form action="uriEndpoint" method="post" enctype="multipart/form-data">
-		<s:textfield name="uri" label="Put here your URI" />
-		<s:textfield name="endpoint" label="Put here your ENDPOINT" />
+		<s:textfield name="uri" label="Put your URI here " />
+		<s:textfield name="endpoint" label="Put your ENDPOINT here " />
 		<s:submit />
 	</s:form>
 	<br>
 	<br>
 	
+	<br>
+	<br>
+	<table border="1">
+		<tr>
+			<td><a
+				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php?go=1"
+				target="_blank"> Pick a random URI [New Tab]</a></td>
+			<td><a
+				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php"
+				target="_blank"> By Richard cyganiak - Random-dbpedia</a></td>
+		</tr>
+	</table>
+	<br>
+	<br>
 	
 	<p>
 		<b>Type a R expression</b>:
