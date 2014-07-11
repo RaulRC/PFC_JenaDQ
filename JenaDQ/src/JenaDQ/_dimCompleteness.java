@@ -1,7 +1,6 @@
 package JenaDQ;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,6 +72,7 @@ public class _dimCompleteness extends DQDimension {
 
 	public _dimCompleteness() {
 		super();
+		this.dimName = "Completeness";
 	}
 
 	/**
@@ -174,9 +174,9 @@ public class _dimCompleteness extends DQDimension {
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println("TIME ELAPSED WITH NODES: "+ (double) (estimatedTime/1000.0));
 
-		//TODO for testing
-		for(ArrayList<RDFNode> ar:results)
-			System.out.println("Nodes: "+ar.size());
+//		 for testing
+//		for(ArrayList<RDFNode> ar:results)
+//			System.out.println("Nodes: "+ar.size());
 		
 		// Results are gonna be here
 		ArrayList<Double> resultsByLevel = new ArrayList<Double>();
@@ -190,7 +190,7 @@ public class _dimCompleteness extends DQDimension {
 		DQModel dq = new DQModel(getEndpoint(), this.getURI());
 		Reasoner reasoner = new GenericRuleReasoner(this.getUseRules());
 
-		// TODO DQ property to assess
+		//  DQ property to assess
 		Resource o = ResourceFactory.createResource(DQA.NS + "NoCompleteness");
 		Resource s = ResourceFactory.createResource(this.getURI());
 
@@ -240,16 +240,14 @@ public class _dimCompleteness extends DQDimension {
 		try {
 			this.setFinalModel(this._getRDFModel());
 		} catch (ModelGenerationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-//		generateMRES(resultsByLevel); 
+		generateMRES(resultsByLevel); 
 		
 		return this.finalModel;
 	}
 
-	@Deprecated
 	public void generateMRES(ArrayList<Double> results) {
 		// Generating DQ results
 		// Setting up the Data Structure no RDF for easily pick the results
@@ -259,8 +257,8 @@ public class _dimCompleteness extends DQDimension {
 
 			query = "PREFIX dqa: <http://www.dqassessment.org/ontologies/2014/9/DQA.owl#>\n"
 					+ "SELECT ?x WHERE { "
-					+ "?a dqa:CompletenessMeasure ?y. \n"
-					+ "?a dqa:ContextualMeasurel ?x . "
+					+ "?a dqa:InLevel ?y. \n"
+					+ "?a dqa:ContextualMeasure ?x . "
 					+ "FILTER ( ?y = " + i + ") } \n";
 
 			q = QueryFactory.create(query);
@@ -278,6 +276,9 @@ public class _dimCompleteness extends DQDimension {
 		}
 
 	}
+	public String toString(){
+		return "Completeness"; 
+	}
 
 	/**
 	 * Generates the final RDF Model with the rules
@@ -285,11 +286,7 @@ public class _dimCompleteness extends DQDimension {
 	public Model _getRDFModel() throws ModelGenerationException{
 
 		Model m = ModelFactory.createDefaultModel();
-		@SuppressWarnings("unused")
-		Date d = new Date();
-		// TODO getTime no funcionará si quiero unirlos después
-		@SuppressWarnings("unused")
-		Resource assessment = null;
+
 
 		ArrayList<Model> mList = new ArrayList<Model>();
 
@@ -306,9 +303,8 @@ public class _dimCompleteness extends DQDimension {
 			lResult = mList.get(i).createTypedLiteral(
 					new Double(assessmentResults.get(i)));
 			lLevel = mList.get(i).createTypedLiteral(new Integer(i));
-			// TODO prefixes
-			//			mList.get(i).setNsPrefix("dqa", DQA.NS); 
-			assessment = mList
+
+			mList
 					.get(i)
 					.createResource(DQA.NS + this.assessmentIdentifier)
 					.addProperty(RDF.type, DQA.COMPLETENESS)

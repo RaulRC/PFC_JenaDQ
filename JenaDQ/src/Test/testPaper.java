@@ -53,7 +53,7 @@ public class testPaper {
 		dqdimlist.add((DQDimension) new _dimCompleteness()); 
 		
 		LinkedList<DQDimension> dqdimlist2 = new LinkedList<DQDimension>();
-		dqdimlist2.add((DQDimension) new _dimCompleteness());
+		dqdimlist2.add((DQDimension) new _dimAccessibility());
 
 		// ADDING ASSESSMENTS
 //		dqplanlist.add(new DQAssessment(dqdimlist, uri, endpoint,
@@ -61,7 +61,7 @@ public class testPaper {
 //		dqplanlist.add(new DQAssessment(dqdimlist, uri2, endpoint,
 //				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 		
-		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
+		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri3, endpoint,
 				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 //		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
 //				contextualRules, rules, 0, "ANOTHER_IDENTIFIER"));

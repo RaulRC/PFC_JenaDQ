@@ -65,11 +65,11 @@ public class testRules {
 //				contextualRules, rules, 1, "IDENTIFIER_GENERATED"));
 		
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri, endpoint,
-				contextualRules, rules, 2, "IDENTIFIER"));
+				contextualRules, rules, 1, "FIRST_ASSESSMENT"));
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist2, uri2, endpoint,
-				contextualRules, rules, 0, "IDENTIFIER"));
+				contextualRules, rules, 0, "SECOND_ASSESSMENT"));
 		dqplan.addDQAssessment(new DQAssessment(dqdimlist, uri3, endpoint,
-				contextualRules, rules, 1, "IDENTIFIER"));
+				contextualRules, rules, 1, "THIRD_ASSESSMENT"));
 		
 // --- COMPARISON MODEL
 		// FIRST MODEL
@@ -95,7 +95,7 @@ public class testRules {
 		
 		dqplan.executePlan();
 		Model mod = dqplan.getFinalModel();
-		mod.write(System.out, "TTL");
+//		mod.write(System.out, "TTL");
 	}
 
 }

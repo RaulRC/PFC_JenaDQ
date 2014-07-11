@@ -26,9 +26,9 @@ public class DQAssessment {
 	}
 
 	public DQAssessment() {
-		this.dqDimensionList = new LinkedList<DQDimension>(); 
-		this.useRules = new ArrayList<Rule>(); 
-		this.contextualRules = new ArrayList<Rule>(); 
+		this.dqDimensionList = new LinkedList<DQDimension>();
+		this.useRules = new ArrayList<Rule>();
+		this.contextualRules = new ArrayList<Rule>();
 
 	}
 
@@ -65,6 +65,15 @@ public class DQAssessment {
 	private int depth;
 	private String DQAssessmentIdentifier;
 	private Model finalModel;
+	public ArrayList<MeasurementResult> mRes;
+
+	public ArrayList<MeasurementResult> getmRes() {
+		return mRes;
+	}
+
+	public void setmRes(ArrayList<MeasurementResult> mRes) {
+		this.mRes = mRes;
+	}
 
 	public LinkedList<DQDimension> getDqDimensionList() {
 		return dqDimensionList;
@@ -102,25 +111,31 @@ public class DQAssessment {
 		// TODO - implement DQAssessment.executeAssessment
 		// set FinalModel here
 
+		mRes = new ArrayList<MeasurementResult>();
+		mRes.add(new MeasurementResult(this.getURI(), this.getDqDimensionList()
+				.toString(), 0.0, "Assessment Data"));
+
 		Model m = ModelFactory.createDefaultModel();
 		// Setting DQDimension parameters
 		// TIME
 		Calendar cal = GregorianCalendar.getInstance();
 		Literal value = m.createTypedLiteral(cal);
-		m.createResource(DQA.NS + this.getDQAssessmentIdentifier()).addProperty(DQA.INTIME, value);
-		
+		m.createResource(DQA.NS + this.getDQAssessmentIdentifier())
+				.addProperty(DQA.INTIME, value);
+
 		for (DQDimension dqdim : dqDimensionList) {
 			setParameters(dqdim);
 			try {
 				m = m.union(dqdim._executeMeasurement());
 				this.setFinalModel(m);
+				mRes.addAll(dqdim.getmRes());
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		}
-		//TODO RESET RESULTS (maybe)
+
 		return m;
 	}
 
@@ -182,25 +197,28 @@ public class DQAssessment {
 
 	/**
 	 * Add a new Dimension to assess
+	 * 
 	 * @param dimension
 	 */
-	public void addDQDimension(DQDimension dimension){
+	public void addDQDimension(DQDimension dimension) {
 		this.getDqDimensionList().add(dimension);
 	}
 
 	/**
 	 * Add new rules to existing ones
+	 * 
 	 * @param contextualRules
 	 */
-	public void addContextualRules(List<Rule> contextualRules){
+	public void addContextualRules(List<Rule> contextualRules) {
 		this.getContextualRules().addAll(contextualRules);
 	}
 
 	/**
 	 * Add new rules to existing ones
+	 * 
 	 * @param useRules
 	 */
-	public void addUseRules(List<Rule> useRules){
+	public void addUseRules(List<Rule> useRules) {
 		this.getUseRules().addAll(useRules);
 	}
 

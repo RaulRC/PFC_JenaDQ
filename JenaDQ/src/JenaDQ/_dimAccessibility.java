@@ -54,7 +54,7 @@ public class _dimAccessibility extends DQDimension {
 		this.setEndpoint(endpoint);
 		this.useRules = contextualRuleList;
 		mRes = new ArrayList<MeasurementResult>();
-		mRes.add(new MeasurementResult("Interlinking", this.dimName));
+
 		this.assessmentResults = new ArrayList<Double>(); 
 	}
 
@@ -64,7 +64,7 @@ public class _dimAccessibility extends DQDimension {
 		this.setRuleList(rules);
 		this.setDepth(0);
 		mRes = new ArrayList<MeasurementResult>();
-		mRes.add(new MeasurementResult("Interlinking", this.dimName));
+
 		this.assessmentResults = new ArrayList<Double>(); 
 	}
 
@@ -72,14 +72,15 @@ public class _dimAccessibility extends DQDimension {
 		super(targetmodel);
 		this.dimName = "Accesibility";
 		mRes = new ArrayList<MeasurementResult>();
-		mRes.add(new MeasurementResult("Interlinking", this.dimName));
+
 		this.assessmentResults = new ArrayList<Double>(); 
 	}
 
 	public _dimAccessibility() {
 		super();
+		this.dimName = "Accesibility";
 		mRes = new ArrayList<MeasurementResult>();
-		mRes.add(new MeasurementResult("Interlinking", this.dimName));
+
 		this.assessmentResults = new ArrayList<Double>(); 
 	}
 
@@ -94,14 +95,13 @@ public class _dimAccessibility extends DQDimension {
 
 		if(this.getAssessmentIdentifier().equals(""))
 			throw new IdentifierException(); 
-		
+
 		if(this.getContextualRules().size()==0)
 			throw new RuleException(); 
-		
+
 		if(this.getURI().equals(""))
 			throw new URIException(); 
 
-		
 		RDFNode rdfn;
 		Statement st;
 		StmtIterator iter = this.getTargetModel().getModel().listStatements();
@@ -123,9 +123,9 @@ public class _dimAccessibility extends DQDimension {
 			}
 		}
 		result = this.calculateDQMeasure(countNoUri, total);
+		System.out.println(total + " ---> " + result);
 
 		this.assessmentResults.add(result); 
-		mRes.get(0).setMResult(result);
 		// Generate model
 		try {
 			this.setFinalModel(this._getRDFModel());
@@ -134,7 +134,10 @@ public class _dimAccessibility extends DQDimension {
 			e.printStackTrace();
 		}
 		// Return model
-		return this.getFinalModel();
+
+		Model m = this.getFinalModel();
+		generateMRES(assessmentResults); 
+		return m;
 	}
 
 	/**
@@ -155,50 +158,45 @@ public class _dimAccessibility extends DQDimension {
 		//			mList.get(i).setNsPrefix("dqa", DQA.NS); 
 		m
 		.createResource(DQA.NS + this.assessmentIdentifier)
-		.addProperty(RDF.type, DQA.ACCESIBILITY)
+		.addProperty(RDF.type, DQA.ACCESSIBILITY)
 		.addProperty(
-				DQA.ACCESIBILITY_RESULT,
+				DQA.ACCESSIBILITY_RESULT,
 				m.createResource()
 				.addProperty(DQA.INURI, this.getURI())
-				.addProperty(DQA.ACCESIBILITY_MEASUREMENT, result)); 
+				.addProperty(DQA.ACCESSIBILITY_MEASUREMENT, result)); 
 
 		// inference here
 		inf = ModelFactory.createInfModel(reasoner,m);
 		//			inf2.setNsPrefix("dqa", DQA.NS); 
-		validate(inf);	
+		validate(inf);
 		return inf;
 	}
-	
-	@Deprecated
+
+
 	public void generateMRES(ArrayList<Double> results) {
 		// Generating DQ results
 		// Setting up the Data Structure no RDF for easily pick the results
 		String query = "";
 		Query q = null;
-		for (int i = 0; i < results.size(); i++) {
 
-			query = "PREFIX dqa: <http://www.dqassessment.org/ontologies/2014/9/DQA.owl#>\n"
-					+ "SELECT ?x WHERE { "
-					+ "?a dqa:AccesibilityMeasure ?y. \n"
-					+ "?a dqa:ContextualMeasurel ?x . "
-					+ "FILTER ( ?y = " + i + ") } \n";
 
-			q = QueryFactory.create(query);
-			QueryExecution qExe = QueryExecutionFactory.create(q,
-					getFinalModel());
-			ResultSet resultsRes = qExe.execSelect();
+		query = "PREFIX dqa: <http://www.dqassessment.org/ontologies/2014/9/DQA.owl#> \n"
+				+ "SELECT ?x WHERE { "
+				+ "?a dqa:ContextualMeasure ?x. \n"
+				+ " } \n";
 
-			if (resultsRes.hasNext())
-				mRes.add(new MeasurementResult("Interlinking", this.dimName,
-						results.get(i), resultsRes.next()
-						.getResource("?x").toString()));
-			else
-				mRes.add(new MeasurementResult("Interlinking", this.dimName,
-						results.get(i)));
+		q = QueryFactory.create(query);
+		QueryExecution qExe = QueryExecutionFactory.create(q,
+				getFinalModel());
+		ResultSet resultsRes = qExe.execSelect();
+
+		if (resultsRes.hasNext()){
+
+			mRes.add(new MeasurementResult("Interlinking", this.dimName,
+					results.get(0), resultsRes.next().getResource("?x").toString()));
 		}
-
 	}
-	
+
 
 
 	public void setRuleList(List<Rule> ruleList) {
@@ -211,6 +209,9 @@ public class _dimAccessibility extends DQDimension {
 
 	public void setAssessmentResults(ArrayList<Double> assessmentResults) {
 		this.assessmentResults = assessmentResults;
+	}
+	public String toString(){
+		return "Accessibility"; 
 	}
 
 }

@@ -203,6 +203,9 @@ public class DQDimension {
 	@Deprecated
 	public void generateMRES(ArrayList<Double> results) {
 	}
+	public String toString(){
+		return ""; 
+	}
 	
 	/**
 	 * Return a validity report (is valid)

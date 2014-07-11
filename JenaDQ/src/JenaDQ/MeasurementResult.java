@@ -24,6 +24,10 @@ public class MeasurementResult {
 		this.mResult = mResult;
 		this.mContextualResult=cResult; 
 	}
+	
+	public MeasurementResult(){
+		
+	}
 
 	private String mName;
 	private String mDimension;

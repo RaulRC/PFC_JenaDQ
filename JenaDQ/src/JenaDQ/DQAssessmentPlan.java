@@ -1,5 +1,6 @@
 package JenaDQ;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -10,6 +11,7 @@ public class DQAssessmentPlan {
 	private boolean isPublic;
 	private LinkedList<DQAssessment> assessmentList;
 	private Model finalModel;
+	private ArrayList<MeasurementResult> mRes; 
 
 	public DQAssessmentPlan(boolean isPublic,
 			LinkedList<DQAssessment> assessmentList) {
@@ -45,11 +47,15 @@ public class DQAssessmentPlan {
 	 */
 	public Model executePlan() {
 		Model m = ModelFactory.createDefaultModel();
+		mRes = new ArrayList<MeasurementResult> (); 
 
-		for (DQAssessment dqassess : this.getAssessmentList())
+		for (DQAssessment dqassess : this.getAssessmentList()){
 			m = m.union(dqassess.executeAssessment());
+			mRes.addAll(dqassess.getmRes());
+		}
 
 		this.setFinalModel(m);
+		System.out.println(mRes.toString());
 		return m;
 	}
 
@@ -74,6 +80,14 @@ public class DQAssessmentPlan {
 	 */
 	public void addDQAssessment(DQAssessment assessment){
 		this.getAssessmentList().add(assessment);
+	}
+
+	public ArrayList<MeasurementResult> getmRes() {
+		return mRes;
+	}
+
+	public void setmRes(ArrayList<MeasurementResult> mRes) {
+		this.mRes = mRes;
 	}
 
 }
