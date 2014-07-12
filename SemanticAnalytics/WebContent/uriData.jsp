@@ -29,6 +29,17 @@
 	<br>
 	<hr />
 	<br>
+	<h3>Query Model</h3>
+	<br>
+	<s:form action="queryModel">
+		<s:textarea label="Query" name="dataQuery" cols="100" rows="15" />
+		<s:submit name="Send" value="Query"></s:submit>
+	</s:form>
+	<br>
+	<br>
+
+	<hr />
+	<br>
 	<h3>Model Properties</h3>
 	<br>
 	<table border="1">
@@ -40,19 +51,5 @@
 			</tr>
 		</s:iterator>
 	</table>
-	<br>
-	<hr />
-	<br>
-	<h3>Query Model</h3>
-	<br>
-	<s:form action="queryModel">
-		<s:textarea label="Query" name="dataQuery" cols="100" rows="15" />
-		<s:submit name="Send" value="Query"></s:submit>
-	</s:form>
-	<br>
-	<br>
-
-	<hr />
-
 </body>
 </html>

@@ -113,7 +113,7 @@ public class DQAssessment {
 
 		mRes = new ArrayList<MeasurementResult>();
 		mRes.add(new MeasurementResult(this.getURI(), this.getDqDimensionList()
-				.toString(), 0.0, "Assessment Data"));
+				.toString(), -1.0, "Assessment Data"));
 
 		Model m = ModelFactory.createDefaultModel();
 		// Setting DQDimension parameters
