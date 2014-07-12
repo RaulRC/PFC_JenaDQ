@@ -10,14 +10,26 @@
 <link rel="stylesheet" href="Style.css" type="text/css" />
 </head>
 <body>
-	<h3>Properties from the URI</h3>
-	[
-	<s:property value="format" />
-	] -
+	<h3>Assessment</h3>
+	<br>
 	<a href="<s:property value="uri.toString()" />"> <s:property
 			value="uri.toString()" />
 	</a>
 	<br>
+	<br>
+	<s:form action="dqassessment" method="post"
+		enctype="multipart/form-data">
+		<s:textfield label="DQAssessment Identifier" name="identifier" />
+		<s:textfield label="Depth" name="depth" />
+		<s:file name="file" label="Use Rules File to upload" />
+		<s:file name="file" label="Contextual Rules File to upload" />
+		<s:submit name="dq" value="DQ Assessment" />
+
+	</s:form>
+	<br>
+	<hr />
+	<br>
+	<h3>Model Properties</h3>
 	<br>
 	<table border="1">
 		<s:iterator value="modelProperties" status="itStatus">
@@ -28,6 +40,11 @@
 			</tr>
 		</s:iterator>
 	</table>
+	<br>
+	<hr />
+	<br>
+	<h3>Query Model</h3>
+	<br>
 	<s:form action="queryModel">
 		<s:textarea label="Query" name="dataQuery" cols="100" rows="15" />
 		<s:submit name="Send" value="Query"></s:submit>
@@ -36,16 +53,6 @@
 	<br>
 
 	<hr />
-	<s:form action="dqassessment" method="post"
-		enctype="multipart/form-data">
-		<s:textfield label="DQAssessment Identifier" name="identifier" />
-		<s:textfield label="Depth" name="depth" />
-		<s:file name="file" label="Use Rules File to upload" />
-		<s:file name="file" label="Contextual Rules File to upload" />
-		<s:submit name="dq" value="Dq Assessment" />
 
-	</s:form>
-
-	<hr />
 </body>
 </html>

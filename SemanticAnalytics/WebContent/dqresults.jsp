@@ -31,6 +31,19 @@
 	</table>
 	<hr>
 	<br>
+
+	<b>Download results</b>
+	<s:url id="fileDownloadRDF" action="downloadRDF"></s:url>
+	<s:url id="fileDownloadN3" action="downloadN3"></s:url>
+	<table border="1">
+		<tr>
+			<td><s:a href="%{fileDownloadRDF}">RDF/XML</s:a></td>
+			<td><s:a href="%{fileDownloadN3}">N3</s:a></td>
+		</tr>
+	</table>
+	
+	<br>
+	<br>
 	<br>
 	<a href="index.jsp">Back</a>
 </body>

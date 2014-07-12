@@ -91,7 +91,12 @@ public class DqAssessment extends ActionSupport {
 			dqplan.executePlan();
 			
 			setMr(dqplan.getmRes());
-			// STORE MODEL TDB
+
+			
+			
+			// TODO STORE MODEL TDB
+			// Putting model in session for download file
+			session.put("resultModel", dqplan.getFinalModel());
 			// RETURN MODEL IN URI
 			// RETURN MODEL IN FILE FORMAT (maybe more actions)
 
