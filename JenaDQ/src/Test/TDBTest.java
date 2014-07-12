@@ -14,7 +14,7 @@ public class TDBTest {
 	public static void main (String [] args){
 		// Make a TDB-backed dataset
 		//		  String directory = "D:\\MyDatabases\\Dataset3" ;
-		String directory = "D:\\MyDatabases\\Dataset4"; 
+		String directory = "D:\\MyDatabases\\DatasetResult"; 
 		Dataset dataset = TDBFactory.createDataset(directory) ;
 
 		Iterator<String> list = dataset.listNames();
