@@ -12,24 +12,43 @@
 	<h3>Add an Assessment Plan</h3>
 	<br>
 	<br>
+	<br>
+	<hr />
 	<s:form action="assessmentPlanAdd" method="post"
 		enctype="multipart/form-data">
-		<s:textfield label="URI" name="uri" />
-		<s:textfield label="Endpoint" name="endpoint" />
-		<s:textfield label="DQAssessment Identifier" name="identifier" />
-		<s:textfield label="Depth" name="depth" />
+		<s:textfield label="URI" name="uri" value="" />
+		<s:textfield label="Endpoint" name="endpoint" value="" />
+		<s:textfield label="DQAssessment Identifier" name="identifier"
+			value="" />
+		<s:textfield label="Depth" name="depth" value="0" />
 		<s:file name="file" label="Use Rules File to upload" />
 		<s:file name="file" label="Contextual Rules File to upload" />
-		<s:checkbox name="completeness" fieldValue="true"
+		<s:checkbox name="completeness" fieldValue="true" value="true"
 			label="Completeness Dimension" />
-		<s:checkbox name="accessibility" fieldValue="true"
+		<s:checkbox name="accessibility" fieldValue="true" value="true"
 			label="Accessibility Dimension" />
 		<s:submit name="dq" value="Add Assessment" />
 
 	</s:form>
-
+	<br>
 	<s:form action="assessmentPlanExecute" method="post">
 		<s:submit name="dqplan" value="Execute DQ Assessment Plan" />
 	</s:form>
+
+	<br>
+	<br>
+	<table border="1">
+		<tr>
+			<td><a
+				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php?go=1"
+				target="_blank"> Pick a random URI [New Tab]</a></td>
+			<td><a
+				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php"
+				target="_blank"> By Richard cyganiak - Random-dbpedia</a></td>
+		</tr>
+	</table>
+	<br>
+	<br>
+
 </body>
 </html>
