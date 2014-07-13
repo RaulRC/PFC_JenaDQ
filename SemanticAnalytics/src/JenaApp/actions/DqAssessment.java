@@ -33,7 +33,9 @@ public class DqAssessment extends ActionSupport {
 	private List<File> file;
 	private File contextualrules;
 	private String identifier; 
-	
+	private boolean completeness; 
+	private boolean accessibility; 
+
 	public File getContextualRules() {
 		return contextualrules;
 	}
@@ -43,8 +45,8 @@ public class DqAssessment extends ActionSupport {
 	}
 
 	private String filename;
-	
-	
+
+
 	public String execute() {
 		Map<String, Object> session = ActionContext.getContext().getSession(); 
 		String ret=SUCCESS;
@@ -59,22 +61,22 @@ public class DqAssessment extends ActionSupport {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(in)); 
 		List<Rule> useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
 		System.out.println(useRules);
-		
+
 		BufferedReader brc = new BufferedReader(new InputStreamReader(inc)); 
 		List<Rule> contextualRules = Rule.parseRules(Rule.rulesParserFromReader(brc));
 		System.out.println(contextualRules);
-		
+
 		// ----------------------------------------------------------------
 		try{
 			setModel((Model)session.get("model")); 
 			setUri((String)session.get("URI"));
 			setEndpoint((String)session.get("ENDPOINT"));
 			dq.setDqmodel(getModel());
-			
+
 			// SETTING PLAN - DQAPLAN
 			DQAssessmentPlan dqplan = new DQAssessmentPlan();
 			LinkedList<DQAssessment> dqplanlist = new LinkedList<DQAssessment>();
@@ -82,18 +84,24 @@ public class DqAssessment extends ActionSupport {
 
 			// SETTING LIST OF DIMENSIONS I'm GOING TO ASSESS
 			LinkedList<DQDimension> dqdimlist = new LinkedList<DQDimension>();
-			dqdimlist.add((DQDimension) new _dimAccessibility());
-			dqdimlist.add((DQDimension) new _dimCompleteness()); 
+
+			// Check-box check
+			if(isAccessibility())
+				dqdimlist.add((DQDimension) new _dimAccessibility());
+			if(isCompleteness())
+				dqdimlist.add((DQDimension) new _dimCompleteness()); 
+
+			
 
 			dqplan.addDQAssessment(new DQAssessment(dqdimlist, getUri(), getEndpoint(),
 					contextualRules, useRules, getDepth(), getIdentifier()));
-			
+
 			dqplan.executePlan();
-			
+
 			setMr(dqplan.getmRes());
 
-			
-			
+
+
 			// TODO STORE MODEL TDB
 			// Putting model in session for download file
 			session.put("resultModel", dqplan.getFinalModel());
@@ -170,6 +178,22 @@ public class DqAssessment extends ActionSupport {
 
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
+	}
+
+	public boolean isCompleteness() {
+		return completeness;
+	}
+
+	public void setCompleteness(boolean completeness) {
+		this.completeness = completeness;
+	}
+
+	public boolean isAccessibility() {
+		return accessibility;
+	}
+
+	public void setAccessibility(boolean accessibility) {
+		this.accessibility = accessibility;
 	}
 
 }
