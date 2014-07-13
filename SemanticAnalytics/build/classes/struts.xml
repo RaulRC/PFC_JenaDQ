@@ -45,6 +45,7 @@
 				<param name="contentDisposition">attachment;filename="assessmentResults.rdf"</param>
 				<param name="bufferSize">1024</param>
 			</result>
+			<result name="error">Error.jsp</result>
 		</action>
 		<action name="downloadN3" class="JenaApp.actions.download"
 			method="n3">
@@ -54,8 +55,29 @@
 				<param name="contentDisposition">attachment;filename="assessmentResults.n3"</param>
 				<param name="bufferSize">1024</param>
 			</result>
+			<result name="error">Error.jsp</result>
 		</action>
-		
+		<action name="assessmentPlanInit" class="JenaApp.actions.assessmentPlan"
+			method="init">
+			<result name="success">
+				assessmentPlan.jsp
+			</result>
+			<result name="error">Error.jsp</result>
+		</action>
+		<action name="assessmentPlanAdd" class="JenaApp.actions.assessmentPlan"
+			method="addAssessment">
+			<result name="success">
+				assessmentPlan.jsp
+			</result>
+			<result name="error">Error.jsp</result>
+		</action>
+		<action name="assessmentPlanExecute" class="JenaApp.actions.assessmentPlan"
+			method="executePlan">
+			<result name="success">
+				dqresults.jsp
+			</result>
+			<result name="error">Error.jsp</result>
+		</action>
 
 	</package>
 </struts>

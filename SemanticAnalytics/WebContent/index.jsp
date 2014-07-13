@@ -39,16 +39,31 @@
 	<br>
 	<br>
 	<p>
-		<b>Use an URI and ENDPOINT</b> 
+		<b>Use an URI and ENDPOINT (single URI Assessment)</b>
 	</p>
-	<s:form action="uriEndpoint" method="post" enctype="multipart/form-data">
+	<s:form action="uriEndpoint" method="post"
+		enctype="multipart/form-data">
 		<s:textfield name="uri" label="Put your URI here " />
 		<s:textfield name="endpoint" label="Put your ENDPOINT here " />
 		<s:submit />
 	</s:form>
 	<br>
 	<br>
-	
+	<p>
+		<b>Create an Assessment Plan (multiple URI Assessment)</b>
+	</p>
+
+	<s:url id="initAssessmentPlan" action="assessmentPlanInit"></s:url>
+
+
+
+	<table>
+		<tr>
+			<td><s:a href="%{initAssessmentPlan}">Multiple URI - Multiple
+					Dimension Assessment</s:a></td>
+		</tr>
+
+	</table>
 	<br>
 	<br>
 	<table border="1">
@@ -63,7 +78,7 @@
 	</table>
 	<br>
 	<br>
-	
+
 	<p>
 		<b>Type a R expression</b>:
 	</p>
