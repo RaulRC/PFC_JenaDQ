@@ -139,7 +139,6 @@ public class assessmentPlan extends ActionSupport{
 			in = new FileInputStream(file.get(0));
 			inc = new FileInputStream(file.get(1)); 
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -187,7 +186,7 @@ public class assessmentPlan extends ActionSupport{
 		setMr(dqplan.getmRes());
 
 
-		// TODO STORE MODEL TDB
+		//  STORE MODEL TDB
 		//		String directory = "D:\\WebAppDatabases\\DatasetResult"; 
 		//		Dataset dataset = TDBFactory.createDataset(directory); 
 		//		Model tdbmodel = dataset.getDefaultModel();
@@ -202,7 +201,6 @@ public class assessmentPlan extends ActionSupport{
 		try {
 			tdb(System.currentTimeMillis()+"");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return SUCCESS; 

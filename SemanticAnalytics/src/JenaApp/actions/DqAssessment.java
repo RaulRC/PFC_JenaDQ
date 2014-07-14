@@ -110,18 +110,13 @@ public class DqAssessment extends ActionSupport {
 
 			setMr(dqplan.getmRes());
 
-
-
-			// TODO STORE MODEL TDB
-
 			// Putting model in session for download file
 			session.put("resultModel", dqplan.getFinalModel());
-			// RETURN MODEL IN URI
-			// RETURN MODEL IN FILE FORMAT (maybe more actions)
+			
+			// Storing in TDB
 			try {
 				tdb(System.currentTimeMillis()+"");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
