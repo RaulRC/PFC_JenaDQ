@@ -2,6 +2,8 @@ package Test;
 
 import java.util.Iterator;
 
+import DQModel.DQModel;
+
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -24,18 +26,18 @@ public class TDBTest {
 		}
 		
 		// THIS WORKS!
-//		Model tdbmodel = dataset.getDefaultModel();
-//		Model m = dataset.getNamedModel("Led-Zeppelin");
-//
-//		m.add((new DQModel("http://dbpedia.org/data/Led_Zeppelin.n3")).getModel());
-//		
-//		dataset.begin(ReadWrite.WRITE);
-//		
-//		tdbmodel.add(m); 
+		Model tdbmodel = dataset.getDefaultModel();
+		Model m = dataset.getNamedModel("http://localhost:3030/db/Led-Zeppelin");
+
+		m.add((new DQModel("http://dbpedia.org/data/Led_Zeppelin.n3")).getModel());
+		
+		dataset.begin(ReadWrite.WRITE);
+		
+		tdbmodel.add(m); 
 //		
 //// HAVE TO USE TRANSACTIONS
 //		dataset.end() ;
-		Model m = dataset.getNamedModel("Led-Zeppelin");
-		m.write(System.out);
+		Model m2 = dataset.getNamedModel("Led-Zeppelin");
+		m2.write(System.out);
 	}
 }

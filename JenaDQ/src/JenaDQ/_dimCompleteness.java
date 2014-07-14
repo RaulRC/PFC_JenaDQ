@@ -100,6 +100,8 @@ public class _dimCompleteness extends DQDimension {
 			if (!rdfn.isURIResource())
 				countNoUri++;
 		}
+		if(total == 0)
+			total = -1; 
 		result = this.calculateDQMeasure(countNoUri, total);
 		mRes.setMResult(result);
 		// System.out.println("RESULT: " + countNoUri+"/"+total +" = " +
