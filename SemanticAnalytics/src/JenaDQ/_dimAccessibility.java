@@ -122,6 +122,9 @@ public class _dimAccessibility extends DQDimension {
 				// Check if is a file or something
 			}
 		}
+		if(total == 0)
+			total = -1; 
+		
 		result = this.calculateDQMeasure(countNoUri, total);
 		System.out.println(total + " ---> " + result);
 

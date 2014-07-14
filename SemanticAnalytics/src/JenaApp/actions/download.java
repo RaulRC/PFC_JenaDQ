@@ -28,25 +28,7 @@ public class download extends ActionSupport {
 		return fileInputStream;
 	}
 
-	public String tdb() throws Exception {
 
-		String directory = "D:\\MyDatabases\\DatasetResult"; 
-		Dataset dataset = TDBFactory.createDataset(directory) ;
-		Map<String, Object> session = ActionContext.getContext().getSession();
-		Model resultModel = (Model) session.get("resultModel");
-
-		Model tdbmodel = dataset.getDefaultModel();
-		Model m = dataset.getNamedModel("results");
-
-		m.add(resultModel);
-		dataset.begin(ReadWrite.WRITE);
-		tdbmodel.add(m); 
-		Model m3 = dataset.getNamedModel("results");
-		m3.write(System.out);
-		dataset.end() ;
-
-		return SUCCESS;
-	}
 
 	public String rdf() throws Exception {
 		String fileName = createFile("rdf");
@@ -70,8 +52,9 @@ public class download extends ActionSupport {
 		else if (format.equals("n3"))
 			formatFile = "N3";
 
+		String currentTime = System.currentTimeMillis() +"";
 		String fileName = "D:\\temp_files_assessment\\"
-				+ System.currentTimeMillis() + "_assessmentResults." + format;
+				+ currentTime + "_assessmentResults." + format;
 
 		try {
 			FileWriter out = new FileWriter(fileName);
@@ -80,12 +63,7 @@ public class download extends ActionSupport {
 		} catch (IOException closeException) {
 			// ignore
 		}
-		try {
-//			tdb();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+
 		return fileName;
 	}
 }

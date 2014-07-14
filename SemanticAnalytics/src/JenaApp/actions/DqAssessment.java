@@ -16,9 +16,12 @@ import Dominion.Operation;
 import JenaDQ.*; 
 import DQModel.*; 
 
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.tdb.TDBFactory;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -35,6 +38,15 @@ public class DqAssessment extends ActionSupport {
 	private String identifier; 
 	private boolean completeness; 
 	private boolean accessibility; 
+	private String uriAssessment; 
+	
+	public String getUriAssessment() {
+		return uriAssessment;
+	}
+
+	public void setUriAssessment(String uriAssessment) {
+		this.uriAssessment = uriAssessment;
+	}
 
 	public File getContextualRules() {
 		return contextualrules;
@@ -101,11 +113,17 @@ public class DqAssessment extends ActionSupport {
 
 
 			// TODO STORE MODEL TDB
+
 			// Putting model in session for download file
 			session.put("resultModel", dqplan.getFinalModel());
 			// RETURN MODEL IN URI
 			// RETURN MODEL IN FILE FORMAT (maybe more actions)
-
+			try {
+				tdb(System.currentTimeMillis()+"");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		catch(Exception e){
 			//TODO set correct exception
@@ -113,7 +131,30 @@ public class DqAssessment extends ActionSupport {
 		}
 		return ret; 
 	}
+	public void tdb(String currentTime) throws Exception {
 
+		String directory = "D:\\WebAppDatabases\\DatasetResult"; 
+		Dataset dataset = TDBFactory.createDataset(directory) ;
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		uriAssessment = "http://localhost:3030/db/AssessmentPlan_"+currentTime;
+		Model resultModel = (Model) session.get("resultModel");
+
+		// Using transactions
+		dataset.begin(ReadWrite.WRITE);
+		try {
+			Model tdbmodel = dataset.getDefaultModel();
+			Model m = dataset.getNamedModel(uriAssessment);
+			m.add(resultModel);
+
+			tdbmodel.add(m);
+			dataset.commit() ;
+		} finally { 
+			dataset.end() ; 
+		}
+
+		System.out.println(uriAssessment);
+
+	}
 	public ArrayList<MeasurementResult> getMr() {
 		return mr;
 	}

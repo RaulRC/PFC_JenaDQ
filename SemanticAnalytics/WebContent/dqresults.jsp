@@ -31,7 +31,8 @@
 	</table>
 	<hr>
 	<br>
-
+	<p>URI for results (fuseki Server): <s:property value="uriAssessment.toString()" /> </p>
+<br>
 	<b>Download results</b>
 	<s:url id="fileDownloadRDF" action="downloadRDF"></s:url>
 	<s:url id="fileDownloadN3" action="downloadN3"></s:url>

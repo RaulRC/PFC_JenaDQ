@@ -19,8 +19,11 @@ import JenaDQ.MeasurementResult;
 import JenaDQ._dimAccessibility;
 import JenaDQ._dimCompleteness;
 
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.tdb.TDBFactory;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -30,9 +33,9 @@ public class assessmentPlan extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private ArrayList<MeasurementResult> mr; 
-	
+
 	private int depth; 
 	private String endpoint; 
 	private String uri; 
@@ -41,7 +44,16 @@ public class assessmentPlan extends ActionSupport{
 	private String identifier; 
 	private boolean completeness; 
 	private boolean accessibility; 
+	private String uriAssessment; 
 
+
+	public String getUriAssessment() {
+		return uriAssessment;
+	}
+
+	public void setUriAssessment(String uriAssessment) {
+		this.uriAssessment = uriAssessment;
+	}
 
 	public ArrayList<MeasurementResult> getMr() {
 		return mr;
@@ -106,12 +118,12 @@ public class assessmentPlan extends ActionSupport{
 		DQAssessmentPlan dqplan = new DQAssessmentPlan(); // TODO Atomicity
 		LinkedList<DQAssessment> dqplanlist = new LinkedList<DQAssessment>();// TODO
 		dqplan.setAssessmentList(dqplanlist);// TODO
-		
+
 		session.put("assessmentPlan", dqplan); 
 
 		return SUCCESS; 
 	}
-	
+
 	/**
 	 * Add new assessment
 	 * @return
@@ -163,7 +175,7 @@ public class assessmentPlan extends ActionSupport{
 		}
 		return ret; 
 	}
-	
+
 	/**
 	 * Execute plan
 	 * @return
@@ -174,11 +186,51 @@ public class assessmentPlan extends ActionSupport{
 		dqplan.executePlan();
 		setMr(dqplan.getmRes());
 
+
 		// TODO STORE MODEL TDB
+		//		String directory = "D:\\WebAppDatabases\\DatasetResult"; 
+		//		Dataset dataset = TDBFactory.createDataset(directory); 
+		//		Model tdbmodel = dataset.getDefaultModel();
+		//		Model m = dataset.getNamedModel("http://localhost:3030/db/" + "SOMEIDENTIFIER");
+		//		m.add(dqplan.getFinalModel()); 
+		//		dataset.begin(ReadWrite.WRITE);
+		//		tdbmodel.add(m); 
+		//		dataset.end();
+
 		// Putting model in session for download file
 		session.put("resultModel", dqplan.getFinalModel());
-
+		try {
+			tdb(System.currentTimeMillis()+"");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return SUCCESS; 
+	}
+
+	public void tdb(String currentTime) throws Exception {
+
+		String directory = "D:\\WebAppDatabases\\DatasetResult"; 
+		Dataset dataset = TDBFactory.createDataset(directory) ;
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		uriAssessment = "http://localhost:3030/db/AssessmentPlan_"+currentTime;
+		Model resultModel = (Model) session.get("resultModel");
+
+		// Using transactions
+		dataset.begin(ReadWrite.WRITE);
+		try {
+			Model tdbmodel = dataset.getDefaultModel();
+			Model m = dataset.getNamedModel(uriAssessment);
+			m.add(resultModel);
+
+			tdbmodel.add(m);
+			dataset.commit() ;
+		} finally { 
+			dataset.end() ; 
+		}
+
+		System.out.println(uriAssessment);
+
 	}
 
 	public int getDepth() {
