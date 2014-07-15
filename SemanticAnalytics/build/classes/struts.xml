@@ -29,6 +29,7 @@
 		<action name="dqassessment" class="JenaApp.actions.DqAssessment">
 			<result name="success">dqresults.jsp</result>
 			<result name="error">Error.jsp</result>
+			<result name="input">uriData.jsp</result>
 		</action>
 		<action name="graph" class="R.actions.Calculations" method="graph">
 			<result name="success" type="stream">
@@ -58,14 +59,14 @@
 			</result>
 			<result name="error">Error.jsp</result>
 		</action>
-		<action name="assessmentPlanInit" class="JenaApp.actions.assessmentPlanInit">
+		<action name="assessmentPlanInit" class="JenaApp.actions.assessmentPlanInit"
+			method="init">
 			<result name="success">
 				assessmentPlan.jsp
 			</result>
 			<result name="error">Error.jsp</result>
 		</action>
-		<action name="assessmentPlanAdd" class="JenaApp.actions.assessmentPlan"
-			method="addAssessment">
+		<action name="assessmentPlanAdd" class="JenaApp.actions.assessmentPlanAdd">
 			<result name="success">
 				assessmentPlan.jsp
 			</result>

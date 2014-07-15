@@ -27,7 +27,7 @@ import com.hp.hpl.jena.tdb.TDBFactory;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class assessmentPlan extends ActionSupport {
+public class assessmentPlanAdd extends ActionSupport {
 
 	/**
 	 * 
@@ -45,6 +45,8 @@ public class assessmentPlan extends ActionSupport {
 	private boolean completeness;
 	private boolean accessibility;
 	private String uriAssessment;
+	private Exception e; 
+	
 
 	public String getUriAssessment() {
 		return uriAssessment;
@@ -115,7 +117,7 @@ public class assessmentPlan extends ActionSupport {
 	 * 
 	 * @return
 	 */
-	public String addAssessment() {
+	public String execute() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		String ret = SUCCESS;
 
@@ -127,23 +129,25 @@ public class assessmentPlan extends ActionSupport {
 
 		try {
 			inc = new FileInputStream(file.get(0));
-			in = new FileInputStream(file.get(1));
+			if (isCompleteness())
+				in = new FileInputStream(file.get(1));
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
 
 		// We need use rules just for completeness dim
-		if (isCompleteness()) {
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
-			// System.out.println(useRules);
-		}
-
 		if (getFile().size() > 0) {
 			BufferedReader brc = new BufferedReader(new InputStreamReader(inc));
 			contextualRules = Rule.parseRules(Rule.rulesParserFromReader(brc));
 			// System.out.println(contextualRules);
 		}
+		if (isCompleteness()) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
+			// System.out.println(useRules);
+		} else
+			setDepth(0);
+
 		// ----------------------------------------------------------------
 		try {
 
@@ -159,12 +163,15 @@ public class assessmentPlan extends ActionSupport {
 			if (isCompleteness())
 				dqdimlist.add((DQDimension) new _dimCompleteness());
 
-			dqplan.addDQAssessment(new DQAssessment(dqdimlist, getUri(),
+			DQAssessment dqas = new DQAssessment(dqdimlist, getUri(),
 					getEndpoint(), contextualRules, useRules, getDepth(),
-					getIdentifier()));
+					getIdentifier());
+
+			dqplan.addDQAssessment(dqas);
 
 		} catch (Exception e) {
 			// TODO set correct exception
+			e.printStackTrace();
 			ret = ERROR;
 		}
 		return ret;
@@ -193,15 +200,11 @@ public class assessmentPlan extends ActionSupport {
 			addFieldError("completeness", getText("identifier.required"));
 			flag = true;
 		}
-		if (getFile() != null && isCompleteness()) {
+
+		if (getFile() == null) {
 			addFieldError("file", getText("file.required"));
 			flag = true;
-		}
-		if (getFile() != null) {
-			addFieldError("file", getText("file.required"));
-			flag = true;
-		}
-		if (getFile() != null && !isAccessibility()) {
+		} else if (getFile().size() == 1 && !isAccessibility()) {
 			addFieldError("file", getText("file.required"));
 			flag = true;
 		}
@@ -209,8 +212,6 @@ public class assessmentPlan extends ActionSupport {
 		if (flag == true)
 			addActionError("Input Error");
 	}
-
-
 
 	public int getDepth() {
 		return depth;
@@ -226,5 +227,13 @@ public class assessmentPlan extends ActionSupport {
 
 	public void setEndpoint(String endpoint) {
 		this.endpoint = endpoint;
+	}
+
+	public Exception getE() {
+		return e;
+	}
+
+	public void setE(Exception e) {
+		this.e = e;
 	}
 }

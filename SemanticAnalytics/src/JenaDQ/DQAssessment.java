@@ -161,7 +161,9 @@ public class DQAssessment {
 	}
 
 	public String toString() {
-		return "DQAssessment: \n" + this.URI + "\n"
+		return "DQAssessment: \n" + this.URI + "\n" +
+				this.endpoint + "\n"+
+				this.depth + "\n"
 				+ dqDimensionList.toString();
 	}
 

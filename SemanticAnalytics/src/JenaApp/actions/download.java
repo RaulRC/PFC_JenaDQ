@@ -11,6 +11,7 @@ import java.util.Map;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -23,6 +24,7 @@ public class download extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private InputStream fileInputStream;
+	private Exception e; 
 
 	public InputStream getFileInputStream() {
 		return fileInputStream;
@@ -42,7 +44,7 @@ public class download extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String createFile(String format) {
+	public String createFile(String format) throws IOException {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Model m = (Model) session.get("resultModel");
 
@@ -56,14 +58,34 @@ public class download extends ActionSupport {
 		String fileName = "D:\\temp_files_assessment\\"
 				+ currentTime + "_assessmentResults." + format;
 
+		FileWriter out =null;
 		try {
-			FileWriter out = new FileWriter(fileName);
-			m.write(out, formatFile);
-			out.close();
+			out = new FileWriter(fileName);
+			if(m!=null)
+				m.write(out, formatFile);
+			else{
+				m = ModelFactory.createDefaultModel();
+				m.write(out, formatFile);
+			}
 		} catch (IOException closeException) {
 			// ignore
 		}
+		finally{
+			out.close();
+		}
 
 		return fileName;
+	}
+
+
+
+	public Exception getE() {
+		return e;
+	}
+
+
+
+	public void setE(Exception e) {
+		this.e = e;
 	}
 }

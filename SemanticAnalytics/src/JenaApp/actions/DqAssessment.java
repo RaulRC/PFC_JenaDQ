@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import Dominion.Operation;
-import JenaDQ.*; 
-import DQModel.*; 
+import JenaDQ.*;
+import DQModel.*;
 
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
@@ -28,18 +28,19 @@ import com.opensymphony.xwork2.ActionSupport;
 public class DqAssessment extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
-	private ArrayList<MeasurementResult> mr; 
-	private Model model; 
-	private int depth; 
-	private String endpoint; 
-	private String uri; 
+	private ArrayList<MeasurementResult> mr;
+	private Model model;
+	private int depth;
+	private String endpoint;
+	private String uri;
 	private List<File> file;
 	private File contextualrules;
-	private String identifier; 
-	private boolean completeness; 
-	private boolean accessibility; 
-	private String uriAssessment; 
-	
+	private String identifier;
+	private boolean completeness;
+	private boolean accessibility;
+	private String uriAssessment;
+	private Exception e; 
+
 	public String getUriAssessment() {
 		return uriAssessment;
 	}
@@ -58,35 +59,45 @@ public class DqAssessment extends ActionSupport {
 
 	private String filename;
 
-
 	public String execute() {
-		Map<String, Object> session = ActionContext.getContext().getSession(); 
-		String ret=SUCCESS;
-		DQModel dq = new DQModel(); 
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		String ret = SUCCESS;
+		DQModel dq = new DQModel();
 		// TODO --------------------------------------------------------
-		InputStream in=null;
-		InputStream inc=null;
+		InputStream in = null;
+		InputStream inc = null;
+		List<Rule> useRules = null;
+		List<Rule> contextualRules = null; 
+
 		try {
-			in = new FileInputStream(file.get(0));
-			inc = new FileInputStream(file.get(1)); 
+			inc = new FileInputStream(file.get(0));
+			if(isCompleteness())
+				in = new FileInputStream(file.get(1));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(in)); 
-		List<Rule> useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
-		System.out.println(useRules);
+		if (getFile().size() > 0) {
+			BufferedReader brc = new BufferedReader(new InputStreamReader(inc));
+			contextualRules = Rule.parseRules(Rule
+					.rulesParserFromReader(brc));
+		}
+		if(isCompleteness()){
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
+			//			System.out.println(useRules);
+		}
+		else
+			setDepth(0); 
 
-		BufferedReader brc = new BufferedReader(new InputStreamReader(inc)); 
-		List<Rule> contextualRules = Rule.parseRules(Rule.rulesParserFromReader(brc));
-		System.out.println(contextualRules);
+		//		System.out.println(contextualRules);
 
 		// ----------------------------------------------------------------
-		try{
-			setModel((Model)session.get("model")); 
-			setUri((String)session.get("URI"));
-			setEndpoint((String)session.get("ENDPOINT"));
+		try {
+			setModel((Model) session.get("model"));
+			setUri((String) session.get("URI"));
+			setEndpoint((String) session.get("ENDPOINT"));
 			dq.setDqmodel(getModel());
 
 			// SETTING PLAN - DQAPLAN
@@ -98,13 +109,14 @@ public class DqAssessment extends ActionSupport {
 			LinkedList<DQDimension> dqdimlist = new LinkedList<DQDimension>();
 
 			// Check-box check
-			if(isAccessibility())
+			if (isAccessibility())
 				dqdimlist.add((DQDimension) new _dimAccessibility());
-			if(isCompleteness())
-				dqdimlist.add((DQDimension) new _dimCompleteness()); 
+			if (isCompleteness())
+				dqdimlist.add((DQDimension) new _dimCompleteness());
 
-			dqplan.addDQAssessment(new DQAssessment(dqdimlist, getUri(), getEndpoint(),
-					contextualRules, useRules, getDepth(), getIdentifier()));
+			dqplan.addDQAssessment(new DQAssessment(dqdimlist, getUri(),
+					getEndpoint(), contextualRules, useRules, getDepth(),
+					getIdentifier()));
 
 			dqplan.executePlan();
 
@@ -112,26 +124,27 @@ public class DqAssessment extends ActionSupport {
 
 			// Putting model in session for download file
 			session.put("resultModel", dqplan.getFinalModel());
-			
+
 			// Storing in TDB
 			try {
-				tdb(System.currentTimeMillis()+"");
+				tdb(System.currentTimeMillis() + "");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO set correct exception
+			ret = ERROR;
 		}
-		catch(Exception e){
-			//TODO set correct exception
-			ret=ERROR;
-		}
-		return ret; 
+		return ret;
 	}
+
 	public void tdb(String currentTime) throws Exception {
 
-		String directory = "D:\\WebAppDatabases\\DatasetResult"; 
-		Dataset dataset = TDBFactory.createDataset(directory) ;
+		String directory = "D:\\WebAppDatabases\\DatasetResult";
+		Dataset dataset = TDBFactory.createDataset(directory);
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		uriAssessment = "http://localhost:3030/db/AssessmentPlan_"+currentTime;
+		uriAssessment = "http://localhost:3030/db/AssessmentPlan_"
+				+ currentTime;
 		Model resultModel = (Model) session.get("resultModel");
 
 		// Using transactions
@@ -142,14 +155,43 @@ public class DqAssessment extends ActionSupport {
 			m.add(resultModel);
 
 			tdbmodel.add(m);
-			dataset.commit() ;
-		} finally { 
-			dataset.end() ; 
+			dataset.commit();
+		} finally {
+			dataset.end();
 		}
 
 		System.out.println(uriAssessment);
 
 	}
+
+	public void validate() {
+		boolean flag = false;
+
+		if (isCompleteness() && getDepth() < 1) {
+			addFieldError("depth", getText("depth.required"));
+			flag = true;
+		}
+		if (!isCompleteness() && !isAccessibility()) {
+			addFieldError("completeness", getText("dqdimension.required"));
+			flag = true;
+		}
+		if (getIdentifier().length() == 0) {
+			addFieldError("completeness", getText("identifier.required"));
+			flag = true;
+		}
+
+		if (getFile() == null) {
+			addFieldError("file", getText("file.required"));
+			flag = true;
+		} else if (getFile().size() == 1 && !isAccessibility()) {
+			addFieldError("file", getText("file.required"));
+			flag = true;
+		}
+
+		if (flag == true)
+			addActionError("Input Error");
+	}
+
 	public ArrayList<MeasurementResult> getMr() {
 		return mr;
 	}
@@ -228,6 +270,14 @@ public class DqAssessment extends ActionSupport {
 
 	public void setAccessibility(boolean accessibility) {
 		this.accessibility = accessibility;
+	}
+
+	public Exception getE() {
+		return e;
+	}
+
+	public void setE(Exception e) {
+		this.e = e;
 	}
 
 }

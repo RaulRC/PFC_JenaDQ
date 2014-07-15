@@ -22,6 +22,7 @@ public class queryModel extends ActionSupport {
 	private Model model; 
 	private String queryResult;
 	private List<QuerySolution> qs ;
+	private Exception e; 
 	
 	public List<QuerySolution> getQs() {
 		return qs;
@@ -64,6 +65,12 @@ public class queryModel extends ActionSupport {
 			ret=ERROR;
 		}
 		return ret; 
+	}
+	public Exception getE() {
+		return e;
+	}
+	public void setE(Exception e) {
+		this.e = e;
 	}
 
 }

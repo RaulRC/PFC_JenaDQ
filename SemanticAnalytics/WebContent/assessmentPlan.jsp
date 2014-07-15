@@ -25,7 +25,7 @@
 		<s:textfield label="Endpoint" name="endpoint" value="" />
 		<s:textfield label="DQAssessment Identifier" name="identifier"
 			value="" />
-		<s:textfield label="Depth" name="depth" value="0" />
+		<s:textfield label="Depth" name="depth" value="1" />
 		<s:file name="file" label="Contextual Rules File to upload" />
 		<s:file name="file" label="Use Rules File to upload" />
 		<s:checkbox name="completeness" fieldValue="true" value="true"

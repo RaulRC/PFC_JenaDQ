@@ -20,6 +20,7 @@ public class getURI extends ActionSupport {
 	private LinkedList<Property> modelProperties; 
 	private Model model; 
 	private String format; 
+	private Exception e; 
 	
 	public String getFormat() {
 		return format;
@@ -71,5 +72,13 @@ public class getURI extends ActionSupport {
 			ret=ERROR;
 		}
 		return ret; 
+	}
+
+	public Exception getE() {
+		return e;
+	}
+
+	public void setE(Exception e) {
+		this.e = e;
 	}
 }

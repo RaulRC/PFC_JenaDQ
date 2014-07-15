@@ -21,6 +21,15 @@ public class assessmentPlanExecute extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<MeasurementResult> mr;
 	private String uriAssessment;
+	private Exception e; 
+
+	public String getUriAssessment() {
+		return uriAssessment;
+	}
+
+	public void setUriAssessment(String uriAssessment) {
+		this.uriAssessment = uriAssessment;
+	}
 
 	/**
 	 * Execute plan
@@ -41,6 +50,7 @@ public class assessmentPlanExecute extends ActionSupport {
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			setMr(new ArrayList<MeasurementResult>());
 		}
 
@@ -92,5 +102,13 @@ public class assessmentPlanExecute extends ActionSupport {
 
 	public void setMr(ArrayList<MeasurementResult> mr) {
 		this.mr = mr;
+	}
+
+	public Exception getE() {
+		return e;
+	}
+
+	public void setE(Exception e) {
+		this.e = e;
 	}
 }

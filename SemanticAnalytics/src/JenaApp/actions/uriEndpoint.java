@@ -29,6 +29,7 @@ public class uriEndpoint extends ActionSupport {
 	private LinkedList<Property> modelProperties; 
 	private Model model; 
 	private String endpoint; 
+	private Exception e; 
 
 
 
@@ -95,5 +96,13 @@ public class uriEndpoint extends ActionSupport {
 
 	public void setEndpoint(String endpoint) {
 		this.endpoint = endpoint;
+	}
+
+	public Exception getE() {
+		return e;
+	}
+
+	public void setE(Exception e) {
+		this.e = e;
 	}
 }
