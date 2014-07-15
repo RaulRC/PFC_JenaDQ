@@ -12,6 +12,7 @@
 		<action name="uriEndpoint" class="JenaApp.actions.uriEndpoint">
 			<result name="success">uriData.jsp</result>
 			<result name="error">Error.jsp</result>
+			<result name="input">index.jsp</result>
 		</action>
 		<action name="queryModel" class="JenaApp.actions.queryModel">
 			<result name="success">QueryResults.jsp</result>
@@ -57,8 +58,7 @@
 			</result>
 			<result name="error">Error.jsp</result>
 		</action>
-		<action name="assessmentPlanInit" class="JenaApp.actions.assessmentPlan"
-			method="init">
+		<action name="assessmentPlanInit" class="JenaApp.actions.assessmentPlanInit">
 			<result name="success">
 				assessmentPlan.jsp
 			</result>
@@ -70,9 +70,9 @@
 				assessmentPlan.jsp
 			</result>
 			<result name="error">Error.jsp</result>
+			<result name="input">assessmentPlan.jsp</result>
 		</action>
-		<action name="assessmentPlanExecute" class="JenaApp.actions.assessmentPlan"
-			method="executePlan">
+		<action name="assessmentPlanExecute" class="JenaApp.actions.assessmentPlanExecute">
 			<result name="success">
 				dqresults.jsp
 			</result>

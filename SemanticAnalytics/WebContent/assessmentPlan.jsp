@@ -13,6 +13,11 @@
 	<br>
 	<br>
 	<br>
+	<s:if test="hasActionErrors()">
+		<div class="welcome">
+			<s:actionmessage />
+		</div>
+	</s:if>
 	<hr />
 	<s:form action="assessmentPlanAdd" method="post"
 		enctype="multipart/form-data">
@@ -21,8 +26,8 @@
 		<s:textfield label="DQAssessment Identifier" name="identifier"
 			value="" />
 		<s:textfield label="Depth" name="depth" value="0" />
-		<s:file name="file" label="Use Rules File to upload" />
 		<s:file name="file" label="Contextual Rules File to upload" />
+		<s:file name="file" label="Use Rules File to upload" />
 		<s:checkbox name="completeness" fieldValue="true" value="true"
 			label="Completeness Dimension" />
 		<s:checkbox name="accessibility" fieldValue="true" value="true"

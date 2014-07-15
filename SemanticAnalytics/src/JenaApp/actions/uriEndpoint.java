@@ -30,7 +30,7 @@ public class uriEndpoint extends ActionSupport {
 	private Model model; 
 	private String endpoint; 
 
-	
+
 
 	public Model getModel() {
 		return model;
@@ -56,6 +56,7 @@ public class uriEndpoint extends ActionSupport {
 		this.uri = uri;
 	}
 
+
 	public String execute() {
 		String ret=SUCCESS;
 		Map<String, Object> session = ActionContext.getContext().getSession(); 
@@ -64,9 +65,9 @@ public class uriEndpoint extends ActionSupport {
 		try{
 			DQModel dq;
 			dq = new DQModel(this.endpoint, this.uri); 
-//			setFormat(dq.getFormat()); 
+			//			setFormat(dq.getFormat()); 
 			setModel(dq.getModel()); 
-//			dq.showModelWithFormat(getFormat());
+			//			dq.showModelWithFormat(getFormat());
 			Operation oper = new Operation(dq.getModel());
 			setModelProperties(oper.getAllProperties());
 			session.put("model", dq.getModel()); 
@@ -78,6 +79,14 @@ public class uriEndpoint extends ActionSupport {
 			ret=ERROR;
 		}
 		return ret; 
+	}
+
+	// TODO Adding validation
+	public void validate(){
+		if(getEndpoint().length()==0)
+			addFieldError("endpoint", getText("endpoint.required") );
+		if(getUri().length()==0)
+			addFieldError("uri", getText("uri.required") );
 	}
 
 	public String getEndpoint() {
