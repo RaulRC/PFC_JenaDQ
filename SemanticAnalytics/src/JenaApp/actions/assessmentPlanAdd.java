@@ -177,7 +177,6 @@ public class assessmentPlanAdd extends ActionSupport {
 		return ret;
 	}
 
-	// TODO Adding validation
 	public void validate() {
 		boolean flag = false;
 		if (getEndpoint().length() == 0) {
@@ -197,7 +196,7 @@ public class assessmentPlanAdd extends ActionSupport {
 			flag = true;
 		}
 		if (getIdentifier().length() == 0) {
-			addFieldError("completeness", getText("identifier.required"));
+			addFieldError("identifier", getText("identifier.required"));
 			flag = true;
 		}
 

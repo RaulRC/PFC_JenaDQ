@@ -1,8 +1,14 @@
 package DQModel;
 
 import java.io.InputStream;
+import java.util.List;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.SimpleSelector;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 public class DQModel {
 	private Model model; 
@@ -77,7 +83,31 @@ public class DQModel {
 	// COMPARISON
 	
 	public Model compareModelWith(Model m){
-		return this.getModel().difference(m); 
+		Model result = ModelFactory.createDefaultModel();
+		StmtIterator modelA = this.getModel().listStatements(); 
+		
+		Statement sta=null; 
+		while (modelA.hasNext()){
+			sta = modelA.next(); 
+			if (!m.listStatements(new SimpleSelector(null, sta.getPredicate(), sta.getObject())).hasNext())
+				result.add(sta); 
+		}
+
+		return result; 
+	}
+	// COMPARISON
+	public Model compareModelWith(DQModel m){
+		Model result = ModelFactory.createDefaultModel();
+		StmtIterator modelA = this.getModel().listStatements(); 
+		
+		Statement sta=null; 
+		while (modelA.hasNext()){
+			sta = modelA.next(); 
+			if (!m.getModel().listStatements(new SimpleSelector(null, sta.getPredicate(), sta.getObject())).hasNext())
+				result.add(sta); 
+		}
+
+		return result; 
 	}
 
 }

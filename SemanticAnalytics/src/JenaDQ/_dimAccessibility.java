@@ -117,14 +117,18 @@ public class _dimAccessibility extends DQDimension {
 			if (!rdfn.isURIResource())
 				countNoUri++;
 			else{
-				//TODO
 				// de-reference URI and check errors
 				// Check if is a file or something
+				try{
+					@SuppressWarnings("unused")
+					DQModel dqm = new DQModel(getEndpoint(),rdfn.toString());
+				}catch(Exception e){
+					countNoUri++; 
+				}
 			}
 		}
 		if(total == 0)
 			total = -1; 
-		
 		result = this.calculateDQMeasure(countNoUri, total);
 		System.out.println(total + " ---> " + result);
 

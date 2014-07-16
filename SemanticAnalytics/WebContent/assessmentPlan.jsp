@@ -42,7 +42,7 @@
 
 	<br>
 	<br>
-	<table border="1">
+	<table>
 		<tr>
 			<td><a
 				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php?go=1"

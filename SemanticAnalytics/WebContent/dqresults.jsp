@@ -13,7 +13,7 @@
 	<hr>
 	<br>
 	<br>
-	<table border="1">
+	<table>
 		<tr>
 			<td align="center"><b>DQ Dimension</b></td>
 			<td align="center"><b>Dimension metric</b></td>
@@ -37,7 +37,7 @@
 	<s:url id="fileDownloadRDF" action="downloadRDF"></s:url>
 	<s:url id="fileDownloadN3" action="downloadN3"></s:url>
 
-	<table border="1">
+	<table>
 		<tr>
 			<td><s:a href="%{fileDownloadRDF}">RDF/XML</s:a></td>
 			<td><s:a href="%{fileDownloadN3}">N3</s:a></td>

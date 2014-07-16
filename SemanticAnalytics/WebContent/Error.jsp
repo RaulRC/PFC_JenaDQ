@@ -12,5 +12,8 @@
 	Something was wrong x_X
 
 	<s:property value="e.printStackTrace()" />
+	<br>
+	<br>
+	<a href="index.jsp">Back</a>
 </body>
 </html>

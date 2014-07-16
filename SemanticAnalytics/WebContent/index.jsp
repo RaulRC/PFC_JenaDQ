@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Jena App v 0.1</title>
 <link rel="stylesheet" href="Style.css" type="text/css" />
@@ -48,25 +49,7 @@
 		<s:submit />
 	</s:form>
 	<br>
-	<br>
-	<p>
-		<b>Create an Assessment Plan (multiple URI Assessment)</b>
-	</p>
-
-	<s:url id="initAssessmentPlan" action="assessmentPlanInit"></s:url>
-
-
-
 	<table>
-		<tr>
-			<td><s:a href="%{initAssessmentPlan}">Multiple URI - Multiple
-					Dimension Assessment</s:a></td>
-		</tr>
-
-	</table>
-	<br>
-	<br>
-	<table border="1">
 		<tr>
 			<td><a
 				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php?go=1"
@@ -78,7 +61,36 @@
 	</table>
 	<br>
 	<br>
+	<br>
+	<p>
+		<b>Create an Assessment Plan (multiple URI Assessment)</b>
+	</p>
 
+	<s:url id="initAssessmentPlan" action="assessmentPlanInit"></s:url>
+
+	<table>
+		<tr>
+			<td><s:a href="%{initAssessmentPlan}">Multiple URI - Multiple
+					Dimension Assessment</s:a></td>
+		</tr>
+
+	</table>
+	<br>
+	<br>
+	<p>
+		<b>Model Comparison</b>
+	</p>
+	<s:form action="modelComparison" method="post"
+		enctype="multipart/form-data">
+		<s:file name="file" label="Model A" />
+		<s:file name="file" label="Model B" />
+		<s:submit />
+	</s:form>
+	<br>
+	<br>
+	<br>
+	<hr />
+	<br>
 	<p>
 		<b>Type a R expression</b>:
 	</p>

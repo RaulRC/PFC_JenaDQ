@@ -79,6 +79,13 @@
 			</result>
 			<result name="error">Error.jsp</result>
 		</action>
+		<action name="modelComparison" class="JenaApp.actions.modelComparison">
+			<result name="success">
+				comparisonResults.jsp
+			</result>
+			<result name="error">Error.jsp</result>
+			<result name="input">index.jsp</result>
+		</action>
 
 	</package>
 </struts>

@@ -75,7 +75,7 @@ public class assessmentPlanExecute extends ActionSupport {
 		String directory = "D:\\WebAppDatabases\\DatasetResult";
 		Dataset dataset = TDBFactory.createDataset(directory);
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		uriAssessment = "http://localhost:3030/db/AssessmentPlan_"
+		uriAssessment = "http://212.122.105.160:3030/db/AssessmentPlan_"
 				+ currentTime;
 		Model resultModel = (Model) session.get("resultModel");
 
