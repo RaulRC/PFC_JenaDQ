@@ -6,8 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
+import utilidades.DataPicker;
+
 import DQModel.DQModel;
-import Dominion.DataPicker;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.StmtIterator;

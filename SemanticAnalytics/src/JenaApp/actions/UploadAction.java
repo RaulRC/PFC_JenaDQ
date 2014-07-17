@@ -9,9 +9,10 @@ import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.Map;
 
-import Dominion.DQModel;
-import Dominion.DataPicker;
-import Dominion.Operation;
+import utilidades.DQModel;
+import utilidades.DataPicker;
+import utilidades.Operation;
+
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;

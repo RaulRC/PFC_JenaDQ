@@ -1,4 +1,4 @@
-package Dominion;
+package utilidades;
 
 import java.io.InputStream;
 

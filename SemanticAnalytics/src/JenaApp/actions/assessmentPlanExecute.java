@@ -3,13 +3,22 @@ package JenaApp.actions;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.jena.atlas.lib.StrUtils;
+
 import JenaDQ.DQAssessmentPlan;
 import JenaDQ.MeasurementResult;
+import NAMES.TDBNames;
 
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.tdb.TDBFactory;
+import com.hp.hpl.jena.update.GraphStore;
+import com.hp.hpl.jena.update.GraphStoreFactory;
+import com.hp.hpl.jena.update.UpdateExecutionFactory;
+import com.hp.hpl.jena.update.UpdateFactory;
+import com.hp.hpl.jena.update.UpdateProcessor;
+import com.hp.hpl.jena.update.UpdateRequest;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -21,7 +30,7 @@ public class assessmentPlanExecute extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<MeasurementResult> mr;
 	private String uriAssessment;
-	private Exception e; 
+	private Exception e;
 
 	public String getUriAssessment() {
 		return uriAssessment;
@@ -55,7 +64,7 @@ public class assessmentPlanExecute extends ActionSupport {
 		}
 
 		// STORE MODEL TDB
-		// String directory = "D:\\WebAppDatabases\\DatasetResult";
+		// String directory = TDBNames.DIR;
 		// Dataset dataset = TDBFactory.createDataset(directory);
 		// Model tdbmodel = dataset.getDefaultModel();
 		// Model m = dataset.getNamedModel("http://localhost:3030/db/" +
@@ -72,11 +81,10 @@ public class assessmentPlanExecute extends ActionSupport {
 
 	public void tdb(String currentTime) throws Exception {
 
-		String directory = "D:\\WebAppDatabases\\DatasetResult";
+		String directory = TDBNames.DIR;
 		Dataset dataset = TDBFactory.createDataset(directory);
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		uriAssessment = "http://212.122.105.160:3030/db/AssessmentPlan_"
-				+ currentTime;
+		uriAssessment = TDBNames.URIBASE + currentTime;
 		Model resultModel = (Model) session.get("resultModel");
 
 		// Using transactions
@@ -84,15 +92,43 @@ public class assessmentPlanExecute extends ActionSupport {
 		try {
 			Model tdbmodel = dataset.getDefaultModel();
 			Model m = dataset.getNamedModel(uriAssessment);
+
 			m.add(resultModel);
 
 			tdbmodel.add(m);
 			dataset.commit();
+
 		} finally {
 			dataset.end();
 		}
 
 		System.out.println(uriAssessment);
+		// store();
+
+	}
+
+	public void store() {
+
+		String directory = TDBNames.DIR;
+		Dataset dataset = TDBFactory.createDataset(directory);
+		try {
+			dataset.begin(ReadWrite.WRITE);
+			GraphStore graphStore = GraphStoreFactory.create(dataset);
+			String sparqlUpdateString = StrUtils.strjoinNL(
+					"PREFIX ex: <http://example/>",
+					"INSERT { ex:s ex:p ?now } WHERE { BIND(now() AS ?now) }");
+
+			UpdateRequest request = UpdateFactory.create(sparqlUpdateString);
+			UpdateProcessor proc = UpdateExecutionFactory.create(request,
+					graphStore);
+			proc.execute();
+
+			// Finally, commit the transaction.
+			dataset.commit();
+			// Or call .abort()
+		} finally {
+			dataset.end();
+		}
 
 	}
 

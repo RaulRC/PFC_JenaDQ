@@ -3,8 +3,9 @@ package JenaApp.actions;
 import java.util.LinkedList;
 import java.util.Map;
 
+import utilidades.Operation;
+
 import DQModel.*;
-import Dominion.Operation;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;

@@ -12,8 +12,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import Dominion.Operation;
+import utilidades.Operation;
+
 import JenaDQ.*;
+import NAMES.TDBNames;
 import DQModel.*;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -39,7 +41,7 @@ public class DqAssessment extends ActionSupport {
 	private boolean completeness;
 	private boolean accessibility;
 	private String uriAssessment;
-	private Exception e; 
+	private Exception e;
 
 	public String getUriAssessment() {
 		return uriAssessment;
@@ -67,11 +69,11 @@ public class DqAssessment extends ActionSupport {
 		InputStream in = null;
 		InputStream inc = null;
 		List<Rule> useRules = null;
-		List<Rule> contextualRules = null; 
+		List<Rule> contextualRules = null;
 
 		try {
 			inc = new FileInputStream(file.get(0));
-			if(isCompleteness())
+			if (isCompleteness())
 				in = new FileInputStream(file.get(1));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -80,18 +82,16 @@ public class DqAssessment extends ActionSupport {
 
 		if (getFile().size() > 0) {
 			BufferedReader brc = new BufferedReader(new InputStreamReader(inc));
-			contextualRules = Rule.parseRules(Rule
-					.rulesParserFromReader(brc));
+			contextualRules = Rule.parseRules(Rule.rulesParserFromReader(brc));
 		}
-		if(isCompleteness()){
+		if (isCompleteness()) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
-			//			System.out.println(useRules);
-		}
-		else
-			setDepth(0); 
+			// System.out.println(useRules);
+		} else
+			setDepth(0);
 
-		//		System.out.println(contextualRules);
+		// System.out.println(contextualRules);
 
 		// ----------------------------------------------------------------
 		try {
@@ -140,11 +140,10 @@ public class DqAssessment extends ActionSupport {
 
 	public void tdb(String currentTime) throws Exception {
 
-		String directory = "D:\\WebAppDatabases\\DatasetResult";
+		String directory = TDBNames.DIR;
 		Dataset dataset = TDBFactory.createDataset(directory);
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		uriAssessment = "http://localhost:3030/db/AssessmentPlan_"
-				+ currentTime;
+		uriAssessment = TDBNames.URIBASE + currentTime;
 		Model resultModel = (Model) session.get("resultModel");
 
 		// Using transactions

@@ -1,4 +1,4 @@
-package Dominion;
+package utilidades;
 
 import com.hp.hpl.jena.query.* ;
 import java.util.LinkedList;

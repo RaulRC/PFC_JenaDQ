@@ -4,7 +4,8 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.Map;
 
-import Dominion.*;
+import utilidades.DQModel;
+import utilidades.Operation;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
