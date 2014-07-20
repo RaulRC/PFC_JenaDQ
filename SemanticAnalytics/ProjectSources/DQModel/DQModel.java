@@ -83,29 +83,25 @@ public class DQModel {
 	// COMPARISON
 	
 	public Model compareModelWith(Model m){
-		Model result = ModelFactory.createDefaultModel();
-		StmtIterator modelA = this.getModel().listStatements(); 
-		
-		Statement sta=null; 
-		while (modelA.hasNext()){
-			sta = modelA.next(); 
-			if (!m.listStatements(new SimpleSelector(null, sta.getPredicate(), sta.getObject())).hasNext())
-				result.add(sta); 
-		}
-
-		return result; 
+		DQModel dq = new DQModel(m, "N3"); 
+		return compareModelWith(dq); 
 	}
+	
 	// COMPARISON
 	public Model compareModelWith(DQModel m){
-		Model result = ModelFactory.createDefaultModel();
+		Model intersection = ModelFactory.createDefaultModel();
+		Model result = ModelFactory.createDefaultModel(); 
+		
 		StmtIterator modelA = this.getModel().listStatements(); 
 		
 		Statement sta=null; 
 		while (modelA.hasNext()){
 			sta = modelA.next(); 
-			if (!m.getModel().listStatements(new SimpleSelector(null, sta.getPredicate(), sta.getObject())).hasNext())
-				result.add(sta); 
+			if (m.getModel().listStatements(new SimpleSelector(null, sta.getPredicate(), sta.getObject())).hasNext())
+				intersection.add(sta); 
 		}
+		// (A v B) - (A ^ B)
+		result = (this.getModel().union(m.getModel())).difference(intersection); 
 
 		return result; 
 	}
