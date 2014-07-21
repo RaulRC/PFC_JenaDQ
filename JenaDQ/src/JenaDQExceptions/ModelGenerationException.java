@@ -1,13 +1,20 @@
 package JenaDQExceptions;
 
-public class ModelGenerationException extends AssessmentException{
+/**
+ * 
+ * Excepción de evaluación: error al generar modelo
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
+public class ModelGenerationException extends AssessmentException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	public ModelGenerationException(){
-		super("Exception while generating final Model"); 
+	/**
+	 * Construye la excepción, asignando su mensaje
+	 */
+	public ModelGenerationException() {
+		super("Exception while generating final Model");
 	}
 }

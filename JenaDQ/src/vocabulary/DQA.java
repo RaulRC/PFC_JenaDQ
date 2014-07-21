@@ -5,6 +5,11 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
+/**
+ * Vocabulario para la generación de la Ontología
+ * @author Raúl Reguillo Carmona
+ *
+ */
 public class DQA {
 
 	private static Model m_model = ModelFactory.createDefaultModel();

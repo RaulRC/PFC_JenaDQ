@@ -34,8 +34,15 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.vocabulary.RDF;
 
+/**
+ * 
+ * Extensión de <code>DQDimension</code> que evalúa la calidad de datos desde la
+ * dimensión <code>Completeness</code>
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
 public class _dimCompleteness extends DQDimension {
-
 
 	public ArrayList<MeasurementResult> getmRes() {
 		return mRes;
@@ -45,6 +52,21 @@ public class _dimCompleteness extends DQDimension {
 		this.mRes = mRes;
 	}
 
+	/**
+	 * 
+	 * @param targetmodel
+	 *            <code>DQModel</code> objetivo
+	 * @param useRules
+	 *            conjunto de reglas de uso en formato Jena
+	 * @param contextualRuleList
+	 *            conjunto de reglas contextuales en formato Jena
+	 * @param depth
+	 *            profundidad a la que se llevará a cabo la evaluación
+	 * @param endpoint
+	 *            dirección del servicio HTTP
+	 * @param uri
+	 *            URI objetivo
+	 */
 	public _dimCompleteness(DQModel targetmodel, List<Rule> useRules,
 			List<Rule> contextualRuleList, int depth, String endpoint,
 			String uri) {
@@ -57,6 +79,13 @@ public class _dimCompleteness extends DQDimension {
 		mRes = null;
 	}
 
+	/**
+	 * 
+	 * @param targetmodel
+	 *            <code>DQModel</code> objetivo
+	 * @param rules
+	 *            conjunto de reglas de contexto en formato Jena
+	 */
 	public _dimCompleteness(DQModel targetmodel, List<Rule> rules) {
 		super(targetmodel);
 		this.dimName = "Completeness";
@@ -65,18 +94,26 @@ public class _dimCompleteness extends DQDimension {
 		mRes = null;
 	}
 
+	/**
+	 * 
+	 * @param targetmodel
+	 *            <code>DQModel</code> objetivo
+	 */
 	public _dimCompleteness(DQModel targetmodel) {
 		super(targetmodel);
 		this.dimName = "Completeness";
 	}
 
+	/**
+	 * Constructor vacío
+	 */
 	public _dimCompleteness() {
 		super();
 		this.dimName = "Completeness";
 	}
 
 	/**
-	 * @name InterlinkingCompleteness Method Calculates the number of interlinks
+	 * InterlinkingCompleteness Method Calculates the number of interlinks
 	 *       in resources
 	 * @return MeasurementResult InterlinkingCompleteness
 	 */
@@ -100,8 +137,8 @@ public class _dimCompleteness extends DQDimension {
 			if (!rdfn.isURIResource())
 				countNoUri++;
 		}
-		if(total == 0)
-			total = -1; 
+		if (total == 0)
+			total = -1;
 		result = this.calculateDQMeasure(countNoUri, total);
 		mRes.setMResult(result);
 		// System.out.println("RESULT: " + countNoUri+"/"+total +" = " +
@@ -110,10 +147,9 @@ public class _dimCompleteness extends DQDimension {
 	}
 
 	/**
-	 * @name schemaCompleteness method Chek if every class and property from
+	 * schemaCompleteness method Chek if every class and property from
 	 *       Ont. are present in the model too
-	 * @return MeasurementResult schemaCompleteness Falta comprobar clase por
-	 *         clase
+	 * @return MeasurementResult schemaCompleteness
 	 */
 	@Deprecated
 	public JenaDQ.MeasurementResult m_schemaCompleteness() {
@@ -154,32 +190,35 @@ public class _dimCompleteness extends DQDimension {
 
 	/**
 	 * ExecuteMeasurement Completeness
-	 * @throws IdentifierException 
-	 * @throws RuleException 
-	 * @throws URIException 
+	 * 
+	 * @throws IdentifierException
+	 * @throws RuleException
+	 * @throws URIException
 	 */
-	public Model _executeMeasurement() throws IdentifierException, RuleException, URIException {
-		
-		if(this.getAssessmentIdentifier().equals(""))
-			throw new IdentifierException(); 
-		
-		if(this.getContextualRules().size()==0)
-			throw new RuleException(); 
-		
-		if(this.getURI().equals(""))
-			throw new URIException(); 
+	public Model _executeMeasurement() throws IdentifierException,
+			RuleException, URIException {
+
+		if (this.getAssessmentIdentifier().equals(""))
+			throw new IdentifierException();
+
+		if (this.getContextualRules().size() == 0)
+			throw new RuleException();
+
+		if (this.getURI().equals(""))
+			throw new URIException();
 
 		long startTime = System.currentTimeMillis();
 		ArrayList<ArrayList<RDFNode>> results = UriUtil
 				.getResourcesInDepthQuery(getEndpoint(), this.getURI(),
 						getDepth());
 		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println("TIME ELAPSED WITH NODES: "+ (double) (estimatedTime/1000.0));
+		System.out.println("TIME ELAPSED WITH NODES: "
+				+ (double) (estimatedTime / 1000.0));
 
-//		 for testing
-//		for(ArrayList<RDFNode> ar:results)
-//			System.out.println("Nodes: "+ar.size());
-		
+		// for testing
+		// for(ArrayList<RDFNode> ar:results)
+		// System.out.println("Nodes: "+ar.size());
+
 		// Results are gonna be here
 		ArrayList<Double> resultsByLevel = new ArrayList<Double>();
 		mRes = new ArrayList<MeasurementResult>();
@@ -192,13 +231,12 @@ public class _dimCompleteness extends DQDimension {
 		DQModel dq = new DQModel(getEndpoint(), this.getURI());
 		Reasoner reasoner = new GenericRuleReasoner(this.getUseRules());
 
-		//  DQ property to assess
+		// DQ property to assess
 		Resource o = ResourceFactory.createResource(DQA.NS + "NoCompleteness");
 		Resource s = ResourceFactory.createResource(this.getURI());
 
 		InfModel inf = ModelFactory.createInfModel(reasoner, dq.getModel());
 		StmtIterator iter = null;
-		
 
 		if (getDepth() >= 0) {
 			if (validate(inf).isValid()) {
@@ -245,11 +283,15 @@ public class _dimCompleteness extends DQDimension {
 			e.printStackTrace();
 		}
 
-		generateMRES(resultsByLevel); 
-		
+		generateMRES(resultsByLevel);
+
 		return this.finalModel;
 	}
 
+	/**
+	 * Generates the <code>MeasurementResult</code> from the result model
+	 * generated
+	 */
 	public void generateMRES(ArrayList<Double> results) {
 		// Generating DQ results
 		// Setting up the Data Structure no RDF for easily pick the results
@@ -261,7 +303,9 @@ public class _dimCompleteness extends DQDimension {
 					+ "SELECT ?x WHERE { "
 					+ "?a dqa:InLevel ?y. \n"
 					+ "?a dqa:ContextualMeasure ?x . "
-					+ "FILTER ( ?y = " + i + ") } \n";
+					+ "FILTER ( ?y = "
+					+ i
+					+ ") } \n";
 
 			q = QueryFactory.create(query);
 			QueryExecution qExe = QueryExecutionFactory.create(q,
@@ -270,25 +314,25 @@ public class _dimCompleteness extends DQDimension {
 
 			if (resultsRes.hasNext())
 				mRes.add(new MeasurementResult("Lvl " + i, this.dimName,
-						results.get(i), resultsRes.next()
-						.getResource("?x").toString()));
+						results.get(i), resultsRes.next().getResource("?x")
+								.toString()));
 			else
 				mRes.add(new MeasurementResult("Lvl " + i, this.dimName,
 						results.get(i)));
 		}
 
 	}
-	public String toString(){
-		return "Completeness"; 
+
+	public String toString() {
+		return "Completeness";
 	}
 
 	/**
 	 * Generates the final RDF Model with the rules
 	 */
-	public Model _getRDFModel() throws ModelGenerationException{
+	public Model _getRDFModel() throws ModelGenerationException {
 
 		Model m = ModelFactory.createDefaultModel();
-
 
 		ArrayList<Model> mList = new ArrayList<Model>();
 
@@ -306,23 +350,21 @@ public class _dimCompleteness extends DQDimension {
 					new Double(assessmentResults.get(i)));
 			lLevel = mList.get(i).createTypedLiteral(new Integer(i));
 
-			mList
-					.get(i)
+			mList.get(i)
 					.createResource(DQA.NS + this.assessmentIdentifier)
 					.addProperty(RDF.type, DQA.COMPLETENESS)
 					.addProperty(
 							DQA.COMPLETENESS_RESULT,
 							mList.get(i)
-							.createResource()
-							.addProperty(DQA.INURI,
-									this.getURI())
+									.createResource()
+									.addProperty(DQA.INURI, this.getURI())
 									.addProperty(DQA.INLEVEL, lLevel)
 									.addProperty(DQA.COMPLETENESS_MEASUREMENT,
 											lResult));
 
 			// inference here
 			inf2 = ModelFactory.createInfModel(reasoner2, mList.get(i));
-			//			inf2.setNsPrefix("dqa", DQA.NS); 
+			// inf2.setNsPrefix("dqa", DQA.NS);
 			validate(inf2);
 			result.add(inf2);
 

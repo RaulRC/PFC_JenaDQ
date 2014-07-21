@@ -20,13 +20,31 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
+/**
+ * 
+ * Clase principal del modelo de calidad. Permite ser extendida sobreescribiendo
+ * los métodos señalados con el fin de añadir nuevas dimensiones de calidad,
+ * manteniendo todas las dimensiones una funcionalidad uniforme en lo que se
+ * refiere a la gestión de su ejecución en el ámbito de un plan de evaluación
+ * así como la gestión de los resultados que se generen.
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
 public class DQDimension {
 
+	/**
+	 * 
+	 * @param targetmodel <code>DQModel</code> objetivo
+	 */
 	public DQDimension(DQModel targetmodel) {
 		super();
 		this.targetModel = targetmodel;
 	}
 
+	/**
+	 * Constructor vacío
+	 */
 	public DQDimension() {
 	}
 
@@ -40,8 +58,8 @@ public class DQDimension {
 	protected String URI;
 	protected String endpoint;
 	protected String assessmentIdentifier;
-	protected ArrayList<Double> assessmentResults; 
-	
+	protected ArrayList<Double> assessmentResults;
+
 	protected Model finalModel;
 
 	// Results
@@ -102,8 +120,6 @@ public class DQDimension {
 		this.contextualRules = contextualRules;
 	}
 
-
-
 	public Model getFinalModel() {
 		return finalModel;
 	}
@@ -158,10 +174,8 @@ public class DQDimension {
 	/**
 	 * Recibe una query y un endpoint, devuelve un modelo RDF
 	 * 
-	 * @param endpoint
-	 * @param queryString
-	 * @param prefix
-	 *            mapping
+	 * @param endpoint dirección del servicio HTTP
+	 * @param queryString <code>String</code> con la consulta 
 	 */
 	@Deprecated
 	public DQModel getResourceFromURI(String endpoint, String queryString) {
@@ -179,41 +193,58 @@ public class DQDimension {
 	}
 
 	/**
-	 * To override
 	 * 
-	 * @return
-	 * @throws IdentifierException 
-	 * @throws RuleException 
-	 * @throws URIException 
+	 * Ejecuta la(s) métrica(s) de la dimensión de calidad. El método
+	 * debe ser sobreescrito cuando se particulariza la clase. 
+	 * 
+	 * @return modelo de Jena con los resultados de la evaluación
+	 * @throws IdentifierException
+	 * @throws RuleException
+	 * @throws URIException
 	 */
-	public Model _executeMeasurement() throws IdentifierException, RuleException, URIException {
+	public Model _executeMeasurement() throws IdentifierException,
+			RuleException, URIException {
 		return null;
 	}
 
-	public Model _getRDFModel() throws ModelGenerationException{
+	/**
+	 * 
+	 * @return modelo Jena de resultados de la ejecución
+	 * @throws ModelGenerationException
+	 */
+	public Model _getRDFModel() throws ModelGenerationException {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return modelo Jena de resultados contextuales de la ejecución
+	 */
 	public Model _contextualFinalModel() {
 		return null;
 	}
-	public void resetResults(){
-		this.assessmentResults=new ArrayList<Double>(); 
+
+	/**
+	 * elimina los resultados
+	 */
+	public void resetResults() {
+		this.assessmentResults = new ArrayList<Double>();
 	}
+
 	@Deprecated
 	public void generateMRES(ArrayList<Double> results) {
 	}
-	public String toString(){
-		return ""; 
+
+	public String toString() {
+		return "";
 	}
-	
+
 	/**
 	 * Return a validity report (is valid)
 	 * 
-	 * @param inf
-	 * @return
+	 * @param inf Inference Model
+	 * @return a Jena Validity Report 
 	 */
-
 	protected ValidityReport validate(InfModel inf) {
 		ValidityReport val = inf.validate();
 		if (val.isValid()) {
