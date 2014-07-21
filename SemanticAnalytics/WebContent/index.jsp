@@ -7,12 +7,20 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Jena App v 0.1</title>
+<title>Jena App v 1.0</title>
 <link rel="stylesheet" href="Style.css" type="text/css" />
 </head>
 <body>
 	<h1>Hello :D</h1>
 	<p>Test Webpage</p>
+	<br>
+	<table>
+	<tr>
+	<td>
+	<s:a href="javadoc/index.html">API SemDQ - Jena DQ </s:a>
+	</td>
+	</tr>
+	</table>
 	<br>
 	<br>
 	<%-- 
@@ -108,6 +116,6 @@
 		<s:textfield name="data" label="R expression with graphical result:" />
 		<s:submit />
 	</s:form>
-
+	
 </body>
 </html>
