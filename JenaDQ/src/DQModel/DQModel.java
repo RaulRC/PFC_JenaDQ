@@ -211,4 +211,39 @@ public class DQModel {
 		return result;
 	}
 
+	/**
+	 * Compara dos modelos A y B obteniendo un porcentaje de similitud
+	 * 
+	 * @param m
+	 *            <code>DQModel</code> que se pretende comparar con el modelo
+	 *            actual
+	 * @return un porcentaje de similitud entre ambos modelos
+	 */
+	public double affinity(DQModel m) {
+		Model intersection = ModelFactory.createDefaultModel();
+		double total = 0;
+		double intersect = 0;
+		double result = -1.0;
+
+		StmtIterator modelA = this.getModel().listStatements();
+
+		Statement sta = null;
+		while (modelA.hasNext()) {
+			sta = modelA.next();
+			if (m.getModel()
+					.listStatements(
+							new SimpleSelector(null, sta.getPredicate(), sta
+									.getObject())).hasNext())
+				intersection.add(sta);
+		}
+		total = (this.getModel().union(m.getModel())).size();
+		intersect = intersection.size();
+
+		try {
+			result = (intersect * 100) / total;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
