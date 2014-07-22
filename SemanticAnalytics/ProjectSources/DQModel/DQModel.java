@@ -105,5 +105,30 @@ public class DQModel {
 
 		return result; 
 	}
+	
+	public double affinity(DQModel m){
+		Model intersection = ModelFactory.createDefaultModel();
+		double total=0; 
+		double intersect=0;
+		double result=-1.0; 
+		
+		StmtIterator modelA = this.getModel().listStatements(); 
+		
+		Statement sta=null; 
+		while (modelA.hasNext()){
+			sta = modelA.next(); 
+			if (m.getModel().listStatements(new SimpleSelector(null, sta.getPredicate(), sta.getObject())).hasNext())
+				intersection.add(sta); 
+		}
+		total = (this.getModel().union(m.getModel())).size();
+		intersect = intersection.size(); 
+		
+		try{
+			result = (intersect*100)/total;
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;  
+	}
 
 }

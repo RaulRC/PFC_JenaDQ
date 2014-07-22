@@ -26,6 +26,7 @@ public class modelComparison extends ActionSupport {
 	private StmtIterator resultList;
 	private StmtIterator modelA;
 	private StmtIterator modelB;
+	private double affinity; 
 
 	public List<File> getFile() {
 		return file;
@@ -43,14 +44,24 @@ public class modelComparison extends ActionSupport {
 			DQModel modelA = new DQModel(inA, "RDF/XML");
 			DQModel modelB = new DQModel(inB, "RDF/XML");
 
-			if(modelA.getModel().listStatements().toList().size() >= modelB.getModel().listStatements().toList().size())
-				setResultModel(modelA.compareModelWith(modelB));
-			else
-				setResultModel(modelB.compareModelWith(modelA)); 
+			// Calculates the affinity percentage
+						setAffinity(-1.0);  
 			
+			if(modelA.getModel().size() >= modelB.getModel().size()){
+				setResultModel(modelA.compareModelWith(modelB));
+				setAffinity(modelA.affinity(modelB));
+			}
+			else{
+				setResultModel(modelB.compareModelWith(modelA));
+				setAffinity(modelB.affinity(modelA));
+			}
 			setResultList(this.resultModel.listStatements());
 			setModelA(modelA.getModel().listStatements());
 			setModelB(modelB.getModel().listStatements());
+			
+			
+			
+			
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -104,6 +115,14 @@ public class modelComparison extends ActionSupport {
 
 	public void setModelB(StmtIterator modelB) {
 		this.modelB = modelB;
+	}
+
+	public double getAffinity() {
+		return affinity;
+	}
+
+	public void setAffinity(double affinity) {
+		this.affinity = affinity;
 	}
 
 }

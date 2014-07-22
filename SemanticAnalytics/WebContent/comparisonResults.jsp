@@ -56,6 +56,16 @@
 	</table>
 	<br>
 	<br>
+	
+	<b>Models affinity</b>: 
+	<table>
+		<tr>
+			<td> <s:property value="affinity" /> %
+			</td>
+		</tr>
+	</table>
+	<br>
+	<br>
 	<a href="index.jsp">Back</a>
 </body>
 </html>
