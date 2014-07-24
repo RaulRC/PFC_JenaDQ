@@ -1,0 +1,95 @@
+.clmonth {
+border-collapse: collapse;
+}
+.clmonth caption {
+text-align: left;
+font: bold 110% Georgia, "Times New Roman", Times, serif;
+padding-bottom: 6px;
+}
+.clmonth th {
+border: 1px solid #AAAAAA;
+border-bottom: none;
+padding: 2px 8px 2px 8px;
+background-color: #CCCCCC;
+color: #3F3F3F;
+font: 90% Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+.clmonth td {
+border: 1px solid #EAEAEA;
+font: 90% Verdana, Geneva, Arial, Helvetica, sans-serif;
+padding: 2px 4px 2px 4px;
+vertical-align: top;
+}
+.clmonth td.previous, .clmonth td.next {
+background-color: #F6F6F6;
+color: #C6C6C6;
+}
+.clmonth td.active {
+background-color: #B1CBE1;
+color: #2B5070;
+border: 2px solid #4682B4;
+}
+.clmonth td.activeblu {
+background-color: #B1CBE1;
+color: #2B5070;
+border: 2px solid #4682B4;
+}
+.clmonth td.activebluchi {
+background-color: #00FFFF;
+color: #2B5070;
+border: 2px solid #4682B4;
+}
+.clmonth td.activered {
+background-color: #FDABAB;
+color: #FF0000;
+border: 2px solid #FF0000;
+}
+.clmonth td.activegree {
+background-color: #79A8A8;
+color: #006666;
+border: 2px solid #006666;
+}
+.clmonth td.activenara {
+background-color: #FFCD81;
+color: #FF9900;
+border: 2px solid #FF9900;
+}
+.clmonth td.activelila {
+background-color: #FD9DF7;
+color: #FF00FF;
+border: 2px solid #FF00FF;
+}
+.clmonth td.activerdechi {
+background-color: #00FF00;
+color: #006666;
+border: 2px solid #006666;
+}
+.clmonth td.activemarron {
+background-color: #A68787;
+color: #6D3636;
+border: 2px solid #6D3636;
+}
+.clmonth td.activeamarillo {
+background-color: #FFFF00;
+color: #B9B93B;
+border: 2px solid #B9B93B;
+}
+.clmonth td.activelilaoscuro {
+background-color: #A476A4;
+color: #660066;
+border: 2px solid #660066;
+}
+.clmonth a:link, a:hover, a:visited {
+text-decoration: none;
+border-bottom: 1px dotted;
+color: transparent;
+cursor: help;
+}
+/*.clmonth tr.altrow {
+	background-color: #DFE7F2;
+	color: #000000;
+}
+.clmonth tr:hover {
+	background-color: #DFE7F2;
+	color: #000000;
+}*/

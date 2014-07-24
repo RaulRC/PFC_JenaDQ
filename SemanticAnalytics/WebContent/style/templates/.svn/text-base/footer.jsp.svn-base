@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+</div>
+<!-- Pie de página institucional sólo en CSS -->	
+<div id="footer">
+	<div class="footer1"> 
+	<a href="http://www.jccm.es/educacion">Consejer&iacute;a de Educaci&oacute;n y Ciencia, </a>
+	<a href="http://www.jccm.es">Junta de Comunidades de Castilla-La Mancha</a>
+	</div>
+</div>	
+<div id="footer2">
+	<div class="footerinf">
+		<span class="imgini"><a href="javascript:history.back()"><img src="<%=request.getContextPath()%>/style/f-back.gif" alt="Volver" border="0" /></a><a href="#top"><img src="<%=request.getContextPath()%>/style/f-up.gif" alt="Arriba" border="0" /></a></span>
+		<span class="inicio"><a href="http://www.jccm.es/educacion">P&aacute;gina de inicio</a></span>
+		<span class="lastup">Última actualización: 
+		<!-- #BeginDate format:fcGe1m -->Martes, 30.06.2010  13:55<!-- #EndDate -->
+		</span>
+		<span class="email"><a href="mailto:jagarcia@jccm.es">Comentarios al Webmaster</a></span>
+  </div>
+</div>
+</div>

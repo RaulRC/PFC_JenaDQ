@@ -1,0 +1,938 @@
+/*
+Juan Luis Alonso - Consejería de Educación y Ciencia
+Plantilla para sub páginas de inicio para www.jccm.es/educacion
+Accesible Nivel AA
+Última revisión: 22/07/05 - 10.15 h
+jlalonso@jccm.es
+*/
+
+/*-------------Estilos genéricos-----------------*/
+html, body { 
+margin: 0; 
+padding: 0; 
+font-size: 90%; 
+background-color: #FFFFFF; 
+font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+scrollbar-face-color: #003366; 
+scrollbar-highlight-color: #003366; 
+scrollbar-shadow-color: #FFFFFF; 
+scrollbar-3dlight-color: #FFFFFF; 
+scrollbar-arrow-color: #FFFFFF; 
+scrollbar-track-color: #B50063; 
+scrollbar-darkshadow-color: #003366;
+}
+img {
+border: 0px;
+}
+.imgcentro{
+display:block;
+margin:auto;
+border: 0px;
+}
+
+a:link { color: #0D2058; text-decoration: underline; font-weight: 600; }
+
+a:visited { color: #31447c; text-decoration: underline; font-weight: 600; }
+
+a:hover { color: #B50063; text-decoration: underline; }
+
+abbr, acronym { cursor: help; border-bottom: 1px dotted; color: #B50063; }
+
+.small { font-size: 70%; }
+
+/*-------------Estilos página-----------------*/
+
+#page { 
+
+padding-top: 50px;
+width: 768px; 
+ 
+}
+
+#encabezado {
+padding-top: 15px;
+margin-right: 10px;
+background-color: #0d2058;
+/*height: 1.0em;	*/
+}
+
+#header { 
+position: absolute; 
+top: 0px; 
+left: 0px; 
+width: 100%;
+overflow: hidden; 
+height: 3.5em;
+border-bottom: 5px solid #B20060;
+}
+
+body>#header { 
+/*position: fixed; */
+left: 0px; 
+right: 0px; 
+top: 0px;
+}
+
+
+#header .maintitle {
+  color: #E0E7F9;
+  font-weight: 600px;
+  font-family: verdana, sans serif, tahoma, lucida console;
+  font-size: 230%;
+  /*margin-left: 250px;*/
+  margin-left: 25%;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+#header .maintitle a {
+  color: #E0E7F9;
+  font-weight: 600px;
+  text-decoration: none;
+}
+
+/*------------ Texto encabezado Consejería --------------*/
+#header .subtitle {
+	color: #0D2058;
+	font-size: 85%;
+	text-align: left;
+	float: left;
+	margin-left: 10px;
+	margin-top: -30px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#header .subtitle a:link, #header .subtitle a:visited {
+  color: #0D2058;
+  font-size: 85%;
+  text-decoration: none;
+  font-family: verdana, sans serif, tahoma, lucida console;
+  font-weight: bold;
+}
+
+#header .subtitle a:hover {
+  color: #0D2058;
+  font-size: 85%;
+  text-decoration: underline;
+  font-family: verdana, sans serif, tahoma, lucida console;
+  font-weight: bold;
+}
+
+/*---------------- Enlaces encabezado derecha institucionales ------------------*/
+#header .right {
+	color: #0D2058;
+	font-size: 85%;
+	float: right;
+	margin-right: 10px;
+	margin-top: -10px;
+	font-family: verdana, sans serif, tahoma, lucida console;
+	font-weight: bold;
+}
+
+#header .right a:link, #header .right a:visited {
+  color: #0D2058;
+  font-size: 85%;
+  text-decoration: underline;
+  font-family: verdana, sans serif, tahoma, lucida console;
+  font-weight: bold;
+}
+
+#header .right a:hover {
+  color: #0D2058;
+  font-size: 85%;
+  text-decoration: none;
+  font-family: verdana, sans serif, tahoma, lucida console;
+  font-weight: bold;
+}
+
+/*---------- Menu azul superior enlaces ------------------*/
+#encabezado .bloque {
+	font-size: 90%;
+	color: #FFFFFF;
+	text-align: right;
+	text-decoration: none;
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	font-weight: 200;
+	}
+
+#encabezado .bloque a:link, #encabezado .bloque a:visited {
+  color: #FFFFFF;
+  font-size: 90%;
+  text-align: right;
+  text-decoration: none;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  font-weight: 200;
+  margin-right: 10px;
+}
+
+#encabezado .bloque a:hover {
+  color: #FFFFFF;
+  font-size: 90%;
+  text-decoration: underline;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  font-weight: 200;
+  margin-right: 10px;
+}
+
+/*-------------------------Área de texto principal - main-----------------------*/
+
+#textarea {
+  margin-left: 148px;
+  margin-top: -8px;
+  text-align: justify;
+}
+#textarea .alignright {
+	FLOAT: right;
+}
+#textarea .alignleft {
+	FLOAT: left;
+}
+#textarea p {
+  margin: 15px;
+  margin-bottom: 17px;
+}
+
+ /* -----Control de tablas en texarea-----*/
+#textarea table {
+	border: 1px solid #C8C8C8;
+	width: 93%;
+	margin: 5px 15px 5px 15px;
+}
+#textarea td {
+	padding: 3px 3px 3px 3px;
+}
+/* -----Control de encabezados en texarea-----*/
+#textarea h1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 175%;
+	font-weight: 500px;
+	color: #B50063;
+	padding: 10px 2px 10px 2px;
+	text-align: center;
+	margin: 0;
+}
+#textarea h2 {
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	font-size: 110%;
+	font-weight: bold;
+	color: #0D2058;
+	margin: 15px;
+	text-align: left;
+}
+#textarea h3 {
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	font-size: 103%;
+	font-weight: bold;
+	color: #0D2058;
+	margin: 15px;
+	text-align: left;
+}
+#textarea li {
+  margin-right: 5px;
+}
+
+#textarea .negrita {
+  font-weight: bold;
+}
+#textarea .textbox {
+  margin: 10px;
+  background-color: #ffffff;
+  border: 1px solid #C8C8C8;
+  border-bottom: 3px solid #C8C8C8;
+  /*-moz-border-radius: 7px;*/
+}
+#textarea .posted {
+  text-align: right;
+  font-size: 90%;
+  font-style: italic;
+  margin-top: 5px;
+}
+#textarea .entrada {
+    margin-right: 0px;
+    margin-left: 0px; /*2*/
+    margin-top: 3px; /*3*/
+    margin-bottom: 2px; /*2*/
+	border-bottom: 1px dotted #00257E;
+	/*height: 19px;*/
+}/*modificado para las barras con títulos*/
+
+#textarea .contenido {
+	margin-left: 10px;
+	
+}  
+#textarea .subtitle {
+  font-size: 100%;
+  font-weight: 900;
+}
+
+#textarea .limited {
+  margin: 5px;
+  height: 40px;
+  overflow: auto;
+}
+ /* -----Algunos encabezados, usar mejor h1, h2-----*/
+#textarea .encabezadogeneral {
+	font-size: 100%;
+	font-weight: bold;
+	color: #0061AB;
+	padding-left: 10px;
+	margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+#textarea .encabezadorojo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #B50063;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
+}
+#textarea .notapostit {
+	border: 1px solid #666666;
+	padding: 5px 5px 5px 5px;
+	width: 93%;
+	background-color: #FFFFCC;
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	color: #656565;
+	text-align: center;
+    }
+#textarea .notalpie {
+	padding: 5px 5px 5px 5px;
+	width: 90%;
+	font-size: 0.7em; 
+	background-color: #EEEEEE;
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	color: #666666;
+	text-align: left;
+}
+#textarea .top {
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	text-align: right;
+}
+/*-------------------------Posición de imágenes en main texarea-----------------------*/
+#textarea img.left {
+		float:left;
+		margin:3px 10px 10px 0;
+		border: 1px solid #000000;
+}
+#textarea img.right {
+	float:right;
+	margin:3px 0 10px 7px;
+	border: 1px solid #000000;
+}
+#textarea img.center {
+	margin:3px 0 10px 7px;
+	border: 1px solid #000000;
+	text-align: center;
+	vertical-align: middle;
+}
+#texarea .ico {
+	vertical-align: middle;
+	border: 0px none;
+	}
+/*-------------------Imagen de encabezado de sección------------------*/
+#textarea .imgtop {
+	margin-top: 10px;
+	margin-left: 6px;
+	display: block;
+	vertical-align: middle;
+}
+
+/*-------------------Menu izquierda principal------------------*/
+
+body>#leftnavlist { 
+position: fixed;
+left: 0px; 
+right: 0px;
+top: 0px; 
+font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+font-size: 95%;
+}
+#leftnavlist {
+float: left;
+width: 148px;
+padding: 5px 0 5px 8px;
+font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+font-size: 95%;
+background-color: #0D2058;
+
+}
+
+#leftnavlist ul
+{
+list-style-type: none;
+padding: 0;
+margin: 0;
+font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+font-size: 95%;
+}
+
+#leftnavlist a {
+display: block;
+color: #FFFFFF/*#0D2058*/;
+background-color: #0D2058/*#EDF1F4*/;
+width: 128px;
+padding: 3px 12px 3px 8px;
+margin: 0 0 3px 0;
+text-decoration: none;
+border-bottom: 1px dotted #00257E;
+font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+font-size: 95%;
+}
+
+#leftnavlist a:hover
+{
+background-color: #B20060;
+color: #FFF;
+font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+font-size: 95%;
+}
+
+#leftnavlist li li a
+{
+display: block;
+color: #0D2058;
+background-color: #EDF1F4;
+width: 128px;
+padding: 3px 12px 3px 8px;
+margin: 0 0 3px 0;
+text-decoration: none;
+border-bottom: 1px dotted #00257E;
+font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+font-size: 95%;
+}
+#leftnavlist .textbox {
+  margin: -5px;
+  background-color: #ffffff;
+  border: 1px solid #E5E5E5;
+  -moz-border-radius: 7px;  
+}
+#leftnavlist .textbox p {
+  margin: 5px;
+}
+
+#leftnavlist .textbox ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 5px;
+}
+#leftnavlist .textbox li a
+{
+display: block;
+text-decoration: none;
+border-bottom: 0px;
+padding: 3px 3px 3px 3px;
+margin: 0 0 2px 0;
+border-bottom: 1px dotted #00257E;
+}
+#leftnavlist .title {
+  font-weight: bold;
+  color: #FFFFFF;
+  padding-left: 5px;
+  background-color:#B20060;
+}
+
+#leftnavlist .limited {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  height: 40px;
+  overflow: auto;
+}
+
+#leftnavlist .small {
+  font-size: 70%;
+}
+
+#leftnavlist .date {
+  color: #444444;
+  font-size: 100%;
+  font-weight: 600;
+}
+
+#leftnavlist input.text {
+  color: #0D2058;
+}
+
+#leftnavlist input.submit {
+  font-size: 70%; 
+  font-weight: bold; 
+  background:#ffffff; 
+  border-width: 0px;
+}
+
+/*--------Pie de página---------*/
+#footer {
+	/*left: 0px;*/
+	width: 100%;
+	margin: 10px 0 0px 0;
+	background-color: #B20060;
+	font-size: 95%;
+	position: relative;
+	color: #FFFFFF;
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	font-weight: 100;
+	float: right; /*coloca al final el pie*/
+}
+#footer .footer1 {
+	text-align: right;
+	background-color: #B20060;
+	margin-right: 10px;
+	font-size: 95%;
+}
+
+#footer .footer1 a:link, #footer .footer1 a:visited {
+  text-decoration: none;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  color: #FFFFFF;
+  font-size: 95%;
+  font-weight: 100;
+}
+
+#footer .footer1 a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  font-size: 95%;
+  font-weight: 100;
+}
+
+#footer2 {
+	background-image: url(http://www.jccm.es/educacion/images/fondorin.gif);
+	left: 0px;
+	/*margin: -10px 0 0px 0;*/
+	width: 100%;
+	font-size: 90%;
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	border-top: 5px solid #0D2058; 
+	font-weight: 600;
+	float: right; /*coloca al final el pie*/
+	}
+
+#footer2 .footerinf {
+	color: #0D2058;
+	text-decoration: none;
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	font-size: 90%;
+	}
+
+#footer2 .footerinf a:link, #footer .footerinf a:visited {
+  color: #0D2058;
+  font-size: 90%;
+  text-decoration: none;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 10px;
+}
+
+#footer2 .footerinf a:hover {
+  color: #B20060;
+  font-size: 90%;
+  text-decoration: underline;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 10px;
+}
+
+/*----- triangulitos de pie ----*/
+#footer2 .imgini {
+	padding-left: 0px;
+	margin-right: 0px;
+    margin-left: 0px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+	position: absolute;
+}
+#footer2 .imgini, #footer2 .imgini a:link, #footer2 .imgini a:visited {
+  color: #0D2058;
+  font-size: 98%;
+  text-decoration: none;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 1px;
+}
+#footer2 .imgini a:hover {
+  color: #B20060;
+  font-size: 98%;
+  text-decoration: underline;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 1px;
+}
+
+/*----- enlace página inicio pie ----*/
+#footer2 .inicio {
+	/*padding-left: 10px;*/
+	margin-right: 5px;
+    margin-left: 45px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+	position: absolute;
+}
+#footer2 .inicio, #footer2 .inicio a:link, #footer2 .inicio a:visited {
+  color: /*#0D2058*/ #FFFFFF;
+  font-size: 98%;
+  text-decoration: none;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 10px;
+}
+#footer2 .inicio a:hover {
+  color: #B20060;
+  font-size: 98%;
+  text-decoration: underline;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 10px;
+}
+/*----- fecha en el pie ----*/
+#footer2 .lastup {
+	padding-left: 10px;
+	margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+	position: absolute;
+	left: 40%;
+	font-size: 90%;
+} 
+/*----- correo webmaster pie ----*/
+#footer2 .email {
+	padding-left: 10px;
+	margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+	position: absolute;
+	left: 80%;
+}
+#footer2 .email, #footer2 .email a:link, #footer2 .email a:visited {
+  color: #0D2058;
+  font-size: 98%;
+  text-decoration: none;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 10px;
+}
+#footer2 .email a:hover {
+  color: #B20060;
+  font-size: 98%;
+  text-decoration: underline;
+  font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+  margin-right: 10px;
+}
+/* Toolbar Tooltip */
+a.tooltip, a.tooltip:link, a.tooltip:visited, a.tooltip:active  {
+  position: relative;
+  text-decoration: none; 
+  }
+  
+a.tooltip:hover {
+  background: transparent;
+  }
+
+a.tooltip span {
+  display: none;  
+  text-decoration: none; 
+}
+
+a.tooltip:hover span {
+	display: block;
+	position: absolute;
+	z-index: 100;
+	color: #002380;
+	border:1px solid #002380;
+	background: #EDF1F4;
+	font: .9em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	top: -20px;
+	cursor: crosshair;
+	padding: 5px;
+  }
+
+/* End Toolbar Tooltip */
+/*------------------------- Estilos Tablas ---------------------*/
+.datatable {
+	border: 1px solid #D6DDE6;
+	border-collapse: collapse; 
+}
+.datatable td {
+	border: 1px solid #D6DDE6;
+	text-align: left;
+	padding: 4px; 
+}
+.datatable th {
+	border: 1px solid #828282;
+	background-color: #EDF1F4;
+	font-weight: bold;
+	text-align: center;
+	padding: 4px;
+}
+.datatable caption {
+	font: bold 0.9em "Trebuchet MS";
+	background-color: #b0c4de;
+	color: #33517a;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	border: 1px solid #789ac6;
+}
+.datatable tr.altrow {
+	background-color: #DFE7F2;
+	color: #000000;
+}
+.datatable tr:hover {
+	background-color: #DFE7F2;
+	color: #000000;
+}
+/*----------------------------- Fin de estilos para tablas------------*/
+/*----------------------------- Estilos para iconos PDF --------------*/
+.pdfIconStyle 
+{
+    font-family: arial,helvetica;
+    text-decoration: none;
+	font-size: 8px;
+    font-weight: normal;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: -moz-use-text-color;
+    border-right-color: -moz-use-text-color;
+    border-bottom-color: -moz-use-text-color;
+    border-left-color: -moz-use-text-color;
+    padding-top: 0px;
+    padding-right-value: 2px;
+    padding-bottom: 0px;
+    padding-left-value: 2px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    margin-top: 0px;
+    margin-right-value: 0px;
+    margin-bottom: 0px;
+    margin-left-value: 0px;
+    margin-left-ltr-source: physical;
+    margin-left-rtl-source: physical;
+    margin-right-ltr-source: physical;
+    margin-right-rtl-source: physical;
+    vertical-align: middle;
+}
+
+.pdfIconStyle, .pdfIconStyle:link, .pdfIconStyle:visited, .pdfIconStyle:active  
+{
+    color: rgb(255, 0, 0);
+    background-color: white;
+    border-top-color: rgb(255, 0, 0);
+    border-right-color: rgb(255, 0, 0);
+    border-bottom-color: rgb(255, 0, 0);
+    border-left-color: rgb(255, 0, 0);
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.pdfIconStyle:hover    
+{
+    color: white;
+    background-color: rgb(255, 0, 0);
+    border-top-color: rgb(255, 165, 165);
+    border-right-color: rgb(125, 51, 2);
+    border-bottom-color: rgb(63, 26, 1);
+    border-left-color: rgb(255, 165, 165);
+	font-weight: normal;
+	text-decoration: none;
+}
+/*-------------------------------*/
+/*-------- Coloca la imagen de PDF o cualquier imagen a la altura del texto -----------*/
+	.imgPdf {
+	vertical-align: top;
+	}
+/*----------------------------- Estilos para iconos DOC --------------*/
+.docIconStyle 
+{
+    font-family: arial,helvetica;
+    text-decoration: none;
+	font-size: 8px;
+    font-weight: normal;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: -moz-use-text-color;
+    border-right-color: -moz-use-text-color;
+    border-bottom-color: -moz-use-text-color;
+    border-left-color: -moz-use-text-color;
+    padding-top: 0px;
+    padding-right-value: 2px;
+    padding-bottom: 0px;
+    padding-left-value: 2px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    margin-top: 0px;
+    margin-right-value: 0px;
+    margin-bottom: 0px;
+    margin-left-value: 0px;
+    margin-left-ltr-source: physical;
+    margin-left-rtl-source: physical;
+    margin-right-ltr-source: physical;
+    margin-right-rtl-source: physical;
+    vertical-align: middle;
+}
+
+.docIconStyle, .docIconStyle:link, .docIconStyle:visited, .docIconStyle:active  
+{
+    color: rgb(5, 54, 130);
+    background-color: white;
+    border-top-color: rgb(5, 54, 130);
+    border-right-color: rgb(5, 54, 130);
+    border-bottom-color: rgb(5, 54, 130);
+    border-left-color: rgb(5, 54, 130);
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.docIconStyle:hover    
+{
+    color: white;
+    background-color: rgb(5, 54, 130);
+    border-top-color: rgb(147, 171, 230);
+    border-right-color: rgb(125, 51, 2);
+    border-bottom-color: rgb(63, 26, 1);
+    border-left-color: rgb(147, 171, 230);
+	font-weight: normal;
+	text-decoration: none;
+}
+/*-------------------------------*/
+/*----------------------------- Estilos para iconos XLS --------------*/
+.xlsIconStyle 
+{
+    font-family: arial,helvetica;
+    text-decoration: none;
+	font-size: 8px;
+    font-weight: normal;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: -moz-use-text-color;
+    border-right-color: -moz-use-text-color;
+    border-bottom-color: -moz-use-text-color;
+    border-left-color: -moz-use-text-color;
+    padding-top: 0px;
+    padding-right-value: 2px;
+    padding-bottom: 0px;
+    padding-left-value: 2px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    margin-top: 0px;
+    margin-right-value: 0px;
+    margin-bottom: 0px;
+    margin-left-value: 0px;
+    margin-left-ltr-source: physical;
+    margin-left-rtl-source: physical;
+    margin-right-ltr-source: physical;
+    margin-right-rtl-source: physical;
+    vertical-align: middle;
+}
+
+.xlsIconStyle, .xlsIconStyle:link, .xlsIconStyle:visited, .xlsIconStyle:active  
+{
+    color: rgb(59, 113, 34);
+    background-color: white;
+    border-top-color: rgb(59, 113, 34);
+    border-right-color: rgb(59, 113, 34);
+    border-bottom-color: rgb(59, 113, 34);
+    border-left-color: rgb(59, 113, 34);
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.xlsIconStyle:hover    
+{
+    color: white;
+    background-color: rgb(59, 113, 34);
+    border-top-color: rgb(109, 176, 103);
+    border-right-color: rgb(125, 51, 2);
+    border-bottom-color: rgb(63, 26, 1);
+    border-left-color: rgb(109, 176, 103);
+	font-weight: normal;
+	text-decoration: none;
+}
+/*-------------------------------*/
+/*----------------------------- Estilos para iconos PDF --------------*/
+.zipIconStyle 
+{
+    font-family: arial,helvetica;
+    text-decoration: none;
+	font-size: 8px;
+    font-weight: normal;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: -moz-use-text-color;
+    border-right-color: -moz-use-text-color;
+    border-bottom-color: -moz-use-text-color;
+    border-left-color: -moz-use-text-color;
+    padding-top: 0px;
+    padding-right-value: 2px;
+    padding-bottom: 0px;
+    padding-left-value: 2px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    margin-top: 0px;
+    margin-right-value: 0px;
+    margin-bottom: 0px;
+    margin-left-value: 0px;
+    margin-left-ltr-source: physical;
+    margin-left-rtl-source: physical;
+    margin-right-ltr-source: physical;
+    margin-right-rtl-source: physical;
+    vertical-align: middle;
+}
+
+.zipIconStyle, .zipIconStyle:link, .zipIconStyle:visited, .zipIconStyle:active  
+{
+    color: rgb(178, 125, 14);
+    background-color: white;
+    border-top-color: rgb(178, 125, 14);
+    border-right-color: rgb(178, 125, 14);
+    border-bottom-color: rgb(178, 125, 14);
+    border-left-color: rgb(178, 125, 14);
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.zipIconStyle:hover    
+{
+    color: white;
+    background-color: rgb(178, 125, 14);
+    border-top-color: rgb(255, 255, 196);
+    border-right-color: rgb(125, 51, 2);
+    border-bottom-color: rgb(63, 26, 1);
+    border-left-color: rgb(255, 255, 196);
+	font-weight: normal;
+	text-decoration: none;
+}
+/*-------------------------------*/
+
+/* Fin de hoja de estilos */

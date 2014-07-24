@@ -6,9 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Model Comparison</title>
-<link rel="stylesheet" href="Style.css" type="text/css" />
+<jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Comparison results</h3>
 	<br>
 	<br>
@@ -67,5 +68,7 @@
 	<br>
 	<br>
 	<a href="index.jsp">Back</a>
+	
+	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

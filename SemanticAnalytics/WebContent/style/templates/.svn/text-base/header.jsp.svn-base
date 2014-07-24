@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- Encabezado institucional generado con CSS-->
+<div id="header">
+
+	<div class="maintitle"><a href="http://www.jccm.es/">Castilla-La Mancha </a></div>	
+
+		<span class="right"><a href="http://www.jccm.es/prensa">Actualidad</a></span>
+		<span class="right"><a href="http://www.jccm.es/ficheroscomunes/framesSiaci.php3?codigo=0">Informaci&oacute;n y solicitud de Servicios</a></span>
+			
+	    <div class="subtitle"><a href="http://www.jccm.es/educacion">Consejer&iacute;a <br />
+  de Educaci&oacute;n y Ciencia</a> </div>
+	
+</div>
+
+<div id="page">
+
+<div id="encabezado">
+<!-- Encabezado con fondo azul y enlaces -->
+<div class="bloque"> 
+<a href="http://www.jccm.es/educacion">Inicio Consejer&iacute;a de Educaci&oacute;n y Ciencia</a> | 
+<a href="mailto:jagarcia@jccm.es">Contacto</a></div>
+</div>
+<!-- Espacio central de texto. Aparece por impresora -->	
+<div id="textarea">

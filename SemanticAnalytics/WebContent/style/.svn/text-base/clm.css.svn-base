@@ -1,0 +1,19 @@
+/*
+Juan Luis Alonso - Consejería de Educación y Ciencia
+Plantilla de propósito general para www.jccm.es/educacion
+Accesible Nivel AA
+
+Este CSS cambia los colores de toda la plantilla. 
+*/
+
+
+
+#textarea .title {
+  border-bottom: 1px solid #0D2058;
+}
+
+#textarea .title a, #textarea .subtitle, #textarea .title, #navigation input.submit, #footer p, #footer a {
+  color: #0D2058;
+}
+
+

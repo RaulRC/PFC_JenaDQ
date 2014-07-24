@@ -1,0 +1,180 @@
+/*
+Juan Luis Alonso - Consejería de Educación y Ciencia
+Plantilla de propósito general para www.jccm.es/educacion
+Versión para impresora
+*/
+
+
+html, body { margin: 0; padding: 0; font-size: 90%; font-family: verdana, sans serif, tahoma, lucida console; }
+
+
+abbr, acronym { cursor: help; border-bottom: 1px dotted;}
+
+
+.small { font-size: 70%; }
+
+
+#header .maintitle { display: none; }
+
+#header .maintitle a { display: none; }
+
+#header .subtitle { display: none; }
+
+#header .right { display: none; }
+
+#header .right a:link, #header .right a:visited, #header .right a:hover { display: none; }
+
+#encabezado { display: none; }
+
+#encabezado .bloque { display: none; }
+
+#encabezado .bloque a:link, #encabezado .bloque a:visited { display: none; }
+#encabezado .bloque a:hover { display: none; }
+#textarea .columnader { display: none; }
+
+a:hover, a:link, a:visited { color: #000000; text-decoration: none; }
+
+abbr, acronym { color: #000000; text-decoration: none; }
+
+/*-------------------------main textarea----------------------*/
+
+#textarea {
+  text-align: justify;
+ /* margin-top: 5.8em;*/
+}
+
+#textarea p {
+  margin: 5px;
+  margin-bottom: 7px;
+}
+
+#textarea li {
+  margin-right: 5px;
+}
+
+#textarea .textbox {
+  margin: 10px;
+ }
+
+#textarea .posted {
+  text-align: right;
+  font-size: 90%;
+  font-style: italic;
+  margin-top: 5px;
+}
+ 
+#textarea .title {
+  font-weight: 900;
+  font-size: 120%;
+  background-color: #ffffff;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+  
+#textarea .subtitle {
+  font-size: 100%;
+  font-weight: 900;
+}
+
+#textarea .limited {
+  margin: 5px;
+  height: 40px;
+  overflow: auto;
+}
+#textarea h1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 200%;
+	font-weight: 500px;
+	text-align: center;
+	margin: 0;
+}
+#textarea h2 {
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	font-size: 150%;
+	font-weight: bold;
+	text-align: left;
+	margin: 0;
+}
+#textarea h3 {
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	font-size: 120%;
+	font-weight: bold;
+	text-align: left;
+	margin: 0;
+}
+#textarea .encabezadogeneral { display: none; }
+#textarea .contenido { display: none; }
+#textarea .notapostit {
+	border-top: 1px solid #666666;
+	border-bottom: 1px solid #666666;
+	border-left: 1px solid #666666;
+	border-right: 1px solid #666666;
+	padding: 5px 5px 5px 5px;
+	font-family: "Trebuchet MS", verdana, sans serif, tahoma, lucida console;
+	color: #656565;
+	text-align: center;
+    } 
+#textarea img.left {
+		float:left;
+		margin:3px 10px 10px 0;
+		border: 1px solid #000000;
+}
+#textarea img.right {
+	float:right;
+	margin:3px 0 10px 7px;
+	border: 1px solid #000000;
+}
+#textarea img.center {
+	margin:3px 0 10px 7px;
+	border: 1px solid #000000;
+	text-align: center;
+	vertical-align: middle;
+}
+#textarea .top { display: none; }
+
+/*---------Menú de navegación------------*/
+
+#leftnavlist { display: none; }
+ 
+/*--------Pié de página---------*/
+
+#footer { display: none; }
+#footer .footer1 { display: none; }
+#footer2 { display: none; }
+/*------------------------- Estilos Tablas ---------------------*/
+.datatable {
+	border: 1px solid #D6DDE6;
+	border-collapse: collapse; 
+}
+.datatable td {
+	border: 1px solid #D6DDE6;
+	text-align: left;
+	padding: 4px; 
+}
+.datatable th {
+	border: 1px solid #828282;
+	background-color: #EDF1F4;
+	font-weight: bold;
+	text-align: center;
+	padding: 4px;
+}
+.datatable caption {
+	font: bold 0.9em "Trebuchet MS";
+	background-color: #b0c4de;
+	color: #33517a;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	border: 1px solid #789ac6;
+}
+.datatable tr.altrow {
+	background-color: #DFE7F2;
+	color: #000000;
+}
+.datatable tr:hover {
+	background-color: #DFE7F2;
+	color: #000000;
+}
+/*----------------------------- Fin de estilos para tablas------------*/

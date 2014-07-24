@@ -6,19 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Assessment Plan</title>
-<link rel="stylesheet" href="Style.css" type="text/css" />
+<jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Add an Assessment Plan</h3>
-	<br>
-	<br>
-	<br>
 	<s:if test="hasActionErrors()">
 		<div class="welcome">
 			<s:actionmessage />
 		</div>
 	</s:if>
-	<hr />
 	<s:form action="assessmentPlanAdd" method="post"
 		enctype="multipart/form-data">
 		<s:textfield label="URI" name="uri" value="" />
@@ -54,6 +51,6 @@
 	</table>
 	<br>
 	<br>
-
+<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

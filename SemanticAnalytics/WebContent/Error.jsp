@@ -6,14 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Error page</title>
-<link rel="stylesheet" href="Style.css" type="text/css" />
+<jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	Something was wrong x_X
 
 	<s:property value="e.printStackTrace()" />
 	<br>
 	<br>
 	<a href="index.jsp">Back</a>
+	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

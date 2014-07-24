@@ -8,21 +8,16 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Jena App v 1.0</title>
-<link rel="stylesheet" href="Style.css" type="text/css" />
+<jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
-	<h1>Hello :D</h1>
-	<p>Test Webpage</p>
-	<br>
+	<jsp:include page="/style/templates/header.jsp"></jsp:include>
+	<h1>Introducción</h1>
 	<table>
-	<tr>
-	<td>
-	<s:a href="javadoc/index.html">API SemDQ - Jena DQ </s:a>
-	</td>
-	</tr>
+		<tr>
+			<td><s:a href="javadoc/index.html">API SemDQ - Jena DQ </s:a></td>
+		</tr>
 	</table>
-	<br>
-	<br>
 	<%-- 
 	<p>
 		Put directly the <b>URI of the resource</b>
@@ -45,11 +40,7 @@
 	
 	--%>
 	<br>
-	<br>
-	<br>
-	<p>
-		<b>Use an URI and ENDPOINT (single URI Assessment)</b>
-	</p>
+	<h3>Use an URI and ENDPOINT (single URI Assessment)</h3>
 	<s:form action="uriEndpoint" method="post"
 		enctype="multipart/form-data">
 		<s:textfield name="uri" label="Put your URI here " />
@@ -70,9 +61,9 @@
 	<br>
 	<br>
 	<br>
-	<p>
-		<b>Create an Assessment Plan (multiple URI Assessment)</b>
-	</p>
+	
+		<h3>Create an Assessment Plan (multiple URI Assessment)</h3>
+
 
 	<s:url id="initAssessmentPlan" action="assessmentPlanInit"></s:url>
 
@@ -85,9 +76,9 @@
 	</table>
 	<br>
 	<br>
-	<p>
-		<b>Model Comparison</b>
-	</p>
+
+		<h3>Model Comparison</h3>
+	
 	<s:form action="modelComparison" method="post"
 		enctype="multipart/form-data">
 		<s:file name="file" label="Model A" />
@@ -103,7 +94,7 @@
 		<b>Type a R expression</b>:
 	</p>
 	<s:form action="calculations">
-		<s:textfield name="data" label="R expression:" />
+		<s:textfield name="data" label="R expression" />
 		<s:submit />
 	</s:form>
 
@@ -113,9 +104,10 @@
 		<b>Type a R expression with graphical result</b>:
 	</p>
 	<s:form action="graph">
-		<s:textfield name="data" label="R expression with graphical result:" />
+		<s:textfield name="data" label="R expression with graphical result" />
 		<s:submit />
 	</s:form>
-	
+
+<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

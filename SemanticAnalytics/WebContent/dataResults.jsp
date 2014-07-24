@@ -6,9 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Data Results</title>
-<link rel="stylesheet" href="Style.css" type="text/css" />
+<jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>DataQuery results</h3>
 	<br>
 	<hr>
@@ -21,5 +22,6 @@
 	<br>
 	<br>
 	<a href="index.jsp">Back</a>
+	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>
