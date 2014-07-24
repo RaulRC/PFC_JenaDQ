@@ -11,6 +11,8 @@
 <body>
 <jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Add an Assessment Plan</h3>
+	
+	Lore ipsum ... 
 	<s:if test="hasActionErrors()">
 		<div class="welcome">
 			<s:actionmessage />

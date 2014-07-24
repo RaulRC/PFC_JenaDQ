@@ -3,7 +3,7 @@
 		<div id="footer">
 			<a href="<%=request.getContextPath()%>/index.jsp">Home </a>&nbsp;
 			<a href="javadoc/index.html">API SemDQ (Jena DQ)</a>&nbsp; 
-			<a href="javadoc/index.html">About </a>&nbsp; 
+			<a href="<%=request.getContextPath()%>/About.jsp">About </a>&nbsp; 
 		</div>
 
 	</div>

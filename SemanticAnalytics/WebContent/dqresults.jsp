@@ -11,9 +11,6 @@
 <body>
 <jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Results of the DQ Assessment</h3>
-	<hr>
-	<br>
-	<br>
 	<table>
 		<tr>
 			<td align="center"><b>DQ Dimension</b></td>
@@ -32,7 +29,7 @@
 	</table>
 	<hr>
 	<br>
-	<p>URI for results (fuseki Server): <s:property value="uriAssessment.toString()" /> </p>
+	<p><b>URI for results (fuseki Server)</b>: <s:property value="uriAssessment.toString()" /> </p>
 <br>
 	<b>Download results</b>
 	<s:url id="fileDownloadRDF" action="downloadRDF"></s:url>

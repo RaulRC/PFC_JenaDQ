@@ -5,35 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Error page</title>
+<title>About</title>
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/style/templates/header.jsp"></jsp:include>
-	Something was wrong x_X
+	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 
-	<s:property value="e.printStackTrace()" />
-	<br>
-	<br>
-	<br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
+	<h3>About...</h3>
 
-	<br><br>
-	<br>
-	<a href="index.jsp">Back</a>
+	<ul>
+		<li>Myself</li>
+		<li>Jena DQ</li>
+		<li>LODQA Tool</li>
+		<li>Others...</li>
+	</ul>
+
 	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

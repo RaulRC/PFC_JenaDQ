@@ -5,35 +5,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Error page</title>
+<title>Model Comparison</title>
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/style/templates/header.jsp"></jsp:include>
-	Something was wrong x_X
+	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 
-	<s:property value="e.printStackTrace()" />
-	<br>
-	<br>
-	<br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
+	<h3>Model Comparison</h3>
 
-	<br><br>
+	Lore Ipsum...
+
+	<s:form action="modelComparison" method="post"
+		enctype="multipart/form-data">
+		<s:file name="file" label="Model A" />
+		<s:file name="file" label="Model B" />
+		<s:submit />
+	</s:form>
 	<br>
-	<a href="index.jsp">Back</a>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>
