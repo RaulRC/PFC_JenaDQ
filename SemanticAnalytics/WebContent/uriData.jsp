@@ -10,7 +10,7 @@
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/style/templates/header.jsp"></jsp:include>
+	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Assessment</h3>
 	<br>
 	<a href="<s:property value="uri.toString()" />"> <s:property
@@ -25,9 +25,9 @@
 		<s:file name="file" label="Contextual Rules File to upload" />
 		<s:file name="file" label="Use Rules File to upload" />
 
-		<s:checkbox name="completeness" fieldValue="true"
+		<s:checkbox name="completeness" fieldValue="true" value="true"
 			label="Completeness Dimension" />
-		<s:checkbox name="accessibility" fieldValue="true"
+		<s:checkbox name="accessibility" fieldValue="true" value="true"
 			label="Accessibility Dimension" />
 		<s:submit name="dq" value="DQ Assessment" />
 

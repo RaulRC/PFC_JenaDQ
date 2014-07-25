@@ -108,7 +108,17 @@
 	</table>
 	<br>
 	<br>
-	<br>
+	<b>Download results</b>
+	<s:url id="fileDownloadCompRDF" action="CdownloadRDF"></s:url>
+	<s:url id="fileDownloadCompN3" action="CdownloadN3"></s:url>
+
+	<table>
+		<tr>
+			<td><s:a href="%{fileDownloadCompRDF}">RDF/XML</s:a></td>
+			<td><s:a href="%{fileDownloadCompN3}">N3</s:a></td>
+
+		</tr>
+	</table>
 	<br>
 	<br>
 	<br>

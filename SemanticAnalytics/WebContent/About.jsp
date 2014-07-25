@@ -20,6 +20,26 @@
 		<li>Others...</li>
 	</ul>
 
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

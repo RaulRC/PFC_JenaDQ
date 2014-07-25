@@ -9,10 +9,33 @@
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/style/templates/header.jsp"></jsp:include>
+	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Add an Assessment Plan</h3>
-	
-	Lore ipsum ... 
+
+	<p>
+		En esta sección usted podrá realizar una evaluación de calidad de los
+		datos respecto de varios modelos. Cada evaluación puede llevarse a
+		cabo en distintos <b>endpoint</b> si se desea, siempre que los datos
+		sean válidos. Igualmente puede indicar como <b>identificador</b> el
+		mismo nombre o puede poner nombres distintos para cada una de las
+		evaluaciones. Para comenzar, rellene los campos que aparecen en el
+		formulario y presione <b>Add Assessment</b> para añadir esa evaluación
+		al plan. Una vez introduzca todas las evaluaciones que desee, bastará
+		con pulsar <b>Execute DQ Assessment Plan</b> y esperar los resultados.
+	</p>
+	<p>
+		Si desea probar la aplicación, puede hacer click en el enlace que
+		aparece abajo y se abrirá en una nueva pestaña una página aleatoria de
+		<a href="http://dbpedia.org">DBPedia</a>. Únicamente deberá copiar
+		dicho enlace pero tendrá que <b>sustituir</b> de la URI la palabra <b>page</b>
+		por <b>resource</b>. Ejemplo:
+	</p>
+	<ul>
+		<li><b>URI</b>: <a href="http://dbpedia.org/resource/Iron_Maiden">http://dbpedia.org/resource/Iron_Maiden</a>
+		</li>
+		<li><b>Endpoint</b>: <a href="http://dbpedia.org/sparql">http://dbpedia.org/sparql</a>
+		</li>
+	</ul>
 	<s:if test="hasActionErrors()">
 		<div class="welcome">
 			<s:actionmessage />
@@ -53,6 +76,6 @@
 	</table>
 	<br>
 	<br>
-<jsp:include page="/style/templates/footer.jsp"></jsp:include>
+	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

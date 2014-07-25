@@ -13,7 +13,16 @@
 
 	<h3>Model Comparison</h3>
 
-	Lore Ipsum...
+	<p>
+		En esta sección usted podrá realizar comparaciones sobre distintos
+		modelos. Como resultado obtendrá un porcentaje de similitud así como
+		un modelo que contendrá todas las <b>triplas no comunes</b>. Dicho
+		modelo resultado podrá ser descargado en formatos <b>RDF</b> y <b>N3</b>.
+	</p>
+
+	<p>Para comenzar basta con que cargue dos modelos en los campos
+		correspondientes y pulse el botón para obtener los resultados de la
+		comparación.</p>
 
 	<s:form action="modelComparison" method="post"
 		enctype="multipart/form-data">

@@ -3,15 +3,23 @@ package JenaApp.actions;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Map;
 
 import utilidades.DataPicker;
 
 import DQModel.DQModel;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class modelComparison extends ActionSupport {
@@ -26,7 +34,7 @@ public class modelComparison extends ActionSupport {
 	private StmtIterator resultList;
 	private StmtIterator modelA;
 	private StmtIterator modelB;
-	private double affinity; 
+	private String affinity;
 
 	public List<File> getFile() {
 		return file;
@@ -38,30 +46,31 @@ public class modelComparison extends ActionSupport {
 
 	public String execute() {
 		try {
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			
 			InputStream inA = new FileInputStream(this.file.get(0));
 			InputStream inB = new FileInputStream(this.file.get(1));
 
 			DQModel modelA = new DQModel(inA, "RDF/XML");
 			DQModel modelB = new DQModel(inB, "RDF/XML");
+			
+			String aff = ""; 
 
 			// Calculates the affinity percentage
-						setAffinity(-1.0);  
-			
-			if(modelA.getModel().size() >= modelB.getModel().size()){
+			setAffinity("");
+
+			if (modelA.getModel().size() >= modelB.getModel().size()) {
 				setResultModel(modelA.compareModelWith(modelB));
-				setAffinity(modelA.affinity(modelB));
-			}
-			else{
+				aff = decimalFormat(modelB.affinity(modelA));
+			} else {
 				setResultModel(modelB.compareModelWith(modelA));
-				setAffinity(modelB.affinity(modelA));
+				aff = decimalFormat(modelB.affinity(modelA));
 			}
+			setAffinity(aff);
+			session.put("CresultModel", this.getResultModel());
 			setResultList(this.resultModel.listStatements());
 			setModelA(modelA.getModel().listStatements());
 			setModelB(modelB.getModel().listStatements());
-			
-			
-			
-			
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -69,9 +78,9 @@ public class modelComparison extends ActionSupport {
 
 		return SUCCESS;
 	}
+
 	public void validate() {
 		boolean flag = false;
-
 
 		if (getFile() == null) {
 			addFieldError("file", getText("file.required"));
@@ -85,6 +94,11 @@ public class modelComparison extends ActionSupport {
 			addActionError("Input Error");
 	}
 
+	public String decimalFormat(double number){
+		DecimalFormat df = new DecimalFormat("0.00##");
+		return df.format(number); 
+
+	}
 	public Model getResultModel() {
 		return resultModel;
 	}
@@ -117,12 +131,14 @@ public class modelComparison extends ActionSupport {
 		this.modelB = modelB;
 	}
 
-	public double getAffinity() {
+	public String getAffinity() {
 		return affinity;
 	}
 
-	public void setAffinity(double affinity) {
-		this.affinity = affinity;
+	public void setAffinity(String aff) {
+		this.affinity = aff;
 	}
+
+	
 
 }

@@ -86,7 +86,26 @@
 			<result name="error">Error.jsp</result>
 			<result name="input">index.jsp</result>
 		</action>
-
+		<action name="CdownloadRDF" class="JenaApp.actions.comparisonDownload"
+			method="rdf">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="comparisonResults.rdf"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="error">Error.jsp</result>
+		</action>
+		<action name="CdownloadN3" class="JenaApp.actions.comparisonDownload"
+			method="n3">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="comparisonResults.n3"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="error">Error.jsp</result>
+		</action>
 	</package>
 </struts>
 
