@@ -9,66 +9,117 @@
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/style/templates/header.jsp"></jsp:include>
+
+	<script language="javascript" type="text/javascript">
+		function mostrarTabla(tr) {
+			var item_tr = document.getElementById(tr);
+
+			if (item_tr) {
+				if (item_tr.style.display == "none") {
+					item_tr.style.display = "";
+
+				} else {
+					item_tr.style.display = "none";
+				}
+			}
+		}
+	</script>
+
+
+
+	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Comparison results</h3>
 	<br>
+		Lore ipsum...
 	<br>
-	<p>
-		<b>Model A:</b>
-	</p>
-	<table>
+	<table onclick="javascript:mostrarTabla('modeloA');"
+		style="cursor: pointer; cursor: hand;">
+		<tr>
+			<td>Display Model A</td>
+		</tr>
+	</table>
+	<table id="modeloA" style="display: none;">
+		<tr>
+			<td align="center"><b>Subject</b></td>
+			<td align="center"><b>Predicate</b></td>
+			<td align="center"><b>Object</b></td>
+		</tr>
 		<s:iterator value="modelA" status="itStatus">
 			<tr>
-				<td align="center"><s:property value="getSubject().toString()" /></td>
-				<td align="center"><s:property
+				<td align="left"><s:property value="getSubject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property
 						value="getPredicate().toString()" /></td>
-				<td align="center"><s:property value="getObject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property value="getObject().toString()" /></td>
 			</tr>
 		</s:iterator>
 	</table>
 	<br>
-	<p>
-		<b>Model B:</b>
-	</p>
-	<table>
+	<table onclick="javascript:mostrarTabla('modeloB');"
+		style="cursor: pointer; cursor: hand;">
+		<tr>
+			<td>Display Model B</td>
+		</tr>
+	</table>
+	<table id="modeloB" style="display: none;">
+		<tr>
+			<td align="center"><b>Subject</b></td>
+			<td align="center"><b>Predicate</b></td>
+			<td align="center"><b>Object</b></td>
+		</tr>
 		<s:iterator value="modelB" status="itStatus">
 			<tr>
-				<td align="center"><s:property value="getSubject().toString()" /></td>
-				<td align="center"><s:property
+				<td align="left"><s:property value="getSubject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property
 						value="getPredicate().toString()" /></td>
-				<td align="center"><s:property value="getObject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property value="getObject().toString()" /></td>
 			</tr>
 		</s:iterator>
 	</table>
 	<br>
-	<br>
-	<p>
-		<b>Model difference:</b>
-	</p>
-	<table>
+	<table onclick="javascript:mostrarTabla('result');"
+		style="cursor: pointer; cursor: hand;">
+		<tr>
+			<td>Display Result</td>
+		</tr>
+	</table>
+	<table id="result" style="display: none;">
+		<tr>
+			<td align="center"><b>Subject</b></td>
+			<td align="center"><b>Predicate</b></td>
+			<td align="center"><b>Object</b></td>
+		</tr>
 		<s:iterator value="resultList" status="itStatus">
 			<tr>
-				<td align="center"><s:property value="getSubject().toString()" /></td>
-				<td align="center"><s:property
+				<td align="left"><s:property value="getSubject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property
 						value="getPredicate().toString()" /></td>
-				<td align="center"><s:property value="getObject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property value="getObject().toString()" /></td>
 			</tr>
 		</s:iterator>
 	</table>
 	<br>
 	<br>
-	
-	<b>Models affinity</b>: 
+
+	<b>Models affinity</b>:
 	<table>
 		<tr>
-			<td> <s:property value="affinity" /> %
-			</td>
+			<td><s:property value="affinity" /> %</td>
 		</tr>
 	</table>
 	<br>
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<a href="index.jsp">Back</a>
-	
+
 	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
 </body>
 </html>

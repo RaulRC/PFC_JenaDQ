@@ -30,18 +30,18 @@ p {
 a:link {
 	font-weight: bold;
 	text-decoration: none;
-	color: #990000;
+	color: #003366;
 }
 
 a:visited {
 	font-weight: bold;
 	text-decoration: none;
-	color: #995555;
+	color: #003366;
 }
 
 a:hover,a:active {
 	text-decoration: underline;
-	color: #010E22;
+	color: #990000;
 }
 
 /* LAYOUT */
@@ -66,11 +66,12 @@ table {
 	border: 1px solid #666666;
 	border-radius: 5px;
 	padding: 5px;
+	background-color: #A3C9D2;
 }
 
 #intro {
 	background: url(logo_escuela_b.jpg) no-repeat top right;
-	background-size: 250px 80px;
+	background-size: 375px 120px;
 	margin: 0px;
 }
 

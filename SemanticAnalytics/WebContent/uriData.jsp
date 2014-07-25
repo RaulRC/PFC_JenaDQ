@@ -48,7 +48,7 @@
 	<br>
 	<h3>Model Properties</h3>
 	<br>
-	<table border="1">
+	<table>
 		<s:iterator value="modelProperties" status="itStatus">
 			<tr>
 				<td align="center"><a href="<s:property value="toString()" />">
