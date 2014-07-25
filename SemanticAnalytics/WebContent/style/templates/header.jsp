@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 <div id="container">
@@ -18,12 +21,15 @@
 			<p class="p3"><span>Based on <a href="http://www.csszengarden.com/?cssfile=124/124.css" title="css sample">CSS zend garden sample</a>. </span></p>
 			--%>
 			<br>
+			
 			<p>Assessment & Operations</p>
 			<ul>
 				<li><a href="<%=request.getContextPath()%>/uriAssessment.jsp">Single
 						URI Assessment</a></li>
-				<li><a href="<%=request.getContextPath()%>/assessmentPlan.jsp">Multiple
-						URI Assessment (Assessment Plan)</a></li>
+				<li>
+				<s:url id="assessmentPlan" action="assessmentPlanInit"></s:url>
+				<s:a href="%{assessmentPlan}">Multiple URI Assessment
+						(Assessment Plan)</s:a></li>
 				<li><a href="<%=request.getContextPath()%>/modelComparison.jsp">Model
 						Comparisons</a></li>
 				<li><a href="<%=request.getContextPath()%>/rOperation.jsp">
@@ -32,7 +38,8 @@
 			<HR />
 			<p>Data Quality</p>
 			<ul>
-				<li><a href="<%=request.getContextPath()%>/contextualAssessment.jsp">
+				<li><a
+					href="<%=request.getContextPath()%>/contextualAssessment.jsp">
 						Contextual Assessment</a>
 					<ul>
 						<li><a

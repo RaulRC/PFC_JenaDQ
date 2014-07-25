@@ -20,10 +20,10 @@
 		</tr>
 		<s:iterator value="mr" status="itStatus">
 			<tr>
-				<td align="center"><s:property value="getMDimension()" /></td>
-				<td align="center"><s:property value="getMName()" /></td>
-				<td align="center"><s:property value="getMResult()" /></td>
-				<td align="center"><s:property value="getmContextualResult()" /></td>
+				<td align="left"><s:property value="getMDimension()" /></td>
+				<td align="left" style="padding-left: 12px"><s:property value="getMName()" /></td>
+				<td align="left" style="padding-left: 12px"><s:property value="getMResult()" /></td>
+				<td align="left" style="padding-left: 12px"><s:property value="getmContextualResult()" /></td>
 			</tr>
 		</s:iterator>
 	</table>
