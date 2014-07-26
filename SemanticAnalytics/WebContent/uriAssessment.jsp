@@ -43,6 +43,8 @@
 			<td><a
 				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php?go=1"
 				target="_blank"> Pick a random URI [New Tab]</a></td>
+		</tr>
+		<tr>
 			<td><a
 				href="http://richard.cyganiak.de/2007/09/random-dbpedia.php"
 				target="_blank"> By Richard cyganiak - Random-dbpedia</a></td>

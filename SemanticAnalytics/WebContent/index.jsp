@@ -28,7 +28,7 @@
 		en el proyecto fin de carrera (PFC) del alumno <b>Raúl Reguillo
 			Carmona</b>.
 	</p>
-
+	<img src="figures/jena-architecture.png"  height="50%" width="50%" style="padding-left: 150px;" />
 	<h3>
 		Cómo funciona <i>LODQA Tool</i>
 	</h3>
