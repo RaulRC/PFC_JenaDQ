@@ -22,7 +22,7 @@
 		enctype="multipart/form-data">
 		<s:textfield label="DQAssessment Identifier" name="identifier" />
 		<s:textfield label="Depth" name="depth" value="1" />
-		<s:file name="file" label="Contextual Rules File to upload" />
+		<s:file name="file" label="Contextual-Values Rules File to upload" />
 		<s:file name="file" label="Use Rules File to upload" />
 
 		<s:checkbox name="completeness" fieldValue="true" value="true"

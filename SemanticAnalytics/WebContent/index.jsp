@@ -7,7 +7,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Jena App v 1.0</title>
+<title>Linked Open Data Quality Assessment Tool v 1.0</title>
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
