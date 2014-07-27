@@ -41,13 +41,24 @@
 			<s:actionmessage />
 		</div>
 	</s:if>
+	<script language="javascript" type="text/javascript">
+		function init() {
+			var item = document.getElementById("loading");
+			item.style.display = "";
+		}
+	</script>
+	<img id="loading" src="figures/loading.gif" border=0
+		style="position: absolute; width: 10%; text-align: center; top: 600px; right: 500px; display: none">
 	<s:form action="assessmentPlanAdd" method="post"
 		enctype="multipart/form-data">
-		<s:textfield label="URI" name="uri" value="YourUri" onclick="this.value='';" />
-		<s:textfield label="Endpoint" name="endpoint" value="YourEndpoint" onclick="this.value='';" />
+		<s:textfield label="URI" name="uri" value="YourUri"
+			onclick="this.value='';" pattern="https?://.+" />
+		<s:textfield label="Endpoint" name="endpoint" value="YourEndpoint"
+			onclick="this.value='';" pattern="https?://.+" />
 		<s:textfield label="DQAssessment Identifier" name="identifier"
-			value="YourIdentifier" onclick="this.value='';"/>
-		<s:textfield label="Depth" name="depth" value="1" onclick="this.value='';"/>
+			value="YourIdentifier" onclick="this.value='';" />
+		<s:textfield label="Depth" name="depth" value="1"
+			onclick="this.value='';" />
 		<s:file name="file" label="Contextual-Values Rules File to upload" />
 		<s:file name="file" label="Use Rules File to upload" />
 		<s:checkbox name="completeness" fieldValue="true" value="true"
@@ -58,7 +69,7 @@
 
 	</s:form>
 	<br>
-	<s:form action="assessmentPlanExecute" method="post">
+	<s:form action="assessmentPlanExecute" method="post" onsubmit="javascript:init()">
 		<s:submit name="dqplan" value="Execute DQ Assessment Plan" />
 	</s:form>
 

@@ -1,6 +1,5 @@
 package JenaApp.actions;
 
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -8,21 +7,19 @@ import utilidades.DQModel;
 import utilidades.Operation;
 
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.util.FileManager;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
 
 public class getURI extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String uri;
-	private LinkedList<Property> modelProperties; 
-	private Model model; 
-	private String format; 
-	private Exception e; 
-	
+	private LinkedList<Property> modelProperties;
+	private Model model;
+	private String format;
+	private Exception e;
+	private String errorMsg; 
+
 	public String getFormat() {
 		return format;
 	}
@@ -56,23 +53,26 @@ public class getURI extends ActionSupport {
 	}
 
 	public String execute() {
-		String ret=SUCCESS;
-		Map<String, Object> session = ActionContext.getContext().getSession(); 
-		System.out.println("Uri: " + uri);
-		try{
+		String ret = SUCCESS;
+		try {
+			Map<String, Object> session = ActionContext.getContext()
+					.getSession();
+			System.out.println("Uri: " + uri);
+
 			DQModel dq;
-			dq = new DQModel(uri); 
-			setFormat(dq.getFormat()); 
-			setModel(dq.getModel()); 
+			dq = new DQModel(uri);
+			setFormat(dq.getFormat());
+			setModel(dq.getModel());
 			dq.showModelWithFormat(getFormat());
 			Operation oper = new Operation(dq.getModel());
 			setModelProperties(oper.getAllProperties());
-			session.put("model", dq.getModel()); 
+			session.put("model", dq.getModel());
+		} catch (Exception e) {
+			setE(e);
+			setErrorMsg("Error loading URI. Check URI and ENDPOINT and try again"); 
+			ret = ERROR;
 		}
-		catch(Exception e){
-			ret=ERROR;
-		}
-		return ret; 
+		return ret;
 	}
 
 	public Exception getE() {
@@ -81,5 +81,13 @@ public class getURI extends ActionSupport {
 
 	public void setE(Exception e) {
 		this.e = e;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }

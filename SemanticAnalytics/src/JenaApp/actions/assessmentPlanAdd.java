@@ -18,6 +18,10 @@ import JenaDQ.DQDimension;
 import JenaDQ.MeasurementResult;
 import JenaDQ._dimAccessibility;
 import JenaDQ._dimCompleteness;
+import JenaDQExceptions.IdentifierException;
+import JenaDQExceptions.ModelGenerationException;
+import JenaDQExceptions.RuleException;
+import JenaDQExceptions.URIException;
 
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.ReadWrite;
@@ -45,8 +49,8 @@ public class assessmentPlanAdd extends ActionSupport {
 	private boolean completeness;
 	private boolean accessibility;
 	private String uriAssessment;
-	private Exception e; 
-	
+	private Exception e;
+	private String errorMsg; 
 
 	public String getUriAssessment() {
 		return uriAssessment;
@@ -117,39 +121,39 @@ public class assessmentPlanAdd extends ActionSupport {
 	 * 
 	 * @return
 	 */
-	public String execute() {
-		Map<String, Object> session = ActionContext.getContext().getSession();
+	public String execute() throws RuleException, URIException, ModelGenerationException, IdentifierException {
 		String ret = SUCCESS;
-
-		// --------------------------------------------------------
-		InputStream in = null;
-		InputStream inc = null;
-		List<Rule> useRules = null;
-		List<Rule> contextualRules = null;
-
 		try {
+			Map<String, Object> session = ActionContext.getContext()
+					.getSession();
+
+			// --------------------------------------------------------
+			InputStream in = null;
+			InputStream inc = null;
+			List<Rule> useRules = null;
+			List<Rule> contextualRules = null;
+
 			inc = new FileInputStream(file.get(0));
 			if (isCompleteness())
 				in = new FileInputStream(file.get(1));
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
 
-		// We need use rules just for completeness dim
-		if (getFile().size() > 0) {
-			BufferedReader brc = new BufferedReader(new InputStreamReader(inc));
-			contextualRules = Rule.parseRules(Rule.rulesParserFromReader(brc));
-			// System.out.println(contextualRules);
-		}
-		if (isCompleteness()) {
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
-			// System.out.println(useRules);
-		} else
-			setDepth(0);
+			// We need use rules just for completeness dim
+			if (getFile().size() > 0) {
 
-		// ----------------------------------------------------------------
-		try {
+				BufferedReader brc = new BufferedReader(new InputStreamReader(
+						inc));
+				contextualRules = Rule.parseRules(Rule
+						.rulesParserFromReader(brc));
+			}
+			if (isCompleteness()) {
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(in));
+				useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
+				// System.out.println(useRules);
+			} else
+				setDepth(0);
+
+			// ----------------------------------------------------------------
 
 			// SETTING PLAN - DQAPLAN
 			DQAssessmentPlan dqplan = (DQAssessmentPlan) session
@@ -170,8 +174,9 @@ public class assessmentPlanAdd extends ActionSupport {
 			dqplan.addDQAssessment(dqas);
 
 		} catch (Exception e) {
-			// TODO set correct exception
+			setE(e);
 			e.printStackTrace();
+			setErrorMsg("Check input parameters"); 
 			ret = ERROR;
 		}
 		return ret;
@@ -234,5 +239,13 @@ public class assessmentPlanAdd extends ActionSupport {
 
 	public void setE(Exception e) {
 		this.e = e;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }

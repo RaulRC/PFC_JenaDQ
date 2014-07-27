@@ -20,7 +20,7 @@ public class uriEndpoint extends ActionSupport {
 	private Model model; 
 	private String endpoint; 
 	private Exception e; 
-
+	private String errorMsg; 
 
 
 	public Model getModel() {
@@ -67,6 +67,8 @@ public class uriEndpoint extends ActionSupport {
 
 		}
 		catch(Exception e){
+			setE(e); 
+			setErrorMsg("Error in Parameters. Please check values and try again."); 
 			ret=ERROR;
 		}
 		return ret; 
@@ -94,5 +96,13 @@ public class uriEndpoint extends ActionSupport {
 
 	public void setE(Exception e) {
 		this.e = e;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }

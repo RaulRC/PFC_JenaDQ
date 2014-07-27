@@ -18,10 +18,21 @@
 	</a>
 	<br>
 	<br>
+	<script language="javascript" type="text/javascript">
+		function init() {
+			var item = document.getElementById("loading");
+			item.style.display = "";
+		}
+	</script>
+	<img id="loading" src="figures/loading.gif" border=0
+		style="position: absolute; width: 10%; text-align: center; top: 400px; right: 500px; display: none;">
+
 	<s:form action="dqassessment" method="post"
-		enctype="multipart/form-data">
-		<s:textfield label="DQAssessment Identifier" name="identifier" value="YourIdentifier" onclick="this.value='';"/>
-		<s:textfield label="Depth" name="depth" value="1" onclick="this.value='';"/>
+		enctype="multipart/form-data" onsubmit="javascript:init()">
+		<s:textfield label="DQAssessment Identifier" name="identifier"
+			value="YourIdentifier" onclick="this.value='';" />
+		<s:textfield label="Depth" name="depth" value="1"
+			onclick="this.value='';" />
 		<s:file name="file" label="Contextual-Values Rules File to upload" />
 		<s:file name="file" label="Use Rules File to upload" />
 

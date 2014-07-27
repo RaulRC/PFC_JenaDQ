@@ -32,11 +32,14 @@
 		</li>
 	</ul>
 	<s:form action="uriEndpoint" method="post"
-		enctype="multipart/form-data">
-		<s:textfield name="uri" label="Put your URI here " value="YourUri" onclick="this.value='';" />
-		<s:textfield name="endpoint" label="Put your ENDPOINT here "  value="YourEndpoint" onclick="this.value='';"/>
+		enctype="multipart/form-data" >
+		<s:textfield name="uri" label="Put your URI here " value="YourUri"
+			onclick="this.value='';" pattern="https?://.+" />
+		<s:textfield name="endpoint" label="Put your ENDPOINT here "
+			value="YourEndpoint" onclick="this.value='';" pattern="https?://.+" />
 		<s:submit />
 	</s:form>
+
 	<br>
 	<table>
 		<tr>

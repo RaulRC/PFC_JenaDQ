@@ -35,7 +35,9 @@ public class modelComparison extends ActionSupport {
 	private StmtIterator modelA;
 	private StmtIterator modelB;
 	private String affinity;
-
+	private Exception e;
+	private String errorMsg; 
+	
 	public List<File> getFile() {
 		return file;
 	}
@@ -72,8 +74,11 @@ public class modelComparison extends ActionSupport {
 			setModelA(modelA.getModel().listStatements());
 			setModelB(modelB.getModel().listStatements());
 
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
+			setE(e); 
+			setErrorMsg("File Exception. Please check both files and try again"); 
 			e.printStackTrace();
+			return ERROR; 
 		}
 
 		return SUCCESS;
@@ -137,6 +142,22 @@ public class modelComparison extends ActionSupport {
 
 	public void setAffinity(String aff) {
 		this.affinity = aff;
+	}
+
+	public Exception getE() {
+		return e;
+	}
+
+	public void setE(Exception e) {
+		this.e = e;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 	

@@ -23,6 +23,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
+import com.hp.hpl.jena.reasoner.rulesys.Rule.ParserException;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -42,6 +43,7 @@ public class DqAssessment extends ActionSupport {
 	private boolean accessibility;
 	private String uriAssessment;
 	private Exception e;
+	private String errorMsg;
 
 	public String getUriAssessment() {
 		return uriAssessment;
@@ -75,26 +77,25 @@ public class DqAssessment extends ActionSupport {
 			inc = new FileInputStream(file.get(0));
 			if (isCompleteness())
 				in = new FileInputStream(file.get(1));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 
-		if (getFile().size() > 0) {
-			BufferedReader brc = new BufferedReader(new InputStreamReader(inc));
-			contextualRules = Rule.parseRules(Rule.rulesParserFromReader(brc));
-		}
-		if (isCompleteness()) {
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
-			// System.out.println(useRules);
-		} else
-			setDepth(0);
+			if (getFile().size() > 0) {
+				BufferedReader brc = new BufferedReader(new InputStreamReader(
+						inc));
+				contextualRules = Rule.parseRules(Rule
+						.rulesParserFromReader(brc));
+			}
+			if (isCompleteness()) {
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(in));
+				useRules = Rule.parseRules(Rule.rulesParserFromReader(br));
+				// System.out.println(useRules);
+			} else
+				setDepth(0);
 
-		// System.out.println(contextualRules);
+			// System.out.println(contextualRules);
 
-		// ----------------------------------------------------------------
-		try {
+			// ----------------------------------------------------------------
+
 			setModel((Model) session.get("model"));
 			setUri((String) session.get("URI"));
 			setEndpoint((String) session.get("ENDPOINT"));
@@ -126,15 +127,25 @@ public class DqAssessment extends ActionSupport {
 			session.put("resultModel", dqplan.getFinalModel());
 
 			// Storing in TDB
-			try {
-				tdb(System.currentTimeMillis() + "");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+
+			tdb(System.currentTimeMillis() + "");
+		} catch (ParserException e) {
+			setE(e); 
+			setErrorMsg("Parser Error Exception. Please check input parameters and try again.");
+			e.printStackTrace();
+			return ERROR; 
+		} catch (FileNotFoundException e) {
+			setE(e); 
+			setErrorMsg("File Error Exception. Please check input parameters and try again.");
+			e.printStackTrace();
+			return ERROR; 
 		} catch (Exception e) {
-			// TODO set correct exception
-			ret = ERROR;
+			setE(e); 
+			setErrorMsg("Parameters Exception. Please check input parameters and try again.");
+			e.printStackTrace();
+			return ERROR; 
 		}
+
 		return ret;
 	}
 
@@ -277,6 +288,14 @@ public class DqAssessment extends ActionSupport {
 
 	public void setE(Exception e) {
 		this.e = e;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 }

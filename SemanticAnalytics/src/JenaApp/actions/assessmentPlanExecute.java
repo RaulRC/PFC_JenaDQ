@@ -31,6 +31,7 @@ public class assessmentPlanExecute extends ActionSupport {
 	private ArrayList<MeasurementResult> mr;
 	private String uriAssessment;
 	private Exception e;
+	private String errorMsg; 
 
 	public String getUriAssessment() {
 		return uriAssessment;
@@ -60,7 +61,10 @@ public class assessmentPlanExecute extends ActionSupport {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			setE(e);
 			setMr(new ArrayList<MeasurementResult>());
+			setErrorMsg("Error during Execution. Please try again"); 
+			return ERROR;
 		}
 
 		// STORE MODEL TDB
@@ -146,5 +150,13 @@ public class assessmentPlanExecute extends ActionSupport {
 
 	public void setE(Exception e) {
 		this.e = e;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }

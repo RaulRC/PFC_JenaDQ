@@ -9,29 +9,34 @@
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="/style/templates/header.jsp"></jsp:include>
+	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	Something was wrong x_X
+	<br>
+	<br>
+	<br>
+	<table>
+		<tr>
+			<td><b><s:property value="errorMsg.toString()" /></b></td>
+		</tr>
+		<tr>
+			<td>Exception: <s:property value="e.getMessage()" /></td>
+		</tr>
+	</table>
 
-	<s:property value="e.printStackTrace()" />
 	<br>
 	<br>
 	<br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
-	<br><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-	<br><br>
 	<br>
 	<a href="index.jsp">Back</a>
 	<jsp:include page="/style/templates/footer.jsp"></jsp:include>

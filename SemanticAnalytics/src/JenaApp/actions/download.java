@@ -24,13 +24,12 @@ public class download extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private InputStream fileInputStream;
-	private Exception e; 
+	private Exception e;
+	private String errorMsg;
 
 	public InputStream getFileInputStream() {
 		return fileInputStream;
 	}
-
-
 
 	public String rdf() throws Exception {
 		String fileName = createFile("rdf");
@@ -47,45 +46,50 @@ public class download extends ActionSupport {
 	public String createFile(String format) throws IOException {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		Model m = (Model) session.get("resultModel");
-
-		String formatFile = "";
-		if (format.equals("rdf"))
-			formatFile = "RDF/XML-ABBREV";
-		else if (format.equals("n3"))
-			formatFile = "N3";
-
-		String currentTime = System.currentTimeMillis() +"";
-		String fileName = "D:\\temp_files_assessment\\"
-				+ currentTime + "_assessmentResults." + format;
-
-		FileWriter out =null;
+		FileWriter out = null;
+		String fileName = "";
 		try {
+			String formatFile = "";
+			if (format.equals("rdf"))
+				formatFile = "RDF/XML-ABBREV";
+			else if (format.equals("n3"))
+				formatFile = "N3";
+
+			String currentTime = System.currentTimeMillis() + "";
+			fileName = "D:\\temp_files_assessment\\" + currentTime
+					+ "_assessmentResults." + format;
+
 			out = new FileWriter(fileName);
-			if(m!=null)
+			if (m != null)
 				m.write(out, formatFile);
-			else{
+			else {
 				m = ModelFactory.createDefaultModel();
 				m.write(out, formatFile);
 			}
 		} catch (IOException closeException) {
-			// ignore
-		}
-		finally{
+			setE(closeException); 
+			setErrorMsg("Error while downloading file. Please try again"); 
+			return ERROR; 
+		} finally {
 			out.close();
 		}
 
 		return fileName;
 	}
 
-
-
 	public Exception getE() {
 		return e;
 	}
 
-
-
 	public void setE(Exception e) {
 		this.e = e;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }
