@@ -45,6 +45,17 @@ a:hover,a:active {
 	color: #990000;
 }
 
+jenastack {
+	background-image: url(jena-architecture.png);
+	height: 50%;
+	width: 50%;
+}
+
+jenastack:hover {
+	background-image: url(jenaDQstack.png);
+	height: 50%;
+	width: 50%;
+}
 /* LAYOUT */
 #container {
 	text-align: left;

@@ -11,6 +11,17 @@
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
+	<script language="javascript" type="text/javascript">
+		function hover(element) {
+			element.setAttribute('src',
+					'figures/jena-architecture.png');
+		}
+		function unhover(element) {
+			element
+					.setAttribute('src',
+							'figures/jenaDQstack.png');
+		}
+	</script>
 	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>
 		Qué es <i>LODQA Tool (Linked Open Data Quality Assessment)</i>
@@ -28,7 +39,9 @@
 		en el proyecto fin de carrera (PFC) del alumno <b>Raúl Reguillo
 			Carmona</b>.
 	</p>
-	<img src="figures/jena-architecture.png"  height="50%" width="50%" style="padding-left: 150px;" />
+	<img id="jenastack" src="figures/jena-architecture.png" height="50%"
+		width="50%" style="padding-left: 150px;" />
+
 	<h3>
 		Cómo funciona <i>LODQA Tool</i>
 	</h3>

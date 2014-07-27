@@ -20,8 +20,8 @@
 	<br>
 	<s:form action="dqassessment" method="post"
 		enctype="multipart/form-data">
-		<s:textfield label="DQAssessment Identifier" name="identifier" />
-		<s:textfield label="Depth" name="depth" value="1" />
+		<s:textfield label="DQAssessment Identifier" name="identifier" value="YourIdentifier" onclick="this.value='';"/>
+		<s:textfield label="Depth" name="depth" value="1" onclick="this.value='';"/>
 		<s:file name="file" label="Contextual-Values Rules File to upload" />
 		<s:file name="file" label="Use Rules File to upload" />
 

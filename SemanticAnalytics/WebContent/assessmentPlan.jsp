@@ -43,11 +43,11 @@
 	</s:if>
 	<s:form action="assessmentPlanAdd" method="post"
 		enctype="multipart/form-data">
-		<s:textfield label="URI" name="uri" value="" />
-		<s:textfield label="Endpoint" name="endpoint" value="" />
+		<s:textfield label="URI" name="uri" value="YourUri" onclick="this.value='';" />
+		<s:textfield label="Endpoint" name="endpoint" value="YourEndpoint" onclick="this.value='';" />
 		<s:textfield label="DQAssessment Identifier" name="identifier"
-			value="" />
-		<s:textfield label="Depth" name="depth" value="1" />
+			value="YourIdentifier" onclick="this.value='';"/>
+		<s:textfield label="Depth" name="depth" value="1" onclick="this.value='';"/>
 		<s:file name="file" label="Contextual-Values Rules File to upload" />
 		<s:file name="file" label="Use Rules File to upload" />
 		<s:checkbox name="completeness" fieldValue="true" value="true"
