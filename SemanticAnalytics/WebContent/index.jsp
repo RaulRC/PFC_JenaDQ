@@ -4,8 +4,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
 
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Linked Open Data Quality Assessment Tool v 1.0</title>
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
@@ -13,13 +13,10 @@
 <body>
 	<script language="javascript" type="text/javascript">
 		function hover(element) {
-			element.setAttribute('src',
-					'figures/jena-architecture.png');
+			element.setAttribute('src', 'figures/jena-architecture.png');
 		}
 		function unhover(element) {
-			element
-					.setAttribute('src',
-							'figures/jenaDQstack.png');
+			element.setAttribute('src', 'figures/jenaDQstack.png');
 		}
 	</script>
 	<jsp:include page="/style/templates/header.jsp"></jsp:include>
@@ -40,7 +37,7 @@
 			Carmona</b>.
 	</p>
 	<img id="jenastack" src="figures/jena-architecture.png" height="50%"
-		width="50%" style="padding-left: 150px;" />
+		width="50%" style="padding-left: 150px;" alt="Jena Technology Stack">
 
 	<h3>
 		Cómo funciona <i>LODQA Tool</i>
@@ -96,7 +93,6 @@
 			aplicación.
 		</li>
 	</ul>
-	</p>
 	<h4>Comparación de modelos y resultados</h4>
 
 	<p>
@@ -107,5 +103,6 @@
 	</p>
 
 	<jsp:include page="/style/templates/footer.jsp"></jsp:include>
+	</div>
 </body>
 </html>

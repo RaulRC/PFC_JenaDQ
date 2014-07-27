@@ -33,7 +33,7 @@
 				<li><a href="<%=request.getContextPath()%>/rOperation.jsp">
 						R Operations</a></li>
 			</ul>
-			<HR />
+			<HR >
 			<p>Data Quality</p>
 			<ul>
 				<li><a
