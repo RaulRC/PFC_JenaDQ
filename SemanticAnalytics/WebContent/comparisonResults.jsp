@@ -30,7 +30,11 @@
 	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>Comparison results</h3>
 	<br>
-		Lore ipsum...
+	<p>A continuación puede encontrar la totalidad de las triplas de
+		los modelos A y B así como un modelo que resulta de la comparación de
+		éstos. Dicho modelo de comparación puede ser descargado pulsando en el
+		link correspondiente. También encontrará un porcentaje de similitud
+		entre ambos modelos.</p>
 	<br>
 	<table onclick="javascript:mostrarTabla('modeloA');"
 		style="cursor: pointer; cursor: hand;">
@@ -49,7 +53,8 @@
 				<td align="left"><s:property value="getSubject().toString()" /></td>
 				<td align="left" style="padding-left: 12px;"><s:property
 						value="getPredicate().toString()" /></td>
-				<td align="left" style="padding-left: 12px;"><s:property value="getObject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property
+						value="getObject().toString()" /></td>
 			</tr>
 		</s:iterator>
 	</table>
@@ -71,7 +76,8 @@
 				<td align="left"><s:property value="getSubject().toString()" /></td>
 				<td align="left" style="padding-left: 12px;"><s:property
 						value="getPredicate().toString()" /></td>
-				<td align="left" style="padding-left: 12px;"><s:property value="getObject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property
+						value="getObject().toString()" /></td>
 			</tr>
 		</s:iterator>
 	</table>
@@ -93,7 +99,8 @@
 				<td align="left"><s:property value="getSubject().toString()" /></td>
 				<td align="left" style="padding-left: 12px;"><s:property
 						value="getPredicate().toString()" /></td>
-				<td align="left" style="padding-left: 12px;"><s:property value="getObject().toString()" /></td>
+				<td align="left" style="padding-left: 12px;"><s:property
+						value="getObject().toString()" /></td>
 			</tr>
 		</s:iterator>
 	</table>
