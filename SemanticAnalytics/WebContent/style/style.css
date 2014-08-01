@@ -82,9 +82,9 @@ table {
 }
 
 #intro {
-	background: url(logo_escuela_b.jpg) no-repeat top right;
-	background-size: 375px 120px;
-	margin: 0px;
+	background: url(logo_alarcos.gif) no-repeat top center , url(logo_escuela_b.jpg) no-repeat top right;
+	background-size: 123px 120px, 375px 120px;
+	margin: 0px;	
 }
 
 #pageHeader {
