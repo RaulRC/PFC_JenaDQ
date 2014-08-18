@@ -31,7 +31,7 @@ import com.hp.hpl.jena.reasoner.rulesys.Rule;
  * @author Raúl Reguillo Carmona
  * 
  */
-public class DQDimension {
+public abstract class DQDimension {
 
 	/**
 	 * 
@@ -202,19 +202,15 @@ public class DQDimension {
 	 * @throws RuleException
 	 * @throws URIException
 	 */
-	public Model _executeMeasurement() throws IdentifierException,
-			RuleException, URIException {
-		return null;
-	}
+	public abstract Model _executeMeasurement() throws IdentifierException,
+			RuleException, URIException;
 
 	/**
 	 * 
 	 * @return modelo Jena de resultados de la ejecución
 	 * @throws ModelGenerationException
 	 */
-	public Model _getRDFModel() throws ModelGenerationException {
-		return null;
-	}
+	public abstract Model _getRDFModel() throws ModelGenerationException;
 
 	/**
 	 * 

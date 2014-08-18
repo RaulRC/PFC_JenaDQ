@@ -25,7 +25,7 @@ public class testPaper {
 	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
 	public static void main(String[] args) throws FileNotFoundException {
 		// RULES
-		FileReader in = new FileReader("D:\\rules\\example.rules");
+		FileReader in = new FileReader("D:\\rules\\use.rules");
 		BufferedReader br = new BufferedReader(in);
 		String endpoint = "http://dbpedia.org/sparql";
 //		 String endpoint = "http://lod.openlinksw.com/sparql";

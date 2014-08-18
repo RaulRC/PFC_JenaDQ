@@ -8,6 +8,8 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 /**
+ * 
+ * 
  * Facilita la construcción de modelos. Si se cargan los modelos desde archivo,
  * permite distinguir directamente su extensión. Si se especifica una URI y un
  * Endpoint, automáticamente devuelve el modelo resultante o una excepción.
