@@ -1,7 +1,0 @@
-R - JRI
-========
-
-- Extend JRI with a more flexible interface
-  - I should know all the set of operations I'll need to develop
-  - Maybe using the int, float will be enough
-
