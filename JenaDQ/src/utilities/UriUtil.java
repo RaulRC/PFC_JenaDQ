@@ -15,8 +15,8 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 /**
- * Clase de utilidades para la consulta y recuperación de información de los
- * modelos semánticos a través de HTTP
+ * Utilities for queries and recovering information about semantic models
+ * through HTTP.
  * 
  * @author Raúl Reguillo Carmona
  * 
@@ -24,14 +24,13 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 public class UriUtil {
 
 	/**
-	 * Realiza una consulta obteniendo como resultado un modelo
+	 * Answer a DQModel using a query
 	 * 
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            HTTP service address
 	 * @param queryString
-	 *            <code>String</code> que contiene la consulta que se desea
-	 *            realizar
-	 * @return <code>DQModel</code> con los resultados
+	 *            <code>String</code> with the Query
+	 * @return <code>DQModel</code>
 	 */
 	public static DQModel getResourceFromEndpoint(String endpoint,
 			String queryString) {
@@ -49,12 +48,11 @@ public class UriUtil {
 	}
 
 	/**
-	 * Obtiene dado un modelo de Jena todos los recursos asociados a él
+	 * Answer an ArrayList with all resources linked to the model m
 	 * 
 	 * @param m
-	 *            modelo de Jena
-	 * @return <code>ArrayList</code> de <code>RDFNode</code> con todos los
-	 *         recursos asociados al modelo
+	 *            Model
+	 * @return <code>ArrayList</code> with <code>RDFNode</code>
 	 */
 	public static ArrayList<RDFNode> getURIResourceList(Model m) {
 

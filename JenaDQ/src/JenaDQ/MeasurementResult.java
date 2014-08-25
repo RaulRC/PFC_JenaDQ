@@ -1,8 +1,8 @@
 package JenaDQ;
 
 /**
- * Almacena resultados de evaluación para que sean más accesibles, como una
- * alternativa a realizar consultas sobre el modelo resultante
+ * This class stores the assessment results in order to make them easy to
+ * access.
  * 
  * @author Raúl Reguillo Carmona
  * 
@@ -12,9 +12,9 @@ public class MeasurementResult {
 	/**
 	 * 
 	 * @param mName
-	 *            nombre de la métrica
+	 *            String metric name
 	 * @param mDimension
-	 *            nombre de la dimensión de calidad
+	 *            String DQDimension name
 	 */
 	public MeasurementResult(String mName, String mDimension) {
 		super();
@@ -27,11 +27,11 @@ public class MeasurementResult {
 	/**
 	 * 
 	 * @param mName
-	 *            nombre de la métrica
+	 *            String metric name
 	 * @param mDimension
-	 *            nombre de la dimensión de calidad
+	 *            String DQDimension name
 	 * @param mResult
-	 *            resultado numérico de la evaluación
+	 *            Double result of the assessment
 	 */
 	public MeasurementResult(String mName, String mDimension, double mResult) {
 		super();
@@ -43,13 +43,13 @@ public class MeasurementResult {
 	/**
 	 * 
 	 * @param mName
-	 *            nombre de la métrica
+	 *            String metric name
 	 * @param mDimension
-	 *            nombre de la dimensión de calidad
+	 *            String DQDimension name
 	 * @param mResult
-	 *            resultado numérico de la evaluación
+	 *            Double result of the assessment
 	 * @param cResult
-	 *            resultado contextual de la evaluación
+	 *            String contextual result of the assessment
 	 */
 	public MeasurementResult(String mName, String mDimension, double mResult,
 			String cResult) {
@@ -61,7 +61,7 @@ public class MeasurementResult {
 	}
 
 	/**
-	 * Constructor vacío
+	 * Empty constructor
 	 */
 	public MeasurementResult() {
 

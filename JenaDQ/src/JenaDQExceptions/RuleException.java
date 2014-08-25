@@ -1,7 +1,7 @@
 package JenaDQExceptions;
 
 /**
- * Excepción de evaluación: error derivado de las reglas
+ * Rule Exception
  * 
  * @author Raúl Reguillo Carmona
  * 
@@ -11,7 +11,7 @@ public class RuleException extends AssessmentException {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Construye la excepción, asignando su mensaje
+	 * Missing Rules Exception
 	 */
 	public RuleException() {
 		super("Missing Rules");

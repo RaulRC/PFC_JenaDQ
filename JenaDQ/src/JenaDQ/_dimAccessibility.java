@@ -31,8 +31,7 @@ import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 /**
- * Extensión de <code>DQDimension</code> que evalúa la calidad de datos desde la
- * dimensión <code>Accessibility</code>
+ * An extension of <code>DQDimension</code> DQDim <code>Accessibility</code>
  * 
  * @author Raúl Reguillo Carmona
  * 
@@ -50,17 +49,17 @@ public class _dimAccessibility extends DQDimension {
 	/**
 	 * 
 	 * @param targetmodel
-	 *            <code>DQModel</code> objetivo
+	 *            <code>DQModel</code>
 	 * @param useRules
-	 *            conjunto de reglas de uso en formato Jena
+	 *            List of Use Rules
 	 * @param contextualRuleList
-	 *            conjunto de reglas contextuales en formato Jena
+	 *            List of Contextual Rules
 	 * @param depth
-	 *            profundidad a la que se llevará a cabo la evaluación
+	 *            Assessment depth
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            Address of HTTP service
 	 * @param uri
-	 *            URI objetivo
+	 *            target URI
 	 */
 	public _dimAccessibility(DQModel targetmodel, List<Rule> useRules,
 			List<Rule> contextualRuleList, int depth, String endpoint,
@@ -79,9 +78,9 @@ public class _dimAccessibility extends DQDimension {
 	/**
 	 * 
 	 * @param targetmodel
-	 *            <code>DQModel</code> objetivo
+	 *            <code>DQModel</code>
 	 * @param rules
-	 *            conjunto de reglas de contexto en formato Jena
+	 *            List of rules
 	 */
 	public _dimAccessibility(DQModel targetmodel, List<Rule> rules) {
 		super(targetmodel);
@@ -96,7 +95,7 @@ public class _dimAccessibility extends DQDimension {
 	/**
 	 * 
 	 * @param targetmodel
-	 *            <code>DQModel</code> objetivo
+	 *            <code>DQModel</code>
 	 */
 	public _dimAccessibility(DQModel targetmodel) {
 		super(targetmodel);
@@ -107,7 +106,7 @@ public class _dimAccessibility extends DQDimension {
 	}
 
 	/**
-	 * Constructor vacío
+	 * Empty constructor
 	 */
 	public _dimAccessibility() {
 		super();
@@ -118,7 +117,7 @@ public class _dimAccessibility extends DQDimension {
 	}
 
 	/**
-	 * Execute Measurement Completeness
+	 * Execute Measurement Accessibility
 	 * 
 	 * @throws IdentifierException
 	 * @throws RuleException

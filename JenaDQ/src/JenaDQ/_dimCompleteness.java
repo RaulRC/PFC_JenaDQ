@@ -55,17 +55,17 @@ public class _dimCompleteness extends DQDimension {
 	/**
 	 * 
 	 * @param targetmodel
-	 *            <code>DQModel</code> objetivo
+	 *            <code>DQModel</code>
 	 * @param useRules
-	 *            conjunto de reglas de uso en formato Jena
+	 *            List of Use Rules
 	 * @param contextualRuleList
-	 *            conjunto de reglas contextuales en formato Jena
+	 *            List of Contextual Rules
 	 * @param depth
-	 *            profundidad a la que se llevará a cabo la evaluación
+	 *            Assessment depth
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            Address of HTTP service
 	 * @param uri
-	 *            URI objetivo
+	 *            target URI
 	 */
 	public _dimCompleteness(DQModel targetmodel, List<Rule> useRules,
 			List<Rule> contextualRuleList, int depth, String endpoint,
@@ -82,9 +82,9 @@ public class _dimCompleteness extends DQDimension {
 	/**
 	 * 
 	 * @param targetmodel
-	 *            <code>DQModel</code> objetivo
+	 *            <code>DQModel</code>
 	 * @param rules
-	 *            conjunto de reglas de contexto en formato Jena
+	 *            List of rules
 	 */
 	public _dimCompleteness(DQModel targetmodel, List<Rule> rules) {
 		super(targetmodel);
@@ -97,7 +97,7 @@ public class _dimCompleteness extends DQDimension {
 	/**
 	 * 
 	 * @param targetmodel
-	 *            <code>DQModel</code> objetivo
+	 *            <code>DQModel</code>
 	 */
 	public _dimCompleteness(DQModel targetmodel) {
 		super(targetmodel);
@@ -105,7 +105,7 @@ public class _dimCompleteness extends DQDimension {
 	}
 
 	/**
-	 * Constructor vacío
+	 * Empty constructor
 	 */
 	public _dimCompleteness() {
 		super();
@@ -113,8 +113,7 @@ public class _dimCompleteness extends DQDimension {
 	}
 
 	/**
-	 * InterlinkingCompleteness Method Calculates the number of interlinks
-	 *       in resources
+	 * 
 	 * @return MeasurementResult InterlinkingCompleteness
 	 */
 	@Deprecated
@@ -147,8 +146,9 @@ public class _dimCompleteness extends DQDimension {
 	}
 
 	/**
-	 * schemaCompleteness method Chek if every class and property from
-	 *       Ont. are present in the model too
+	 * schemaCompleteness method Chek if every class and property from Ont. are
+	 * present in the model too
+	 * 
 	 * @return MeasurementResult schemaCompleteness
 	 */
 	@Deprecated

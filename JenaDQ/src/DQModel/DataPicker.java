@@ -11,8 +11,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.util.FileManager;
 
 /**
- * clase auxiliar que da soporte a la clase <code>DQModel</code> cargando los
- * modelos que se pretenden evaluar a partir de archivos o URIs
+ * Auxiliar class used to pick data in various ways
  * 
  * @author Raúl Reguillo Carmona
  * @link JenaDQ.src.DQModel.DQModel
@@ -24,7 +23,7 @@ public class DataPicker {
 	private String format;
 
 	/**
-	 * @return Modelo de Jena
+	 * @return Model
 	 */
 	public Model getM() {
 		return model;
@@ -32,7 +31,7 @@ public class DataPicker {
 
 	/**
 	 * @param m
-	 *            modelo de Jena
+	 *            Model
 	 */
 	public void setModel(Model m) {
 		this.model = m;
@@ -40,7 +39,7 @@ public class DataPicker {
 
 	/**
 	 * 
-	 * @return formato del modelo
+	 * @return String format
 	 */
 	public String getFormat() {
 		return format;
@@ -49,27 +48,25 @@ public class DataPicker {
 	/**
 	 * 
 	 * @param format
-	 *            formato del modelo
+	 *            String format
 	 */
 	public void setFormat(String format) {
 		this.format = format;
 	}
 
 	/**
-	 * constructor vacío
+	 * Empty constructor
 	 */
 	public DataPicker() {
 
 	}
 
 	/**
-	 * Construye el modelo a partir de una dirección web donde reside el archivo
-	 * rdf
+	 * Answer a DQModel
 	 * 
 	 * @param userURI
-	 *            dirección del archivo
-	 * @return <code>DQModel</code> resultante, incluyendo modelo de Jena y
-	 *         extensión
+	 *            adress of the file
+	 * @return <code>DQModel</code>
 	 */
 	public DQModel getModel(String userURI) {
 		Model m = ModelFactory.createDefaultModel();
@@ -110,16 +107,13 @@ public class DataPicker {
 	}
 
 	/**
-	 * Carga un archivo RDF a través de <code>InputStream</code> y formato de
-	 * ese mismo archivo
+	 * Answer a DQ Model from InputStream and format
 	 * 
 	 * @param in
-	 *            <code>InputStream</code> del archivo que se pasa como
-	 *            argumento
+	 *            <code>InputStream</code> of the file
 	 * @param format
-	 *            formato del modelo a leer
-	 * @return <code>DQModel</code> resultante, incluyendo modelo de Jena y
-	 *         extensión
+	 *            format of the model
+	 * @return <code>DQModel</code>
 	 */
 	public DQModel getModel(InputStream in, String format) {
 		Model m = ModelFactory.createDefaultModel();
@@ -136,14 +130,13 @@ public class DataPicker {
 	}
 
 	/**
-	 * Construye el modelo tomando la dirección del mismo y de su endpoint
+	 * Answer a DQModel using URI and Endpoint
 	 * 
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            Address of the HTTP service
 	 * @param URI
-	 *            uri del modelo que se pretende construir
-	 * @return <code>DQModel</code> resultante, incluyendo modelo de Jena y
-	 *         extensión por defecto
+	 *            URI of the model wanted
+	 * @return <code>DQModel</code>
 	 */
 	public DQModel getModel(String endpoint, String URI) {
 		DQModel dqmodel = new DQModel();
@@ -162,17 +155,15 @@ public class DataPicker {
 	}
 
 	/**
-	 * filtra la aparición de la uri que se utiliza como sujeto en la
-	 * construcción del modelo
+	 * Creates a DQModel filterign the subject
 	 * 
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            address of HTTP service
 	 * @param URI
-	 *            modelo que se pretende cargar
+	 *            URI of the model
 	 * 
 	 * @param includeSubject
-	 *            <code>false</code> deshabilita la aparición de la URI en el
-	 *            modelo resultante
+	 *            <code>false</code> avoid the URI as a subject in the model
 	 * 
 	 */
 	public DQModel getModel(String endpoint, String URI, boolean includeSubject) {
@@ -199,11 +190,11 @@ public class DataPicker {
 	}
 
 	/**
-	 * devuelve el formato del nombre del archivo que se pasa como parámetro
+	 * Answer the format of the model as a String
 	 * 
 	 * @param filename
-	 *            nombre o ruta del archivo
-	 * @return formato del archivo
+	 *            name or path of the file
+	 * @return file format
 	 */
 	public String checkFormat(String filename) {
 		String format = filename

@@ -16,8 +16,8 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 /**
- * Crea y gestiona evaluaciones. Una evaluación está compuesta de una URI
- * objetivo, una lista de dimensiones de calidad y un endpoint.
+ * This class creates and handle the Assessments. An assessment is composed by a
+ * target URI, a List of DQDimensions and an endpoint.
  * 
  * @author Raúl Reguillo Carmona
  * 
@@ -27,11 +27,11 @@ public class DQAssessment {
 	/**
 	 * 
 	 * @param dqDimensionList
-	 *            lista de dimensiones de calidad
+	 *            DQDimension List
 	 * @param URI
-	 *            URI objetivo
+	 *            target URI
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            Address of HTTP service
 	 */
 	public DQAssessment(LinkedList<DQDimension> dqDimensionList, String URI,
 			String endpoint) {
@@ -42,7 +42,7 @@ public class DQAssessment {
 	}
 
 	/**
-	 * Constructor vacío
+	 * Empty constructor
 	 */
 	public DQAssessment() {
 		this.dqDimensionList = new LinkedList<DQDimension>();
@@ -52,22 +52,22 @@ public class DQAssessment {
 	}
 
 	/**
-	 * Constructor completamente parametrizado
+	 * Constructor with all parameters
 	 * 
 	 * @param dqDimensionList
-	 *            lista de dimensiones de calidad
+	 *            DQDimension List
 	 * @param uRI
-	 *            URI objetivo
+	 *            Target URI
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            Address of HTTP service
 	 * @param contextualRules
-	 *            conjunto de reglas contextuales en formato Jena
+	 *            List of Contextual Rules
 	 * @param useRules
-	 *            conjunto de reglas de uso en formato Jena
+	 *            List of Use Rules
 	 * @param depth
-	 *            profundidad a la que se llevará a cabo la evaluación
+	 *            Depth of the Assessment
 	 * @param dQAssessmentIdentifier
-	 *            identificador de evaluación
+	 *            Assessment identifier
 	 */
 	public DQAssessment(LinkedList<DQDimension> dqDimensionList, String uRI,
 			String endpoint, List<Rule> contextualRules, List<Rule> useRules,
@@ -83,19 +83,20 @@ public class DQAssessment {
 	}
 
 	/**
+	 * Constructor with all parameters
 	 * 
 	 * @param dqDimensionList
-	 *            lista de dimensiones de calidad
+	 *            DQDimension List
 	 * @param uRI
-	 *            URI objetivo
+	 *            Target URI
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            Address of HTTP service
 	 * @param contextualRules
-	 *            conjunto de reglas contextuales en formato Jena
+	 *            List of Contextual Rules
 	 * @param depth
-	 *            profundidad a la que se llevará a cabo la evaluación
+	 *            Depth of the Assessment
 	 * @param dQAssessmentIdentifier
-	 *            identificador de evaluación
+	 *            Assessment identifier
 	 */
 	public DQAssessment(LinkedList<DQDimension> dqDimensionList, String uRI,
 			String endpoint, List<Rule> contextualRules, int depth,
@@ -160,8 +161,9 @@ public class DQAssessment {
 	}
 
 	/**
+	 * Answer a Model with the result of the Assessment
 	 * 
-	 * @return modelo Jena resultado de la evaluación
+	 * @return Model
 	 */
 	public Model executeAssessment() {
 		// set FinalModel here

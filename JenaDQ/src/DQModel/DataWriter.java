@@ -1,8 +1,7 @@
 package DQModel;
 
 /**
- * clase auxiliar que da soporte a la clase <code>DQModel</code> permitiendo
- * mostrar por pantalla los modelos cargados
+ * Auxiliar class used to show DQModels in various ways
  * 
  * @author Raúl Reguillo Carmona
  * @link JenaDQ.src.DQModel.DQModel
@@ -11,31 +10,29 @@ package DQModel;
 public class DataWriter {
 
 	/**
-	 * Constructor vacío
+	 * Empty constructor
 	 */
 	public DataWriter() {
 
 	}
 
 	/**
-	 * Muestra el modelo por salida estándar en el formato que éste posea
+	 * Show model with it's format
 	 * 
 	 * @param dqmodel
-	 *            <code>DQModel</code> que deberá tener un modelo de Jena y su
-	 *            extensión asociados
+	 *            <code>DQModel</code>
 	 */
 	public void showModel(DQModel dqmodel) {
 		dqmodel.getModel().write(System.out, dqmodel.getFormat());
 	}
 
 	/**
-	 * Muestra el modelo por salida estándar en el formato que se le indique
+	 * Shows a DQModel usign the given format
 	 * 
 	 * @param dqmodel
-	 *            <code>DQModel</code> que deberá tener un modelo de Jena
-	 *            asociado
+	 *            <code>DQModel</code>
 	 * @param format
-	 *            formato de salida esperado
+	 *            expected output format
 	 */
 	public void showModelWithFormat(DQModel dqmodel, String format) {
 		dqmodel.getModel().write(System.out, format);

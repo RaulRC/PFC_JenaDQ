@@ -22,11 +22,8 @@ import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 /**
  * 
- * Clase principal del modelo de calidad. Permite ser extendida sobreescribiendo
- * los métodos señalados con el fin de añadir nuevas dimensiones de calidad,
- * manteniendo todas las dimensiones una funcionalidad uniforme en lo que se
- * refiere a la gestión de su ejecución en el ámbito de un plan de evaluación
- * así como la gestión de los resultados que se generen.
+ * The main class of the Data Quality Model. This class can be extended
+ * overwriting the abstract methods in order to add new Data Quality Dimensions.
  * 
  * @author Raúl Reguillo Carmona
  * 
@@ -35,7 +32,8 @@ public abstract class DQDimension {
 
 	/**
 	 * 
-	 * @param targetmodel <code>DQModel</code> objetivo
+	 * @param targetmodel
+	 *            <code>DQModel</code>
 	 */
 	public DQDimension(DQModel targetmodel) {
 		super();
@@ -43,7 +41,7 @@ public abstract class DQDimension {
 	}
 
 	/**
-	 * Constructor vacío
+	 * Empty constructor
 	 */
 	public DQDimension() {
 	}
@@ -172,10 +170,12 @@ public abstract class DQDimension {
 	}
 
 	/**
-	 * Recibe una query y un endpoint, devuelve un modelo RDF
+	 * Answer a DQModel usign query and endpoint
 	 * 
-	 * @param endpoint dirección del servicio HTTP
-	 * @param queryString <code>String</code> con la consulta 
+	 * @param endpoint
+	 *            address of the HTTP Service
+	 * @param queryString
+	 *            <code>String</code> with query
 	 */
 	@Deprecated
 	public DQModel getResourceFromURI(String endpoint, String queryString) {
@@ -194,10 +194,9 @@ public abstract class DQDimension {
 
 	/**
 	 * 
-	 * Ejecuta la(s) métrica(s) de la dimensión de calidad. El método
-	 * debe ser sobreescrito cuando se particulariza la clase. 
+	 * Measurement of the DQDimension
 	 * 
-	 * @return modelo de Jena con los resultados de la evaluación
+	 * @return Model
 	 * @throws IdentifierException
 	 * @throws RuleException
 	 * @throws URIException
@@ -207,21 +206,24 @@ public abstract class DQDimension {
 
 	/**
 	 * 
-	 * @return modelo Jena de resultados de la ejecución
+	 * Answer the final model as a result of the execution
+	 * 
+	 * @return Model
 	 * @throws ModelGenerationException
 	 */
 	public abstract Model _getRDFModel() throws ModelGenerationException;
 
 	/**
 	 * 
-	 * @return modelo Jena de resultados contextuales de la ejecución
+	 * @return Model
 	 */
+	@Deprecated
 	public Model _contextualFinalModel() {
 		return null;
 	}
 
 	/**
-	 * elimina los resultados
+	 * reset all results
 	 */
 	public void resetResults() {
 		this.assessmentResults = new ArrayList<Double>();
@@ -238,8 +240,9 @@ public abstract class DQDimension {
 	/**
 	 * Return a validity report (is valid)
 	 * 
-	 * @param inf Inference Model
-	 * @return a Jena Validity Report 
+	 * @param inf
+	 *            Inference Model
+	 * @return a Jena Validity Report
 	 */
 	protected ValidityReport validate(InfModel inf) {
 		ValidityReport val = inf.validate();

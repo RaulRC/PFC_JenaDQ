@@ -10,9 +10,9 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 /**
  * 
  * 
- * Facilita la construcción de modelos. Si se cargan los modelos desde archivo,
- * permite distinguir directamente su extensión. Si se especifica una URI y un
- * Endpoint, automáticamente devuelve el modelo resultante o una excepción.
+ * Makes easier the model construction. If models are loaded from file, this
+ * class distinguish the extension. If URI and Endpoint are specified, returns
+ * the model or an exception.
  * 
  * @author Raúl Reguillo Carmona
  * 
@@ -22,12 +22,11 @@ public class DQModel {
 	private String format;
 
 	/**
-	 * Construye el modelo a través de una cadena de caracteres que debe indicar
-	 * la dirección del archivo rdf. Automáticamente detectará la extensión y
-	 * generará el resultado.
+	 * Answer a DQModel
 	 * 
 	 * @param userURI
-	 *            enlace hacia el archivo de datos
+	 *            adress of the file by HTTP
+	 * @return <code>DQModel</code>
 	 */
 	public DQModel(String userURI) {
 		DataPicker dp = new DataPicker();
@@ -38,13 +37,12 @@ public class DQModel {
 	}
 
 	/**
-	 * Construye el modelo a partir de un archivo cargado y un formato
-	 * especificado.
+	 * Creates a new DQModel using Inputstream and a file format.
 	 * 
 	 * @param in
-	 *            InputStream con el archivo leido
+	 *            InputStream with the file
 	 * @param format
-	 *            formato del archivo que se pretende cargar
+	 *            file format
 	 */
 	public DQModel(InputStream in, String format) {
 		DataPicker dp = new DataPicker();
@@ -55,12 +53,12 @@ public class DQModel {
 	}
 
 	/**
-	 * Construye el modelo a partir de una URI y un Endpoint.
+	 * Creates a new DQModel usign URI and Endpoint
 	 * 
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            address of HTTP service
 	 * @param URI
-	 *            modelo que se pretende cargar
+	 *            URI of the model
 	 */
 	public DQModel(String endpoint, String URI) {
 		DataPicker dp = new DataPicker();
@@ -71,17 +69,15 @@ public class DQModel {
 	}
 
 	/**
-	 * filtra la aparición de la uri que se utiliza como sujeto en la
-	 * construcción del modelo
+	 * Creates a DQModel filterign the subject
 	 * 
 	 * @param endpoint
-	 *            dirección del servicio HTTP
+	 *            address of HTTP service
 	 * @param URI
-	 *            modelo que se pretende cargar
+	 *            URI of the model
 	 * 
 	 * @param includeSubject
-	 *            <code>false</code> deshabilita la aparición de la URI en el
-	 *            modelo resultante
+	 *            <code>false</code> avoid the URI as a subject in the model
 	 * 
 	 */
 	public DQModel(String endpoint, String URI, boolean includeSubject) {
@@ -94,7 +90,7 @@ public class DQModel {
 
 	/**
 	 * 
-	 * @return modelo Jena asociado al <code>DQModel</code>
+	 * @return Jena Model
 	 */
 	public Model getModel() {
 		return model;
@@ -103,7 +99,7 @@ public class DQModel {
 	/**
 	 * 
 	 * @param dqmodel
-	 *            modelo Jena que se pretende asociar al <code>DQModel</code>
+	 *            Jena Model
 	 */
 	public void setDqmodel(Model dqmodel) {
 		this.model = dqmodel;
@@ -111,7 +107,7 @@ public class DQModel {
 
 	/**
 	 * 
-	 * @return formato del modelo cargado
+	 * @return Sting with the format of the model (if any)
 	 */
 	public String getFormat() {
 		return format;
@@ -120,19 +116,19 @@ public class DQModel {
 	/**
 	 * 
 	 * @param format
-	 *            especifica el formato del modelo que se pretende cargar
+	 *            set the format of the loaded model.
 	 */
 	public void setFormat(String format) {
 		this.format = format;
 	}
 
 	/**
-	 * Construye <code>DQModel</code> a partir de un modelo de Jena y un formato
+	 * Creates a <code>DQModel</code> from Model and format
 	 * 
 	 * @param model
-	 *            modelo Jena que se pretende cargar
+	 *            Jena Model
 	 * @param format
-	 *            formato por defecto asociado al modelo
+	 *            format by default
 	 */
 	public DQModel(Model model, String format) {
 		super();
@@ -141,7 +137,7 @@ public class DQModel {
 	}
 
 	/**
-	 * Constructor vacío
+	 * Empty constructor
 	 */
 	public DQModel() {
 	}
@@ -152,7 +148,7 @@ public class DQModel {
 	}
 
 	/**
-	 * Muestra el modelo en el formato especificado
+	 * Show the model
 	 */
 	public void showModel() {
 		DataWriter dw = new DataWriter();
@@ -160,10 +156,10 @@ public class DQModel {
 	}
 
 	/**
-	 * Muestra el modelo según el formato que se le especifique
+	 * Show the model usign the format specified
 	 * 
 	 * @param format
-	 *            formato de salida para mostrar el modelo
+	 *            format of the model
 	 */
 	public void showModelWithFormat(String format) {
 		DataWriter dw = new DataWriter();
@@ -171,12 +167,11 @@ public class DQModel {
 	}
 
 	/**
-	 * Compara dos modelos A y B según la operación
-	 * <code>(A v B) - (A ^ B)</code>
+	 * Answer a model comparison using: <code>(A v B) - (A ^ B)</code>
 	 * 
 	 * @param m
-	 *            modelo de Jena que se pretende comparar con el modelo actual
-	 * @return modelo de Jena resultante de la operación de comparación
+	 *            Jena Model which is compared with this
+	 * @return Model
 	 */
 	public Model compareModelWith(Model m) {
 		DQModel dq = new DQModel(m, "N3");
@@ -184,13 +179,11 @@ public class DQModel {
 	}
 
 	/**
-	 * Compara dos modelos A y B según la operación
-	 * <code>(A v B) - (A ^ B)</code>
+	 * Answer a model comparison using: <code>(A v B) - (A ^ B)</code>
 	 * 
 	 * @param m
-	 *            <code>DQModel</code> que se pretende comparar con el modelo
-	 *            actual
-	 * @return modelo de Jena resultante de la operación de comparación
+	 *            DQModel which is compared with this
+	 * @return Model
 	 */
 	public Model compareModelWith(DQModel m) {
 		Model intersection = ModelFactory.createDefaultModel();
@@ -214,12 +207,11 @@ public class DQModel {
 	}
 
 	/**
-	 * Compara dos modelos A y B obteniendo un porcentaje de similitud
+	 * Answer an affinity percentage
 	 * 
 	 * @param m
-	 *            <code>DQModel</code> que se pretende comparar con el modelo
-	 *            actual
-	 * @return un porcentaje de similitud entre ambos modelos
+	 *            <code>DQModel</code> to compare with
+	 * @return Double affinity percentage
 	 */
 	public double affinity(DQModel m) {
 		Model intersection = ModelFactory.createDefaultModel();
