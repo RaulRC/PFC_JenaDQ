@@ -7,7 +7,7 @@
 	<div id="intro">
 		<div id="pageHeader">
 			<h1>
-				<span>Linked Open Data Quality Assessment</span>
+				<span><b>Li</b>nked Open <b>D</b>ata <b>Q</b>uality <b>A</b>ssessment</span>
 			</h1>
 			<h2>
 				<span>Raúl Reguillo Carmona</span>

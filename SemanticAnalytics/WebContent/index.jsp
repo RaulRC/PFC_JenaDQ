@@ -7,7 +7,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Linked Open Data Quality Assessment Tool v 1.0</title>
+<title>LiDQA Tool v 1.0</title>
 <jsp:include page="/style/templates/styles.jsp"></jsp:include>
 </head>
 <body>
@@ -21,10 +21,10 @@
 	</script>
 	<jsp:include page="/style/templates/header.jsp"></jsp:include>
 	<h3>
-		Qué es <i>LODQA Tool (Linked Open Data Quality Assessment)</i>
+		Qué es <i>LiDQA Tool (Linked Open Data Quality Assessment)</i>
 	</h3>
 	<p>
-		<b>LODQA</b> es una herramienta creada para la evaluación de calidad
+		<b>LiDQA</b> es una herramienta creada para la evaluación de calidad
 		de <b>Linked Open Data</b>. Esta herramienta hace uso del framework <a
 			href="http://jena.apache.org"> Apache Jena</a> así como de una <b>extensión</b>
 		creada para tal fin, denominada <b>Jena DQ</b>. El objetivo principal
@@ -32,7 +32,7 @@
 		uso de los mismos. Para ello, se facilita una serie de primitivas
 		encapsuldadas en la extensión del framework, una <a
 			href="javadoc/index.html">API</a> y un vocabulario de resultados.
-		Tanto la aplicación <b>LODQA Tool</b> como <b>Jena DQ</b> se enmarcan
+		Tanto la aplicación <b>LiDQA Tool</b> como <b>Jena DQ</b> se enmarcan
 		en el proyecto fin de carrera (PFC) del alumno <b>Raúl Reguillo
 			Carmona</b>.
 	</p>
@@ -40,11 +40,11 @@
 		width="50%" style="padding-left: 150px;" alt="Jena Technology Stack">
 
 	<h3>
-		Cómo funciona <i>LODQA Tool</i>
+		Cómo funciona <i>LiDQA Tool</i>
 	</h3>
 
 	<p>
-		<b>LODQA Tool</b> analiza la calidad de los datos según dos
+		<b>LiDQA Tool</b> analiza la calidad de los datos según dos
 		dimensiones de calidad: <b>Completeness</b> y <b>Accessibility</b>.
 		Para conocer los detalles del análisis contextual, así como de ambas
 		dimensiones de calidad, diríjase a la sección <a
