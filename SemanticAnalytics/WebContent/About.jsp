@@ -17,12 +17,13 @@
 		<li><b>Author</b>: Raúl Reguillo Carmona
 			<ul>
 				<li><b>E-mail</b>: <a
-					href="mailto:raul.reguillo@gmail.com?Subject=LODQA%20Tool%20Webpage">raul.reguillo@gmail.com</a></li>
+					href="mailto:raul.reguillo@gmail.com?Subject=LiDQA%20Tool%20Webpage">raul.reguillo@gmail.com</a></li>
 			</ul></li>
 		<li><b>Director</b>: Dr. Ismael Caballero Muñoz-Reja</li>
+		<li><b>PFC Doc File</b>: <a href="PFCDoc.pdf">PDF Document</a></li>
 		<li><b>University</b>: <a href="http://www.uclm.es">UCLM</a>
 			(Universidad de Castilla-La Mancha)</li>
-		<li><b>LODQA Tool Technology Stack:</b>
+		<li><b>LiDQA Tool Technology Stack:</b>
 			<ul>
 				<li><b>Core</b>: <a href="http://jena.apache.org">Apache
 						Jena Framework</a> and <a href="javadoc/index.html">Jena DQ</a></li>
@@ -37,7 +38,7 @@
 						2</a></li>
 			</ul></li>
 
-		<li><b>Last update</b>: 27-VII-2014</li>
+		<li><b>Last update</b>: 28-VIII-2014</li>
 	</ul>
 	<br>
 
