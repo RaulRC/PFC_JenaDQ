@@ -1,17 +1,29 @@
 package JenaDQExceptions;
 
-public class AssessmentException extends Exception{
+/**
+ * Generic Exception for Assessment
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
+public class AssessmentException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	public AssessmentException(){
-		
+	/**
+	 * Empty constructor
+	 */
+	public AssessmentException() {
+
 	}
-	
-	public AssessmentException(String message){
-		super(message); 
+
+	/**
+	 * Set the message
+	 * 
+	 * @param message
+	 *            String with the message
+	 */
+	public AssessmentException(String message) {
+		super(message);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.jena.atlas.lib.StrUtils;
 
+import JenaDQ.APISemDQ;
 import JenaDQ.DQAssessmentPlan;
 import JenaDQ.MeasurementResult;
 import NAMES.TDBNames;
@@ -51,7 +52,7 @@ public class assessmentPlanExecute extends ActionSupport {
 		DQAssessmentPlan dqplan = (DQAssessmentPlan) session
 				.get("assessmentPlan");
 		try {
-			dqplan.executePlan();
+			APISemDQ.executeAssessmentPlan(dqplan);
 			setMr(dqplan.getmRes());
 			session.put("resultModel", dqplan.getFinalModel());
 			try {

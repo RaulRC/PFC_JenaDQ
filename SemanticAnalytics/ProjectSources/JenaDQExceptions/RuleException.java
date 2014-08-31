@@ -1,13 +1,20 @@
 package JenaDQExceptions;
 
-public class RuleException extends AssessmentException{
+/**
+ * Rule Exception
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
+public class RuleException extends AssessmentException {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
+	 * Missing Rules Exception
 	 */
-	private static final long serialVersionUID = 1L;
-	public RuleException(){
-		super("Missing Rules"); 
+	public RuleException() {
+		super("Missing Rules");
 	}
 
 }

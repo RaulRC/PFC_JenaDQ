@@ -1,38 +1,76 @@
 package JenaDQ;
 
+/**
+ * This class stores the assessment results in order to make them easy to
+ * access.
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
 public class MeasurementResult {
 
+	/**
+	 * 
+	 * @param mName
+	 *            String metric name
+	 * @param mDimension
+	 *            String DQDimension name
+	 */
 	public MeasurementResult(String mName, String mDimension) {
 		super();
 		this.mName = mName;
 		this.mDimension = mDimension;
-		this.mContextualResult = null; 
-		
+		this.mContextualResult = null;
+
 	}
 
+	/**
+	 * 
+	 * @param mName
+	 *            String metric name
+	 * @param mDimension
+	 *            String DQDimension name
+	 * @param mResult
+	 *            Double result of the assessment
+	 */
 	public MeasurementResult(String mName, String mDimension, double mResult) {
 		super();
 		this.mName = mName;
 		this.mDimension = mDimension;
 		this.mResult = mResult;
 	}
-	
-	public MeasurementResult(String mName, String mDimension, double mResult, String cResult) {
+
+	/**
+	 * 
+	 * @param mName
+	 *            String metric name
+	 * @param mDimension
+	 *            String DQDimension name
+	 * @param mResult
+	 *            Double result of the assessment
+	 * @param cResult
+	 *            String contextual result of the assessment
+	 */
+	public MeasurementResult(String mName, String mDimension, double mResult,
+			String cResult) {
 		super();
 		this.mName = mName;
 		this.mDimension = mDimension;
 		this.mResult = mResult;
-		this.mContextualResult=cResult; 
+		this.mContextualResult = cResult;
 	}
-	
-	public MeasurementResult(){
-		
+
+	/**
+	 * Empty constructor
+	 */
+	public MeasurementResult() {
+
 	}
 
 	private String mName;
 	private String mDimension;
 	private double mResult;
-	private String mContextualResult; 
+	private String mContextualResult;
 
 	public String getMName() {
 		return this.mName;

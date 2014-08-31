@@ -20,13 +20,29 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.reasoner.ValidityReport;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
-public class DQDimension {
+/**
+ * 
+ * The main class of the Data Quality Model. This class can be extended
+ * overwriting the abstract methods in order to add new Data Quality Dimensions.
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
+public abstract class DQDimension {
 
+	/**
+	 * 
+	 * @param targetmodel
+	 *            <code>DQModel</code>
+	 */
 	public DQDimension(DQModel targetmodel) {
 		super();
 		this.targetModel = targetmodel;
 	}
 
+	/**
+	 * Empty constructor
+	 */
 	public DQDimension() {
 	}
 
@@ -40,8 +56,8 @@ public class DQDimension {
 	protected String URI;
 	protected String endpoint;
 	protected String assessmentIdentifier;
-	protected ArrayList<Double> assessmentResults; 
-	
+	protected ArrayList<Double> assessmentResults;
+
 	protected Model finalModel;
 
 	// Results
@@ -102,8 +118,6 @@ public class DQDimension {
 		this.contextualRules = contextualRules;
 	}
 
-
-
 	public Model getFinalModel() {
 		return finalModel;
 	}
@@ -156,12 +170,12 @@ public class DQDimension {
 	}
 
 	/**
-	 * Recibe una query y un endpoint, devuelve un modelo RDF
+	 * Answer a DQModel usign query and endpoint
 	 * 
 	 * @param endpoint
+	 *            address of the HTTP Service
 	 * @param queryString
-	 * @param prefix
-	 *            mapping
+	 *            <code>String</code> with query
 	 */
 	@Deprecated
 	public DQModel getResourceFromURI(String endpoint, String queryString) {
@@ -179,41 +193,57 @@ public class DQDimension {
 	}
 
 	/**
-	 * To override
 	 * 
-	 * @return
-	 * @throws IdentifierException 
-	 * @throws RuleException 
-	 * @throws URIException 
+	 * Measurement of the DQDimension
+	 * 
+	 * @return Model
+	 * @throws IdentifierException
+	 * @throws RuleException
+	 * @throws URIException
 	 */
-	public Model _executeMeasurement() throws IdentifierException, RuleException, URIException {
-		return null;
-	}
+	public abstract Model _executeMeasurement() throws IdentifierException,
+			RuleException, URIException;
 
-	public Model _getRDFModel() throws ModelGenerationException{
-		return null;
-	}
+	/**
+	 * 
+	 * Answer the final model as a result of the execution
+	 * 
+	 * @return Model
+	 * @throws ModelGenerationException
+	 */
+	public abstract Model _getRDFModel() throws ModelGenerationException;
 
+	/**
+	 * 
+	 * @return Model
+	 */
+	@Deprecated
 	public Model _contextualFinalModel() {
 		return null;
 	}
-	public void resetResults(){
-		this.assessmentResults=new ArrayList<Double>(); 
+
+	/**
+	 * reset all results
+	 */
+	public void resetResults() {
+		this.assessmentResults = new ArrayList<Double>();
 	}
+
 	@Deprecated
 	public void generateMRES(ArrayList<Double> results) {
 	}
-	public String toString(){
-		return ""; 
+
+	public String toString() {
+		return "";
 	}
-	
+
 	/**
 	 * Return a validity report (is valid)
 	 * 
 	 * @param inf
-	 * @return
+	 *            Inference Model
+	 * @return a Jena Validity Report
 	 */
-
 	protected ValidityReport validate(InfModel inf) {
 		ValidityReport val = inf.validate();
 		if (val.isValid()) {

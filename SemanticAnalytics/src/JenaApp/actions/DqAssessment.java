@@ -102,9 +102,7 @@ public class DqAssessment extends ActionSupport {
 			dq.setDqmodel(getModel());
 
 			// SETTING PLAN - DQAPLAN
-			DQAssessmentPlan dqplan = new DQAssessmentPlan();
-			LinkedList<DQAssessment> dqplanlist = new LinkedList<DQAssessment>();
-			dqplan.setAssessmentList(dqplanlist);
+			DQAssessmentPlan dqplan = APISemDQ.createAssessmentPlan();
 
 			// SETTING LIST OF DIMENSIONS I'm GOING TO ASSESS
 			LinkedList<DQDimension> dqdimlist = new LinkedList<DQDimension>();
@@ -119,7 +117,7 @@ public class DqAssessment extends ActionSupport {
 					getEndpoint(), contextualRules, useRules, getDepth(),
 					getIdentifier()));
 
-			dqplan.executePlan();
+			APISemDQ.executeAssessmentPlan(dqplan);
 
 			setMr(dqplan.getmRes());
 

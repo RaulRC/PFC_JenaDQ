@@ -3,6 +3,7 @@ package JenaApp.actions;
 import java.util.LinkedList;
 import java.util.Map;
 
+import JenaDQ.APISemDQ;
 import JenaDQ.DQAssessment;
 import JenaDQ.DQAssessmentPlan;
 
@@ -20,9 +21,7 @@ public class assessmentPlanInit extends ActionSupport {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 
 		// SETTING PLAN - DQAPLAN
-		DQAssessmentPlan dqplan = new DQAssessmentPlan(); // TODO Atomicity
-		LinkedList<DQAssessment> dqplanlist = new LinkedList<DQAssessment>();// TODO
-		dqplan.setAssessmentList(dqplanlist);// TODO
+		DQAssessmentPlan dqplan = APISemDQ.createAssessmentPlan();
 
 		session.put("assessmentPlan", dqplan);
 

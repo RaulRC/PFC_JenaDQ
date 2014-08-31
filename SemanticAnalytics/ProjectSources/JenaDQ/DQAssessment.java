@@ -15,8 +15,24 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
+/**
+ * This class creates and handle the Assessments. An assessment is composed by a
+ * target URI, a List of DQDimensions and an endpoint.
+ * 
+ * @author Raúl Reguillo Carmona
+ * 
+ */
 public class DQAssessment {
 
+	/**
+	 * 
+	 * @param dqDimensionList
+	 *            DQDimension List
+	 * @param URI
+	 *            target URI
+	 * @param endpoint
+	 *            Address of HTTP service
+	 */
 	public DQAssessment(LinkedList<DQDimension> dqDimensionList, String URI,
 			String endpoint) {
 		super();
@@ -25,6 +41,9 @@ public class DQAssessment {
 		this.endpoint = endpoint;
 	}
 
+	/**
+	 * Empty constructor
+	 */
 	public DQAssessment() {
 		this.dqDimensionList = new LinkedList<DQDimension>();
 		this.useRules = new ArrayList<Rule>();
@@ -32,6 +51,24 @@ public class DQAssessment {
 
 	}
 
+	/**
+	 * Constructor with all parameters
+	 * 
+	 * @param dqDimensionList
+	 *            DQDimension List
+	 * @param uRI
+	 *            Target URI
+	 * @param endpoint
+	 *            Address of HTTP service
+	 * @param contextualRules
+	 *            List of Contextual Rules
+	 * @param useRules
+	 *            List of Use Rules
+	 * @param depth
+	 *            Depth of the Assessment
+	 * @param dQAssessmentIdentifier
+	 *            Assessment identifier
+	 */
 	public DQAssessment(LinkedList<DQDimension> dqDimensionList, String uRI,
 			String endpoint, List<Rule> contextualRules, List<Rule> useRules,
 			int depth, String dQAssessmentIdentifier) {
@@ -45,6 +82,22 @@ public class DQAssessment {
 		this.DQAssessmentIdentifier = dQAssessmentIdentifier;
 	}
 
+	/**
+	 * Constructor with all parameters
+	 * 
+	 * @param dqDimensionList
+	 *            DQDimension List
+	 * @param uRI
+	 *            Target URI
+	 * @param endpoint
+	 *            Address of HTTP service
+	 * @param contextualRules
+	 *            List of Contextual Rules
+	 * @param depth
+	 *            Depth of the Assessment
+	 * @param dQAssessmentIdentifier
+	 *            Assessment identifier
+	 */
 	public DQAssessment(LinkedList<DQDimension> dqDimensionList, String uRI,
 			String endpoint, List<Rule> contextualRules, int depth,
 			String dQAssessmentIdentifier) {
@@ -107,8 +160,12 @@ public class DQAssessment {
 		this.depth = depth;
 	}
 
+	/**
+	 * Answer a Model with the result of the Assessment
+	 * 
+	 * @return Model
+	 */
 	public Model executeAssessment() {
-		// TODO - implement DQAssessment.executeAssessment
 		// set FinalModel here
 
 		mRes = new ArrayList<MeasurementResult>();
@@ -155,15 +212,13 @@ public class DQAssessment {
 		dqdim.resetResults();
 	}
 
-	public int publishResult() {
-		// TODO - implement DQAssessment.publishResult
-		throw new UnsupportedOperationException();
-	}
+	// public int publishResult() {
+	//
+	// throw new UnsupportedOperationException();
+	// }
 
 	public String toString() {
-		return "DQAssessment: \n" + this.URI + "\n" +
-				this.endpoint + "\n"+
-				this.depth + "\n"
+		return "DQAssessment: \n" + this.URI + "\n"
 				+ dqDimensionList.toString();
 	}
 

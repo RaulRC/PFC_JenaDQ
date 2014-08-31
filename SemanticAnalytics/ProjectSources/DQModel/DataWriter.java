@@ -1,24 +1,40 @@
 package DQModel;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
+/**
+ * Auxiliar class used to show DQModels in various ways
+ * 
+ * @author Raúl Reguillo Carmona
+ * @link JenaDQ.src.DQModel.DQModel
+ * 
+ */
 public class DataWriter {
-	
-	public DataWriter(){
-		
-	}
-	
-	public Model writeModel(String userFormat){
-		return null; 	
-	}
-	
-	/*
-	 * Shows the current model
+
+	/**
+	 * Empty constructor
 	 */
-	public void showModel(DQModel dqmodel){
-		dqmodel.getModel().write(System.out, dqmodel.getFormat()); 
+	public DataWriter() {
+
 	}
-	public void showModelWithFormat(DQModel dqmodel, String format){
-		dqmodel.getModel().write(System.out, format); 
+
+	/**
+	 * Show model with it's format
+	 * 
+	 * @param dqmodel
+	 *            <code>DQModel</code>
+	 */
+	public void showModel(DQModel dqmodel) {
+		dqmodel.getModel().write(System.out, dqmodel.getFormat());
+	}
+
+	/**
+	 * Shows a DQModel usign the given format
+	 * 
+	 * @param dqmodel
+	 *            <code>DQModel</code>
+	 * @param format
+	 *            expected output format
+	 */
+	public void showModelWithFormat(DQModel dqmodel, String format) {
+		dqmodel.getModel().write(System.out, format);
 	}
 }

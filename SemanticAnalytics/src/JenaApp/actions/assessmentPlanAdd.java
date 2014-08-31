@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import DQModel.DQModel;
+import JenaDQ.APISemDQ;
 import JenaDQ.DQAssessment;
 import JenaDQ.DQAssessmentPlan;
 import JenaDQ.DQDimension;
@@ -167,11 +168,13 @@ public class assessmentPlanAdd extends ActionSupport {
 			if (isCompleteness())
 				dqdimlist.add((DQDimension) new _dimCompleteness());
 
-			DQAssessment dqas = new DQAssessment(dqdimlist, getUri(),
+			
+			DQAssessment dqas = APISemDQ.createDQAssessment(dqdimlist, getUri(),
 					getEndpoint(), contextualRules, useRules, getDepth(),
-					getIdentifier());
+					getIdentifier()); 
 
-			dqplan.addDQAssessment(dqas);
+			dqplan = APISemDQ.addDQAssessmentToPlan(dqplan, dqas);
+			
 
 		} catch (Exception e) {
 			setE(e);
