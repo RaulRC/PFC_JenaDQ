@@ -24,7 +24,7 @@ public class APISemDQ {
 	 * 
 	 * @return DQAssessmentPlan
 	 */
-	public DQAssessmentPlan createAssessmentPlan() {
+	public static DQAssessmentPlan createAssessmentPlan() {
 		DQAssessmentPlan dqplan = new DQAssessmentPlan();
 		LinkedList<DQAssessment> dqplanlist = new LinkedList<DQAssessment>();
 		dqplan.setAssessmentList(dqplanlist);
@@ -37,7 +37,7 @@ public class APISemDQ {
 	 * @param dqplan
 	 * @return Jena Model
 	 */
-	public Model executeAssessmentPlan(DQAssessmentPlan dqplan) {
+	public static Model executeAssessmentPlan(DQAssessmentPlan dqplan) {
 		return dqplan.executePlan();
 	}
 
@@ -48,7 +48,7 @@ public class APISemDQ {
 	 * @param dqa
 	 * @return DQAssessmentPlan
 	 */
-	public DQAssessmentPlan addDQAssessmentToPlan(DQAssessmentPlan dqplan,
+	public static DQAssessmentPlan addDQAssessmentToPlan(DQAssessmentPlan dqplan,
 			DQAssessment dqa) {
 		dqplan.addDQAssessment(dqa);
 		return dqplan;
@@ -66,7 +66,7 @@ public class APISemDQ {
 	 * @param dQAssessmentIdentifier
 	 * @return DQAssessment
 	 */
-	public DQAssessment createDQAssessment(
+	public static DQAssessment createDQAssessment(
 			LinkedList<DQDimension> dqDimensionList, String uRI,
 			String endpoint, List<Rule> contextualRules, int depth,
 			String dQAssessmentIdentifier) {
@@ -88,7 +88,7 @@ public class APISemDQ {
 	 * @param dQAssessmentIdentifier
 	 * @return DQAssessment
 	 */
-	public DQAssessment createDQAssessment(
+	public static DQAssessment createDQAssessment(
 			LinkedList<DQDimension> dqDimensionList, String uRI,
 			String endpoint, List<Rule> contextualRules, List<Rule> useRules,
 			int depth, String dQAssessmentIdentifier) {
@@ -104,7 +104,7 @@ public class APISemDQ {
 	 * 
 	 * @return DQAssessment
 	 */
-	public DQAssessment createDQAssessment() {
+	public static DQAssessment createDQAssessment() {
 		DQAssessment dqa = new DQAssessment();
 		return dqa;
 	}
@@ -115,7 +115,7 @@ public class APISemDQ {
 	 * @param dq
 	 * @return Model
 	 */
-	public Model executeDQAssessmentGetModel(DQAssessment dq) {
+	public static Model executeDQAssessmentGetModel(DQAssessment dq) {
 		return dq.executeAssessment();
 	}
 
@@ -126,7 +126,7 @@ public class APISemDQ {
 	 * @param dq
 	 * @return ArrayList<MeasurementResult>
 	 */
-	public ArrayList<MeasurementResult> executeDQAssessmentGetMeasurementResult(
+	public static ArrayList<MeasurementResult> executeDQAssessmentGetMeasurementResult(
 			DQAssessment dq) {
 		dq.executeAssessment();
 		return dq.getmRes();
@@ -139,7 +139,7 @@ public class APISemDQ {
 	 * @param dqdim
 	 * @return DQAssessment
 	 */
-	public DQAssessment addDQDimensionToAssessment(DQAssessment dq,
+	public static DQAssessment addDQDimensionToAssessment(DQAssessment dq,
 			DQDimension dqdim) {
 		dq.addDQDimension(dqdim);
 		return dq;
@@ -156,7 +156,7 @@ public class APISemDQ {
 	 * @param uri
 	 * @return _dimCompleteness
 	 */
-	public DQDimension createDQDimensionCompleteness(DQModel targetmodel,
+	public static DQDimension createDQDimensionCompleteness(DQModel targetmodel,
 			List<Rule> useRules, List<Rule> contextualRuleList, int depth,
 			String endpoint, String uri) {
 		return new _dimCompleteness(targetmodel, useRules, contextualRuleList,
@@ -174,7 +174,7 @@ public class APISemDQ {
 	 * @param uri
 	 * @return _dimAccessibility
 	 */
-	public DQDimension createDQDimensionAccessibility(DQModel targetmodel,
+	public static DQDimension createDQDimensionAccessibility(DQModel targetmodel,
 			List<Rule> useRules, List<Rule> contextualRuleList, int depth,
 			String endpoint, String uri) {
 		return new _dimAccessibility(targetmodel, useRules, contextualRuleList,
@@ -186,7 +186,7 @@ public class APISemDQ {
 	 * 
 	 * @return DQModel
 	 */
-	public DQModel createDQModel() {
+	public static DQModel createDQModel() {
 		return new DQModel();
 	}
 
@@ -197,7 +197,7 @@ public class APISemDQ {
 	 * @param URI
 	 * @return DQModel
 	 */
-	public DQModel createDQModel(String endpoint, String URI) {
+	public static DQModel createDQModel(String endpoint, String URI) {
 		return new DQModel(endpoint, URI);
 	}
 
@@ -208,7 +208,7 @@ public class APISemDQ {
 	 * @param format
 	 * @return DQModel
 	 */
-	public DQModel createDQModel(InputStream in, String format) {
+	public static DQModel createDQModel(InputStream in, String format) {
 		return new DQModel(in, format);
 	}
 
@@ -219,7 +219,7 @@ public class APISemDQ {
 	 * @param modelB
 	 * @return Model
 	 */
-	public Model modelComparison(DQModel modelA, DQModel modelB) {
+	public static Model modelComparison(DQModel modelA, DQModel modelB) {
 		return modelA.compareModelWith(modelB);
 	}
 }

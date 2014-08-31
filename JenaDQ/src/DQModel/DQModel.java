@@ -26,8 +26,7 @@ public class DQModel {
 	 * 
 	 * @param userURI
 	 *            adress of the file by HTTP
-	 * @return <code>DQModel</code>
-	 */
+	 * */
 	public DQModel(String userURI) {
 		DataPicker dp = new DataPicker();
 		DQModel aux;
