@@ -1,7 +1,7 @@
-JenaProjects
+JenaProjects 
 ============
 
-SemanticAnalytics project
+SemanticAnalytics project (calified 9.5/10)
 -------------------------
 
 Integrating: 
@@ -11,3 +11,4 @@ Integrating:
  - Apache Jena
 
  - The R Project for Statistical Computing
+
