@@ -12,3 +12,4 @@ Integrating:
 
  - The R Project for Statistical Computing
 
+ - Data Quality 
