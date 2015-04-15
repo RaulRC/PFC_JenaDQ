@@ -27,7 +27,7 @@ public class testNavigation {
 		
 
 		
-		for(int i=0; i<=depth; i++)
+		for(int i=0; i<depth; i++)
 			System.out.print(i+":" +levels.get(i).size() + "\t" );
 		
 		
